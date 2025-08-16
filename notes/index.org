@@ -1,3 +1,4 @@
 #+title: Bash Notes
 
 * Table of Contents
+** [[./intro.org][Intro]]

@@ -4,7 +4,7 @@
 (require 'ox-publish)
 
 ;; collapsible TOC filter using final output
-(defun my-collapsible-toc-filter (string backend info)
+(defun my-collapsible-toc-filter (string backend _info)
   "Add collapsible functionality to TOC in final HTML output."
   (when (eq backend 'html)
     (with-temp-buffer
@@ -27,7 +27,7 @@
          :publishing-function org-html-publish-to-html
          :with-author nil
          :with-creator nil
-         :with-toc nil  ; enable TOC so the filter can work
+         :with-toc t
          :section-numbers nil
          :time-stamp-file nil
          :html-head-extra "

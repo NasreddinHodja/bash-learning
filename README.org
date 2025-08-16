@@ -74,4 +74,6 @@ The watch script:
 + [X] general project structure
 + [X] =publish.el= & =build.sh= for publishing org files to html
 + [X] =watch.sh= to reload browser tab on changes
++ [ ] publish src blocks with syntax highlighting
++ [ ] publish results of src blocks
 + [ ] =build-toc.el= for generating index file with TOC

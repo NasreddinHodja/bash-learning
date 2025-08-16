@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shell Expansions</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/static/style.css" >
+
+<script>
+function toggleTOC() {
+    const content = document.getElementById('text-table-of-contents');
+    const icon = document.querySelector('.toggle-icon');
+
+    if (content && icon) {
+        content.classList.toggle('expanded');
+        icon.classList.toggle('expanded');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const content = document.getElementById('text-table-of-contents');
+    const icon = document.querySelector('.toggle-icon');
+
+    if (content && icon) {
+        content.classList.remove('expanded');
+        icon.classList.remove('expanded');
+    }
+});
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Shell Expansions</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2 onclick="toggleTOC()">Table of Contents<span class="toggle-icon">▼</span></h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org501c44d">Default values</a></li>
+<li><a href="#orgcaec14b">Required parameters with error</a></li>
+<li><a href="#orgc157c2d">String manipulation</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org501c44d" class="outline-2">
+<h2 id="org501c44d">Default values</h2>
+<div class="outline-text-2" id="text-org501c44d">
+<div class="org-src-container">
+<pre class="src src-bash">DIR="${DIR:-/default/path}"
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcaec14b" class="outline-2">
+<h2 id="orgcaec14b">Required parameters with error</h2>
+<div class="outline-text-2" id="text-orgcaec14b">
+<div class="org-src-container">
+<pre class="src src-bash">: "${REQUIRED_VAR:?Error: REQUIRED_VAR must be set}"
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc157c2d" class="outline-2">
+<h2 id="orgc157c2d">String manipulation</h2>
+<div class="outline-text-2" id="text-orgc157c2d">
+<div class="org-src-container">
+<pre class="src src-bash">filename="/path/to/file.txt"
+echo "${filename##*/}"
+echo "${filename%.*}"
+echo "${filename##*.}"
+</pre>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

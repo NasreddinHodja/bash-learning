@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Intro</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/static/style.css" >
+
+<script>
+function toggleTOC() {
+    const content = document.getElementById('text-table-of-contents');
+    const icon = document.querySelector('.toggle-icon');
+
+    if (content && icon) {
+        content.classList.toggle('expanded');
+        icon.classList.toggle('expanded');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const content = document.getElementById('text-table-of-contents');
+    const icon = document.querySelector('.toggle-icon');
+
+    if (content && icon) {
+        content.classList.remove('expanded');
+        icon.classList.remove('expanded');
+    }
+});
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Intro</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2 onclick="toggleTOC()">Table of Contents<span class="toggle-icon">▼</span></h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org1e65c84">History</a></li>
+<li><a href="#orgab09053">Software tools principles</a>
+<ul>
+<li><a href="#org2d0dcfc">Do one thing well</a></li>
+<li><a href="#org3fae053">Process lines of text, not binary</a></li>
+<li><a href="#orgcb36abb">Use Regular Expressions</a></li>
+<li><a href="#org470b19d">Default to std in/out</a></li>
+<li><a href="#org5e7124d">Don't be chatty</a></li>
+<li><a href="#org8f10b78">Use the input format for output</a></li>
+<li><a href="#org42b974f">Let someone else do the hard part</a></li>
+<li><a href="#orge5937a8">Detour to write specilized tools</a></li>
+</ul>
+</li>
+<li><a href="#orgf81b35e">Self contained scripts</a>
+<ul>
+<li><a href="#orga9fd789">Creating a script</a>
+<ul>
+<li><a href="#org345541f">understand tools you can use</a></li>
+<li><a href="#orge3584e2">write it</a></li>
+<li><a href="#org8d37020">make it executable</a></li>
+<li><a href="#orgebbc201">run!</a></li>
+<li><a href="#orgbf41a34">Lets change our script</a></li>
+</ul>
+</li>
+<li><a href="#orga7deec3">How simple script works</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1e65c84" class="outline-2">
+<h2 id="org1e65c84">History</h2>
+<div class="outline-text-2" id="text-org1e65c84">
+<ul class="org-ul">
+<li>shell scripting was deved in the context of UNIX from Bell Labs</li>
+<li>research-oriented, no pressure to ship product</li>
+<li>UNIX devs were the users
+<ul class="org-ul">
+<li>deved to solve their problems</li>
+<li>freedom to experiment and rewrite as needed</li>
+</ul></li>
+<li>no-nonsense, users were computer scientists</li>
+<li>besides functionality, quest for <i>elegance</i></li>
+</ul>
+
+<p>
+The not-so-good:
+</p>
+<ul class="org-ul">
+<li>utilities were often incosistent</li>
+<li>a leading minus for options was not always used (<code>tar</code>)</li>
+<li>different regex syntax</li>
+<li>documentation often too terse</li>
+</ul>
+
+<p>
+Small history:
+</p>
+<ul class="org-ul">
+<li>1970-1976: Thompson Shell</li>
+<li>1975: Mashey Shell for PWB UNIX</li>
+<li>1977: <b>Bourne Shell</b> for V7 UNIX</li>
+<li>1979: Berkly C-Shell (csh)</li>
+<li>1986-1993 and on: Korn Shell (ksh86, ksh88, ksh93)</li>
+<li>1988 and on: <b>GNU Bash</b> (Bourne Again Shell)</li>
+<li>many other Bourne Shell clones in the wild</li>
+<li><b>POSIX Shell Standard</b>: 1992 and ongoing</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgab09053" class="outline-2">
+<h2 id="orgab09053">Software tools principles</h2>
+<div class="outline-text-2" id="text-orgab09053">
+<ul class="org-ul">
+<li>programs should be specialized tools
+<ul class="org-ul">
+<li>avoid "one program to urle them all"</li>
+</ul></li>
+<li>combining tools (with pipelines and shell "glue" code) often gets the job done wihtout having to write a new full program</li>
+<li>popularized in the Kerninghan &amp; Plauger books</li>
+</ul>
+</div>
+<div id="outline-container-org2d0dcfc" class="outline-3">
+<h3 id="org2d0dcfc">Do one thing well</h3>
+<div class="outline-text-3" id="text-org2d0dcfc">
+<p>
+Programs are easier to:
+</p>
+<ul class="org-ul">
+<li>write and get correct</li>
+<li>document</li>
+<li>understand and use</li>
+</ul>
+
+<p>
+Examples:
+</p>
+<ul class="org-ul">
+<li><code>cat</code> (the original) only concatenated files</li>
+<li><code>cp</code> copies files, <code>mv</code> moves and renames them - they are 2 different programs</li>
+<li>contrast to VMS COPY command: creates new file from one or more existing files; copy input file to output file; concatenate 2 or more input files into single output file; copy a group of input files ot a group of output files;</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3fae053" class="outline-3">
+<h3 id="org3fae053">Process lines of text, not binary</h3>
+<div class="outline-text-3" id="text-org3fae053">
+<ul class="org-ul">
+<li>easy to process with existing and new tools</li>
+<li>can be edited with any text editor</li>
+<li>portable accross networks and machine archs</li>
+</ul>
+
+<p>
+Example: list of unique login names
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">who | awk '{print $1}' | sort | uniq
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcb36abb" class="outline-3">
+<h3 id="orgcb36abb">Use Regular Expressions</h3>
+<div class="outline-text-3" id="text-orgcb36abb">
+<p>
+Provide powerful text matching and substitution
+</p>
+
+<p>
+2 flavors standardized by POSIX:
+</p>
+<ul class="org-ul">
+<li><b>Basic Regual Expressions (BREs)</b>: <code>grep</code>, <code>sed</code>, &#x2026;</li>
+<li><b>Extended Regular Expressions (EREs)</b>: <code>egrep</code>, <code>awk</code>, &#x2026;</li>
+</ul>
+
+<p>
+Example:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">who | sed 's/[^[:alnum:]].*//' | sort | uniq
+</pre>
+</div>
+
+<p>
+(often more than one way to do things)
+</p>
+</div>
+</div>
+<div id="outline-container-org470b19d" class="outline-3">
+<h3 id="org470b19d">Default to std in/out</h3>
+<div class="outline-text-3" id="text-org470b19d">
+<p>
+When no files are named on the command line, use std in and out
+</p>
+
+<ul class="org-ul">
+<li>simplifies writing programs</li>
+<li>lets you hook programs together with pipelines</li>
+<li>encourages programs to do one thing well</li>
+</ul>
+
+<p>
+Such programs are called "<b>filters</b>" (by analogy to water pipelines)
+</p>
+</div>
+</div>
+<div id="outline-container-org5e7124d" class="outline-3">
+<h3 id="org5e7124d">Don't be chatty</h3>
+<div class="outline-text-3" id="text-org5e7124d">
+<ul class="org-ul">
+<li>status messages mixed with output can only confuse downstream programs</li>
+<li>you asked for it, you got it (no "are you sure?")</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8f10b78" class="outline-3">
+<h3 id="org8f10b78">Use the input format for output</h3>
+<div class="outline-text-3" id="text-org8f10b78">
+<p>
+If your text is structured, after processing, write the same format for output as you read for input.
+(this is something of a later principle adopted by the community)
+</p>
+
+<ul class="org-ul">
+<li>allows to build <b>specialized tools that work together</b></li>
+</ul>
+
+<p>
+Example: The Portable Network Graphics (PNG) suite:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">pngtopnm x.png | pnmflip -leftright | ppnmrotate 45 | pnmtopng &gt; y.png
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org42b974f" class="outline-3">
+<h3 id="org42b974f">Let someone else do the hard part</h3>
+<div class="outline-text-3" id="text-org42b974f">
+<ul class="org-ul">
+<li>use existing tools to select data (<code>grep</code>, <code>awk</code>, &#x2026;)</li>
+<li>sort it, if that makes sense</li>
+<li>if necessary, write a specialized tool to finish the job</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge5937a8" class="outline-3">
+<h3 id="orge5937a8">Detour to write specilized tools</h3>
+<div class="outline-text-3" id="text-orge5937a8">
+<ul class="org-ul">
+<li>sometimes, there is no existing too, so write it!</li>
+<li>but, stop and think:
+<ul class="org-ul">
+<li>is what you want to do useful to others?</li>
+<li>can it be generalized?</li>
+</ul></li>
+<li>if so, try to design and write it as a <b>general purpose tool</b></li>
+<li>ofter, you can use a scripting language to write your tool, be it Awk, Perl, Python, Ruby, or shell!</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf81b35e" class="outline-2">
+<h2 id="orgf81b35e">Self contained scripts</h2>
+<div class="outline-text-2" id="text-orgf81b35e">
+</div>
+<div id="outline-container-orga9fd789" class="outline-3">
+<h3 id="orga9fd789">Creating a script</h3>
+<div class="outline-text-3" id="text-orga9fd789">
+<p>
+Lets say we want to count the number of login sessions on our computer&#x2026; (here there's just me)
+</p>
+</div>
+<div id="outline-container-org345541f" class="outline-4">
+<h4 id="org345541f">understand tools you can use</h4>
+<div class="outline-text-4" id="text-org345541f">
+<ul class="org-ul">
+<li><code>who</code> allows us to see who is logged in:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash">who
+</pre>
+</div>
+
+<ul class="org-ul">
+<li><code>wc</code> allows us to count words but also lines!</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-bash">ls | wc -l
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge3584e2" class="outline-4">
+<h4 id="orge3584e2">write it</h4>
+<div class="outline-text-4" id="text-orge3584e2">
+<p>
+Use a text editor and save it to a file.
+</p>
+
+<p>
+Using <code>who</code> and <code>cat</code>, we can:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">who | wc -l
+</pre>
+</div>
+
+<p>
+Lets save that to a file:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">echo "who | wc -l" &gt; nusers
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8d37020" class="outline-4">
+<h4 id="org8d37020">make it executable</h4>
+<div class="outline-text-4" id="text-org8d37020">
+<div class="org-src-container">
+<pre class="src src-bash">chmod +x ./nusers
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgebbc201" class="outline-4">
+<h4 id="orgebbc201">run!</h4>
+<div class="outline-text-4" id="text-orgebbc201">
+<div class="org-src-container">
+<pre class="src src-bash">./nusers
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbf41a34" class="outline-4">
+<h4 id="orgbf41a34">Lets change our script</h4>
+<div class="outline-text-4" id="text-orgbf41a34">
+<p>
+We can enhance it by printing <b>unique</b> logged in users
+</p>
+
+<p>
+We can edit the file using any text editor&#x2026;
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">who | awk '{print $1}' | sort | uniq | wc -l
+</pre>
+</div>
+
+<p>
+Now we see that there is only me logged in
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orga7deec3" class="outline-3">
+<h3 id="orga7deec3">How simple script works</h3>
+</div>
+</div>
+</div>
+</body>
+</html>

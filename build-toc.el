@@ -1,4 +1,29 @@
 ;;; build-toc.el --- Generate hierarchical TOC for org files -*- lexical-binding: t; -*-
+;;;
+;;; Commentary:
+;;;
+;;; This package provides functionality to automatically generate a hierarchical
+;;; table of contents for a collection of Org-mode files.
+;;;
+;;; The main function `generate-notes-toc' scans all .org files in a notes
+;;; directory, extracts their titles, index numbers, and heading structures,
+;;; then generates a comprehensive TOC in an index.org file.
+;;;
+;;; Features:
+;;; - Automatic TOC generation from multiple org files
+;;; - Hierarchical structure with proper numbering (1.0, 1.1, 1.1.1, etc.)
+;;; - Clickable org-mode links to sections and files
+;;; - Customizable notes directory and index file locations
+;;; - Interactive user prompts for index file creation
+;;;
+;;; Usage:
+;;; (require 'build-toc)
+;;; (generate-notes-toc)
+;;;
+;;; Customization:
+;;; Set `notes-dir' and `notes-index-file' variables to customize paths.
+;;;
+;;; Code:
 
 (require 'org)
 (require 'org-element)
@@ -10,10 +35,10 @@
   "Path to the index file.")
 
 (defvar toc-title "Table of Contents"
-  "Title of the section in 'notes-index-file' containg the table of contents")
+  "Title of the section in `notes-index-file' containg the table of contents.")
 
 (defun validate-env ()
-  "Validate environment"
+  "Validate environment."
 
   (unless (file-directory-p notes-dir)
     (error "Notes directory %s does not exist" notes-dir))
@@ -23,20 +48,20 @@
     (create-index-file)))
 
 (defun get-notes-files ()
-  "Returns all .org files in 'notes-dir' except 'notes-index-file'"
+  "Return all .org files in `notes-dir' except `notes-index-file'."
 
   (seq-filter (lambda (f)
                                 (not (string= f (file-name-nondirectory notes-index-file))))
                               (directory-files notes-dir nil "\\.org$")))
 
 (defun print-message-completed ()
-  "Print completion message"
+  "Print completion message."
 
     (message "TOC generation complete! Processed %d org files."
              (length (get-notes-files))))
 
 (defun create-index-file ()
-  "Create index file 'notes-index-file'"
+  "Create index file `notes-index-file'."
 
   (let ((title (read-string "Notes title: ")))
     (with-temp-file notes-index-file
@@ -45,7 +70,7 @@
       (insert (format "* %s\n\n" toc-title)))))
 
 (defun collect-files-info ()
-  "Collect info from all note files"
+  "Collect info from all note files."
 
   (let ((files-info '()))
     (dolist (filename (get-notes-files))
@@ -59,7 +84,7 @@
 (collect-files-info)
 
 (defun generate-toc-content ()
-  "Generate hierarchical TOC lines for all org files"
+  "Generate hierarchical TOC lines for all org files."
 
   (let ((files-info (collect-files-info))
         (toc-lines '()))
@@ -69,7 +94,7 @@
     toc-lines))
 
 (defun update-toc ()
-  "Update * Table of Contents in 'notes-index-file'"
+  "Update * Table of Contents in `notes-index-file'."
 
   (with-temp-buffer
     (insert-file-contents notes-index-file)
@@ -95,7 +120,7 @@
     (write-file notes-index-file)))
 
 (defun generate-notes-toc ()
-  "Main function to generate notes TOC"
+  "Main function to generate notes TOC."
   (interactive)
 
   (validate-env)
