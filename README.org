@@ -1,0 +1,77 @@
+#+title: Bash Learning Notes
+
+* Overview
+A comprehensive collection of Bash scripting notes and tutorials, organized as a structured learning resource.
+
+This repository contains my personal notes while learning Bash, structured to eventually become a comprehensive tutorial website. The notes are written in Org-mode format for easy organization.
+
+* Project Structure
+#+begin_example
+bash-learning/
+├── notes/
+│   ├── index.org          # index file with TOC
+│   ├── [notesection].org  # note file concerning a specific topic
+│   └── ...                # additional topic files
+├── static/
+│   └── style.css          # CSS styles for HTML output
+│   └── [notesection]/     # images for notes/[notesection].org files
+│   └── ...                # additional images dir for each topic file
+├── public/                # generated HTML files (build output)
+├── build-toc.el           # elisp script to generate index file with TOC
+├── publish.el             # org-publish configuration & HTML generation
+├── build.sh               # build script wrapper
+└── watch.sh               # development server with live reload
+#+end_example
+
+* Organization System
+Each topic is contained in its own =.org= file within the =notes/= directory.
+
+#+begin_src org
+,#+title: Topic Title
+,#+index: 1
+,* Main Heading
+,** Subheading
+,*** ...
+#+end_src
+
+The =#+index:= property determines the order in the table of contents.
+
+* Table of Contents Generation
+The =build-toc.el= automatically generates a hierarchical table of contents in =notes/index.org= by:
+1. Scanning all =.org= files in the =notes/= directory
+2. Extracting titles, index numbers, and heading structures
+3. Creating a numbered, hierarchical TOC with proper Org-mode links
+4. Updating the "Table of Contents" section in =index.org=
+
+* Publishing System
+** HTML Generation
+The =publish.el= script uses Org's built-in publishing system to generate a static website:
+
++ Converts all =.org= files in =notes/= to HTML in =public/=
++ Includes custom CSS styling and collapsible TOC functionality
++ Automatically cleans up orphaned HTML files (when source =.org= files are deleted)
++ Copies static assets (CSS, images) from =static/= to =public/static/=
+
+** Build Process
+#+begin_src bash
+./build.sh    # generate html from org files
+#+end_src
+
+The build script runs =publish.el= through Emacs in batch mode for automated publishing.
+
+** Development Workflow
+#+begin_src bash
+./watch.sh    # start development server with live reload
+#+end_src
+
+The watch script:
++ Monitors changes to content files and build scripts
++ Automatically rebuilds the site when files change
++ Serves the site locally with browser-sync
++ Provides live reload functionality for seamless development
+
+* Dev progress
++ [X] general project structure
++ [X] =publish.el= & =build.sh= for publishing org files to html
++ [X] =watch.sh= to reload browser tab on changes
++ [ ] =build-toc.el= for generating index file with TOC
