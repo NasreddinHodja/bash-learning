@@ -20,8 +20,7 @@
     - [[./intro.org::*run!][1.16 run!]]
     - [[./intro.org::*Lets change our script][1.17 Lets change our script]]
   - [[./intro.org::*How simple script works][1.18 How simple script works]]
-+ [[./intro.org::*OIEEE NEW HEADING][1.19 OIEEE NEW HEADING]]
-  - [[./intro.org::*NEW TOO][1.20 NEW TOO]]
+
 ** [[./shell-expansions.org][2.0 Shell Expansions]]
 + [[./shell-expansions.org::*Default values][2.1 Default values]]
 + [[./shell-expansions.org::*Required parameters with error][2.2 Required parameters with error]]

@@ -89,6 +89,7 @@
                       filename))
            (index-num (string-to-number (cadar (org-collect-keywords '("index")))))
            (headings (extract-note-headings)))
+
       (list :link relative-path
             :title title
             :index index-num
@@ -102,6 +103,7 @@
       (let ((filepath (expand-file-name filename notes-dir)))
         (message "Processing %s..." filename)
         (push (extract-note-info filepath) notes-infos)))
+
     (sort notes-infos (lambda (a b) (< (plist-get a :index)
                                        (plist-get b :index))))))
 
@@ -115,10 +117,8 @@
          (section-lines '())
          (heading-counter 0))
 
-    ;; Add file entry as ** heading
     (push (format "** [[%s][%d.0 %s]]" link index title) section-lines)
 
-    ;; Add each heading
     (dolist (heading headings)
       (setq heading-counter (1+ heading-counter))
       (let* ((h-title (plist-get heading :title))
@@ -131,6 +131,8 @@
                       indent bullet link-target number h-title)
               section-lines)))
 
+    (push "" section-lines)
+
     (reverse section-lines)))
 
 (defun generate-toc-content ()
@@ -141,6 +143,7 @@
     (dolist (note-info notes-info)
       (let ((section-lines (generate-toc-section note-info)))
         (setq toc-lines (append toc-lines section-lines))))
+
     toc-lines))
 
 (defun update-toc ()
@@ -172,8 +175,7 @@
       (dolist (line toc-lines)
         (insert line "\n")))
 
-    (write-file notes-index-file)
-    ))
+    (write-file notes-index-file)))
 
 (defun generate-notes-toc ()
   "Main function to generate notes TOC."
