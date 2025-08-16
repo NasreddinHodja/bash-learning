@@ -183,3 +183,5 @@ who | awk '{print $1}' | sort | uniq | wc -l
 Now we see that there is only me logged in
 
 ** How simple script works
+#+begin_src bash
+#+end_src

@@ -1,7 +1,26 @@
 ;;; -*- lexical-binding: t; -*-
 
+;; setup package archives
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+
+;; install htmlize if not available
+(unless (package-installed-p 'htmlize)
+  (package-refresh-contents)
+  (package-install 'htmlize))
+
 ;; setup project publishing
+(use-package htmlize)
+
 (require 'ox-publish)
+(require 'ox-html)
+
+;; htmlize output
+(setq org-html-htmlize-output-type 'inline-css)
+(setq org-export-with-sub-superscripts nil)
+
+(setq org-html-doctype "html5")
 
 ;; collapsible TOC filter using final output
 (defun my-collapsible-toc-filter (string backend _info)
