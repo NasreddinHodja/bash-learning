@@ -1,0 +1,25 @@
+#+title: Shell Expansions
+#+source: https://youtu.be/BhOqqsLWVyA?si=G3MfTkHbDmMzpXaF
+
+* Default values
+#+begin_src bash
+DIR="${DIR:-/default/path}"
+#+end_src
+
+* Required parameters with error
+#+begin_src bash
+: "${REQUIRED_VAR:?Error: REQUIRED_VAR must be set}"
+#+end_src
+
+* String manipulation
+#+begin_src bash
+filename="/path/to/file.txt"
+echo "${filename##*/}"
+echo "${filename%.*}"
+echo "${filename##*.}"
+#+end_src
+
+#+RESULTS:
+| file.txt      |
+| /path/to/file |
+| txt           |
