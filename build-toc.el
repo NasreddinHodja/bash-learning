@@ -51,14 +51,14 @@
   "Return all .org files in `notes-dir' except `notes-index-file'."
 
   (seq-filter (lambda (f)
-                                (not (string= f (file-name-nondirectory notes-index-file))))
-                              (directory-files notes-dir nil "\\.org$")))
+                (not (string= f (file-name-nondirectory notes-index-file))))
+              (directory-files notes-dir nil "\\.org$")))
 
 (defun print-message-completed ()
   "Print completion message."
 
-    (message "TOC generation complete! Processed %d org files."
-             (length (get-notes-files))))
+  (message "TOC generation complete! Processed %d org files."
+           (length (get-notes-files))))
 
 (defun create-index-file ()
   "Create index file `notes-index-file'."
@@ -69,28 +69,78 @@
       (insert "\n")
       (insert (format "* %s\n\n" toc-title)))))
 
-(defun collect-files-info ()
+(defun extract-note-headings ()
+  "Extract headings from the current buffer."
+
+  (org-element-map (org-element-parse-buffer 'headline) 'headline
+    (lambda (headline)
+      (list :title (org-element-property :raw-value headline)
+            :level (org-element-property :level headline)))))
+
+(defun extract-note-info (filepath)
+  "Extract title, index number, and headings from FILEPATH."
+
+  (with-temp-buffer
+    (insert-file-contents filepath)
+    (org-mode)
+    (let* ((filename (file-name-nondirectory filepath))
+           (relative-path (concat "./" filename))  ; for links from index.org
+           (title (or (cadar (org-collect-keywords '("title")))
+                      filename))
+           (index-num (string-to-number (cadar (org-collect-keywords '("index")))))
+           (headings (extract-note-headings)))
+      (list :link relative-path
+            :title title
+            :index index-num
+            :headings headings))))
+
+(defun collect-notes-infos ()
   "Collect info from all note files."
 
-  (let ((files-info '()))
+  (let ((notes-infos '()))
     (dolist (filename (get-notes-files))
       (let ((filepath (expand-file-name filename notes-dir)))
-        (message (format "OIEEEE %s" filepath))
-        ;; TODO collec file info
-        ))
+        (message "Processing %s..." filename)
+        (push (extract-note-info filepath) notes-infos)))
+    (sort notes-infos (lambda (a b) (< (plist-get a :index)
+                                       (plist-get b :index))))))
 
-    files-info))
+(defun generate-toc-section (note-info)
+  "Generate TOC section for one NOTE-INFO."
 
-(collect-files-info)
+  (let* ((link (plist-get note-info :link))
+         (title (plist-get note-info :title))
+         (index (plist-get note-info :index))
+         (headings (plist-get note-info :headings))
+         (section-lines '())
+         (heading-counter 0))
+
+    ;; Add file entry as ** heading
+    (push (format "** [[%s][%d.0 %s]]" link index title) section-lines)
+
+    ;; Add each heading
+    (dolist (heading headings)
+      (setq heading-counter (1+ heading-counter))
+      (let* ((h-title (plist-get heading :title))
+             (h-level (plist-get heading :level))
+             (number (format "%d.%d" index heading-counter))
+             (bullet (if (= h-level 1) "+" "-"))
+             (indent (make-string (* (- h-level 1) 2) ?\s))
+             (link-target (format "%s::*%s" link h-title)))
+        (push (format "%s%s [[%s][%s %s]]"
+                      indent bullet link-target number h-title)
+              section-lines)))
+
+    (reverse section-lines)))
 
 (defun generate-toc-content ()
   "Generate hierarchical TOC lines for all org files."
 
-  (let ((files-info (collect-files-info))
+  (let ((notes-info (collect-notes-infos))
         (toc-lines '()))
-
-    ;; TODO Generate lines for each file
-
+    (dolist (note-info notes-info)
+      (let ((section-lines (generate-toc-section note-info)))
+        (setq toc-lines (append toc-lines section-lines))))
     toc-lines))
 
 (defun update-toc ()
@@ -101,26 +151,33 @@
     (org-mode)
     (goto-char (point-min))
 
-    (if (re-search-forward (format "^\\* %s" toc-title) nil t)
-        (progn
-          (let ((toc-start (point)))
-            (if (re-search-forward "^\\*" nil t)
-                (progn
-                  (beginning-of-line)
-                  (delete-region toc-start (point)))
-              (delete-region toc-start (point-max)))))
+    (when (re-search-forward (format "^\\* %s" toc-title) nil t)
+      (beginning-of-line)
+      (let ((section-start (point)))
+        (forward-line 1)
+        (if (re-search-forward "^\\* " nil t)
+            (progn
+              (beginning-of-line)
+              (delete-region section-start (point)))
+          (delete-region section-start (point-max)))))
 
+    (unless (save-excursion
+              (goto-char (point-min))
+              (re-search-forward (format "^\\* %s" toc-title) nil t))
       (goto-char (point-max))
-      (unless (bolp) insert "\n")
-      (insert (format "* %s" toc-title)))
+      (unless (bolp) (insert "\n")))
 
-    (insert "\n")
-    ;; <fill (under the heading) with the generated lines of the TOC section>
+    (insert (format "* %s\n" toc-title))
+    (let ((toc-lines (generate-toc-content)))
+      (dolist (line toc-lines)
+        (insert line "\n")))
 
-    (write-file notes-index-file)))
+    (write-file notes-index-file)
+    ))
 
 (defun generate-notes-toc ()
   "Main function to generate notes TOC."
+
   (interactive)
 
   (validate-env)
