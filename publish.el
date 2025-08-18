@@ -37,6 +37,16 @@
 ;; add the filter
 (add-to-list 'org-export-filter-final-output-functions 'my-collapsible-toc-filter)
 
+;; set default header arguments for all source blocks
+(setq org-babel-default-header-args
+      '((:exports . "both")
+        (:results . "output verbatim")
+        (:session . "none")
+        (:cache . "no")
+        (:noweb . "no")
+        (:hlines . "no")
+        (:tangle . "no")))
+
 ;; define publish project
 (setq org-publish-project-alist
       '(("content"

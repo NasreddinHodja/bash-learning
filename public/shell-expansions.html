@@ -36,33 +36,33 @@ document.addEventListener('DOMContentLoaded', function() {
 <h2 onclick="toggleTOC()">Table of Contents<span class="toggle-icon">▼</span></h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgdb4e218">Default values</a></li>
-<li><a href="#org0c720f2">Required parameters with error</a></li>
-<li><a href="#org3a6d46c">String manipulation</a></li>
+<li><a href="#orgfed9dcd">Default values</a></li>
+<li><a href="#org8b9baf6">Required parameters with error</a></li>
+<li><a href="#org35f5052">String manipulation</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgdb4e218" class="outline-2">
-<h2 id="orgdb4e218">Default values</h2>
-<div class="outline-text-2" id="text-orgdb4e218">
+<div id="outline-container-orgfed9dcd" class="outline-2">
+<h2 id="orgfed9dcd">Default values</h2>
+<div class="outline-text-2" id="text-orgfed9dcd">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">DIR</span>=<span style="font-style: italic;">"${DIR:-/default/path}"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org0c720f2" class="outline-2">
-<h2 id="org0c720f2">Required parameters with error</h2>
-<div class="outline-text-2" id="text-org0c720f2">
+<div id="outline-container-org8b9baf6" class="outline-2">
+<h2 id="org8b9baf6">Required parameters with error</h2>
+<div class="outline-text-2" id="text-org8b9baf6">
 <div class="org-src-container">
 <pre class="src src-bash">: <span style="font-style: italic;">"${REQUIRED_VAR:?Error: REQUIRED_VAR must be set}"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org3a6d46c" class="outline-2">
-<h2 id="org3a6d46c">String manipulation</h2>
-<div class="outline-text-2" id="text-org3a6d46c">
+<div id="outline-container-org35f5052" class="outline-2">
+<h2 id="org35f5052">String manipulation</h2>
+<div class="outline-text-2" id="text-org35f5052">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">filename</span>=<span style="font-style: italic;">"/path/to/file.txt"</span>
 <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"${filename##*/}"</span>
@@ -70,6 +70,27 @@ document.addEventListener('DOMContentLoaded', function() {
 <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"${filename##*.}"</span>
 </pre>
 </div>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">file.txt</td>
+</tr>
+
+<tr>
+<td class="org-left">/path/to/file</td>
+</tr>
+
+<tr>
+<td class="org-left">txt</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>

@@ -17,6 +17,7 @@
   --code: #8a6b9c;
   --preformatted: #9c6b8a;
   --disabled: #bac4d1;
+  --code-border: #d4dae0;
 }
 
 /* Reset box-sizing */
@@ -796,4 +797,8 @@ sub {
   pre code {
     white-space: pre-wrap;
   }
+}
+
+.org-src-container pre {
+  border: var(--border-width) solid color-mix(in srgb, var(--disabled) 20%, transparent);
 }

@@ -1,4 +1,4 @@
-;;; build-toc.el --- Generate hierarchical TOC for org files -*- lexical-binding: t; -*-
+;;; build-toc.el --- Generate TOC for org files -*- lexical-binding: t; -*-
 ;;;
 ;;; Commentary:
 ;;;

@@ -123,13 +123,13 @@ Lets say we want to count the number of login sessions on our computer... (here 
 *** understand tools you can use
 + =who= allows us to see who is logged in:
 
-#+begin_src bash
+#+begin_src bash :results output verbatim
 who
 #+end_src
 
 #+RESULTS:
-| nasreddin | tty7  | 2025-08-15 | 15:49 | (:0)            |
-| nasreddin | pts/1 | 2025-08-15 | 15:49 | (tmux(1314).%0) |
+: nasreddin tty7         2025-08-18 18:34 (:0)
+: nasreddin pts/1        2025-08-18 18:34 (tmux(1307).%0)
 
 + =wc= allows us to count words but also lines!
 #+begin_src bash
