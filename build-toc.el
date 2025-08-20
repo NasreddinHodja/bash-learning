@@ -2,12 +2,12 @@
 ;;;
 ;;; Commentary:
 ;;;
-;;; This package provides functionality to automatically generate a hierarchical
-;;; table of contents for a collection of Org-mode files.
+;;; This script automatically generates a hierarchical table of contents
+;;; for a collection of Org-mode files.
 ;;;
-;;; The main function `generate-notes-toc' scans all .org files in a notes
-;;; directory, extracts their titles, index numbers, and heading structures,
-;;; then generates a comprehensive TOC in an index.org file.
+;;; The script scans all .org files in a notes directory, extracts their
+;;; titles, index numbers, and heading structures, then generates a
+;;; comprehensive TOC in an index.org file.
 ;;;
 ;;; Features:
 ;;; - Automatic TOC generation from multiple org files
@@ -17,8 +17,10 @@
 ;;; - Interactive user prompts for index file creation
 ;;;
 ;;; Usage:
-;;; (require 'build-toc)
-;;; (generate-notes-toc)
+;;; emacs --script build-toc.el
+;;;
+;;; Or from build script:
+;;; ./build.sh
 ;;;
 ;;; Customization:
 ;;; Set `notes-dir' and `notes-index-file' variables to customize paths.
@@ -189,5 +191,5 @@
 
   (print-message-completed))
 
-(provide 'build-toc)
+(generate-notes-toc)
 ;;; build-toc.el ends here

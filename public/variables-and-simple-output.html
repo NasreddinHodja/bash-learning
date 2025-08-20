@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Variables and Simple Output</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/static/style.css" >
+
+<script>
+function toggleTOC() {
+    const content = document.getElementById('text-table-of-contents');
+    const icon = document.querySelector('.toggle-icon');
+
+    if (content && icon) {
+        content.classList.toggle('expanded');
+        icon.classList.toggle('expanded');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const content = document.getElementById('text-table-of-contents');
+    const icon = document.querySelector('.toggle-icon');
+
+    if (content && icon) {
+        content.classList.remove('expanded');
+        icon.classList.remove('expanded');
+    }
+});
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Variables and Simple Output</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2 onclick="toggleTOC()">Table of Contents<span class="toggle-icon">▼</span></h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgf69ef6d">Variables</a>
+<ul>
+<li><a href="#org1bdd263">Quoting issues</a></li>
+</ul>
+</li>
+<li><a href="#org6f92ada">Output</a>
+<ul>
+<li><a href="#org669ed77"><code>echo</code></a></li>
+<li><a href="#org3895f63"><code>printf</code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf69ef6d" class="outline-2">
+<h2 id="orgf69ef6d">Variables</h2>
+<div class="outline-text-2" id="text-orgf69ef6d">
+<p>
+Variable names:
+</p>
+<ul class="org-ul">
+<li>start with a letter then letter/underscore/digits</li>
+<li>not case insensitive</li>
+</ul>
+
+<p>
+We use <code>$</code> before the name to get the variable value.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">long_name</span>=<span style="font-style: italic;">"Tomazine Bizine"</span> <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">quoted because constains space
+</span><span style="font-weight: bold; font-style: italic;">LONG_NAME</span>=<span style="font-style: italic;">"bizineeee"</span>
+
+<span style="font-weight: bold;">echo</span> $<span style="font-weight: bold; font-style: italic;">long_name</span>
+<span style="font-weight: bold;">echo</span> $<span style="font-weight: bold; font-style: italic;">LONG_NAME</span>
+</pre>
+</div>
+
+<pre class="example">
+Tomazine Bizine
+bizineeee
+</pre>
+</div>
+<div id="outline-container-org1bdd263" class="outline-3">
+<h3 id="org1bdd263">Quoting issues</h3>
+<div class="outline-text-3" id="text-org1bdd263">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">a</span>=<span style="font-style: italic;">"a      b"</span>
+
+<span style="font-weight: bold;">echo</span> $<span style="font-weight: bold; font-style: italic;">a</span>
+</pre>
+</div>
+
+<pre class="example">
+a b
+</pre>
+
+
+<ul class="org-ul">
+<li>The shell <b>takes the value of <code>a</code> and substitutes it into the command</b></li>
+<li>Any white space in the value becomes regular white in the command</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">a</span>=<span style="font-style: italic;">"a      b"</span>
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">these have the same result!
+</span><span style="font-weight: bold;">echo</span> $<span style="font-weight: bold; font-style: italic;">a</span>
+<span style="font-weight: bold;">echo</span> a      b
+<span style="font-weight: bold;">echo</span> a b
+</pre>
+</div>
+
+<pre class="example">
+a b
+a b
+a b
+</pre>
+
+
+<p>
+<b>In order to preserve whitespace, we need to use <code>"</code></b>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">a</span>=<span style="font-style: italic;">"a      b"</span>
+
+<span style="font-weight: bold;">echo</span> $<span style="font-weight: bold; font-style: italic;">a</span>
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$a"</span>
+</pre>
+</div>
+
+<pre class="example">
+a b
+a      b
+</pre>
+
+
+<ul class="org-ul">
+<li>always use double quotes for referring to var values!</li>
+</ul>
+
+<p>
+<b>OBS</b>: Single quotes do not do any interpretation of the value inside them:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">echo</span> <span style="font-style: italic;">'$a'</span>
+</pre>
+</div>
+
+<pre class="example">
+$a
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6f92ada" class="outline-2">
+<h2 id="org6f92ada">Output</h2>
+<div class="outline-text-2" id="text-org6f92ada">
+</div>
+<div id="outline-container-org669ed77" class="outline-3">
+<h3 id="org669ed77"><code>echo</code></h3>
+<div class="outline-text-3" id="text-org669ed77">
+<p>
+We've already seen the <code>echo</code> command.
+</p>
+
+<ul class="org-ul">
+<li><code>-n</code> argument makes it not print a new line at the end of the line - <b>used for prompting input</b></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">echo</span> -n <span style="font-style: italic;">"Enter your name:"</span>
+</pre>
+</div>
+
+<ul class="org-ul">
+<li><code>-e</code> for using escape sequences</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">echo</span> -e <span style="font-style: italic;">'1\t2'</span>
+</pre>
+</div>
+
+<pre class="example">
+1	2
+</pre>
+
+
+<p>
+Different versions of <code>echo</code> do different things&#x2026;
+</p>
+
+<p>
+<b>Posix standardizes only plain output but allows <code>-n</code> and <code>-e</code>.</b>
+</p>
+</div>
+</div>
+<div id="outline-container-org3895f63" class="outline-3">
+<h3 id="org3895f63"><code>printf</code></h3>
+<div class="outline-text-3" id="text-org3895f63">
+<p>
+Alternative to <code>echo</code> (more reliable) and works like the <code>printf</code> in C.
+</p>
+
+<p>
+Recieves:
+</p>
+<ul class="org-ul">
+<li>a format string and</li>
+<li>values to fill the format string if necessary</li>
+</ul>
+
+<p>
+How to use vars values inside the format string we use <b>conversion specifications</b>:
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">%[argument$][flags][width][.precision][length modifier]conversion
+</pre>
+</div>
+
+<p>
+At the, we have a letter called the <b>conversion specification</b> that dictates how our value is going to be printed in the line. The main ones are:
+</p>
+<ul class="org-ul">
+<li><code>d</code>, <code>i</code>: the <code>int</code> argument is converted to signed decimal notation.</li>
+<li><code>f</code>, <code>F</code>: the double argument is rounded and converted to decimal</li>
+<li><code>%s</code>: for strings</li>
+</ul>
+
+<p>
+See <a href="https://man7.org/linux/man-pages/man3/printf.3.html">printf documentation</a> to better understand format strings and conversion specification.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">printf <span style="font-style: italic;">"hello world\n"</span> <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">printf needs \n to be specified
+</span>
+printf <span style="font-style: italic;">"one is %d, two is %g\n"</span> 1 2.3
+</pre>
+</div>
+
+<pre class="example">
+hello world
+one is 1, two is 2.3
+</pre>
+
+
+<ul class="org-ul">
+<li>use <code>echo</code> only for super simple output</li>
+<li>use <code>printf</code> when you want prompt and more control</li>
+</ul>
+
+<p>
+<b>OBS</b>: Favour using single quotes (<code>'</code>) for printf format strings! <b>Single quotes protect special characters from being interpreted!</b>
+</p>
+
+<p>
+Best practice is:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">printf <span style="font-style: italic;">'format string with %s and %d\n'</span> <span style="font-style: italic;">"$var1"</span> <span style="font-style: italic;">"$var2"</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

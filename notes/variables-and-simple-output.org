@@ -1,0 +1,131 @@
+#+title: Variables and Simple Output
+#+index: 2
+
+* Variables
+Variable names:
++ start with a letter then letter/underscore/digits
++ not case insensitive
+
+We use =$= before the name to get the variable value.
+
+#+begin_src bash
+long_name="Tomazine Bizine" # quoted because constains space
+LONG_NAME="bizineeee"
+
+echo $long_name
+echo $LONG_NAME
+#+end_src
+
+#+RESULTS:
+: Tomazine Bizine
+: bizineeee
+
+** Quoting issues
+#+begin_src bash
+a="a      b"
+
+echo $a
+#+end_src
+
+#+RESULTS:
+: a b
+
++ The shell *takes the value of =a= and substitutes it into the command*
++ Any white space in the value becomes regular white in the command
+
+#+begin_src bash
+a="a      b"
+
+# these have the same result!
+echo $a
+echo a      b
+echo a b
+#+end_src
+
+#+RESULTS:
+: a b
+: a b
+: a b
+
+*In order to preserve whitespace, we need to use ="=*:
+
+#+begin_src bash
+a="a      b"
+
+echo $a
+echo "$a"
+#+end_src
+
+#+RESULTS:
+: a b
+: a      b
+
++ always use double quotes for referring to var values!
+
+*OBS*: Single quotes do not do any interpretation of the value inside them:
+#+begin_src bash
+echo '$a'
+#+end_src
+
+#+RESULTS:
+: $a
+
+* Output
+** =echo=
+We've already seen the =echo= command.
+
++ =-n= argument makes it not print a new line at the end of the line - *used for prompting input*
+#+begin_src bash
+echo -n "Enter your name:"
+#+end_src
+
++ =-e= for using escape sequences
+#+begin_src bash
+echo -e '1\t2'
+#+end_src
+
+#+RESULTS:
+: 1	2
+
+Different versions of =echo= do different things...
+
+*Posix standardizes only plain output but allows =-n= and =-e=.*
+
+** =printf=
+Alternative to =echo= (more reliable) and works like the =printf= in C.
+
+Recieves:
++ a format string and
++ values to fill the format string if necessary
+
+How to use vars values inside the format string we use *conversion specifications*:
+#+begin_src
+%[argument$][flags][width][.precision][length modifier]conversion
+#+end_src
+
+At the, we have a letter called the *conversion specification* that dictates how our value is going to be printed in the line. The main ones are:
++ =d=, =i=: the =int= argument is converted to signed decimal notation.
++ =f=, =F=: the double argument is rounded and converted to decimal
++ =%s=: for strings
+
+See [[https://man7.org/linux/man-pages/man3/printf.3.html][printf documentation]] to better understand format strings and conversion specification.
+
+#+begin_src bash
+printf "hello world\n" # printf needs \n to be specified
+
+printf "one is %d, two is %g\n" 1 2.3
+#+end_src
+
+#+RESULTS:
+: hello world
+: one is 1, two is 2.3
+
++ use =echo= only for super simple output
++ use =printf= when you want prompt and more control
+
+*OBS*: Favour using single quotes (='=) for printf format strings! *Single quotes protect special characters from being interpreted!*
+
+Best practice is:
+#+begin_src bash
+printf 'format string with %s and %d\n' "$var1" "$var2"
+#+end_src

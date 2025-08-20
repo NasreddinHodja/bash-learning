@@ -20,8 +20,22 @@
     - [[./intro.org::*run!][1.16 run!]]
     - [[./intro.org::*Lets change our script][1.17 Lets change our script]]
   - [[./intro.org::*How simple script works][1.18 How simple script works]]
+  - [[./intro.org::*Interpreter in a script][1.19 Interpreter in a script]]
+  - [[./intro.org::*=man= and =help=][1.20 =man= and =help=]]
 
-** [[./shell-expansions.org][2.0 Shell Expansions]]
-+ [[./shell-expansions.org::*Default values][2.1 Default values]]
-+ [[./shell-expansions.org::*Required parameters with error][2.2 Required parameters with error]]
-+ [[./shell-expansions.org::*String manipulation][2.3 String manipulation]]
+** [[./variables-and-simple-output.org][2.0 Variables and Simple Output]]
++ [[./variables-and-simple-output.org::*Variables][2.1 Variables]]
+  - [[./variables-and-simple-output.org::*Quoting issues][2.2 Quoting issues]]
++ [[./variables-and-simple-output.org::*Output][2.3 Output]]
+  - [[./variables-and-simple-output.org::*=echo=][2.4 =echo=]]
+  - [[./variables-and-simple-output.org::*=printf=][2.5 =printf=]]
+
+** [[./arguments.org][3.0 Script Arguments]]
++ [[./arguments.org::*Getting arguments][3.1 Getting arguments]]
++ [[./arguments.org::*Processing arguments][3.2 Processing arguments]]
+
+** [[./shell-expansions.org][100.0 Shell Expansions]]
++ [[./shell-expansions.org::*Default values][100.1 Default values]]
++ [[./shell-expansions.org::*Required parameters with error][100.2 Required parameters with error]]
++ [[./shell-expansions.org::*String manipulation][100.3 String manipulation]]
+

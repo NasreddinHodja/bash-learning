@@ -36,57 +36,86 @@ document.addEventListener('DOMContentLoaded', function() {
 <h2 onclick="toggleTOC()">Table of Contents<span class="toggle-icon">▼</span></h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0c9c90e">Table of Contents</a>
+<li><a href="#orgd8899ec">Table of Contents</a>
 <ul>
-<li><a href="#org65413b9">1.0 Intro</a></li>
-<li><a href="#org40b5a88">2.0 Shell Expansions</a></li>
+<li><a href="#org6c3be06">1.0 Intro</a></li>
+<li><a href="#org23ab79f">2.0 Variables and Simple Output</a></li>
+<li><a href="#org0e77e99">3.0 Script Arguments</a></li>
+<li><a href="#orgd25771c">100.0 Shell Expansions</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org0c9c90e" class="outline-2">
-<h2 id="org0c9c90e">Table of Contents</h2>
-<div class="outline-text-2" id="text-org0c9c90e">
+<div id="outline-container-orgd8899ec" class="outline-2">
+<h2 id="orgd8899ec">Table of Contents</h2>
+<div class="outline-text-2" id="text-orgd8899ec">
 </div>
-<div id="outline-container-org65413b9" class="outline-3">
-<h3 id="org65413b9"><a href="./intro.html">1.0 Intro</a></h3>
-<div class="outline-text-3" id="text-org65413b9">
+<div id="outline-container-org6c3be06" class="outline-3">
+<h3 id="org6c3be06"><a href="./intro.html">1.0 Intro</a></h3>
+<div class="outline-text-3" id="text-org6c3be06">
 <ul class="org-ul">
-<li><a href="./intro.html#orgb55e629">1.1 History</a></li>
-<li><a href="./intro.html#org1799bd5">1.2 Software tools principles</a>
+<li><a href="./intro.html#orgd8e53f1">1.1 History</a></li>
+<li><a href="./intro.html#org244b52e">1.2 Software tools principles</a>
 <ul class="org-ul">
-<li><a href="./intro.html#org0f26a6c">1.3 Do one thing well</a></li>
-<li><a href="./intro.html#orgdea47d1">1.4 Process lines of text, not binary</a></li>
-<li><a href="./intro.html#org1a41f54">1.5 Use Regular Expressions</a></li>
-<li><a href="./intro.html#org111a18d">1.6 Default to std in/out</a></li>
-<li><a href="./intro.html#org0ee79bf">1.7 Don't be chatty</a></li>
-<li><a href="./intro.html#org089e288">1.8 Use the input format for output</a></li>
-<li><a href="./intro.html#org8e8b70e">1.9 Let someone else do the hard part</a></li>
-<li><a href="./intro.html#org0639402">1.10 Detour to write specilized tools</a></li>
+<li><a href="./intro.html#orgf6d01dd">1.3 Do one thing well</a></li>
+<li><a href="./intro.html#org188d7b0">1.4 Process lines of text, not binary</a></li>
+<li><a href="./intro.html#org1c0c6ba">1.5 Use Regular Expressions</a></li>
+<li><a href="./intro.html#orgbe0d10a">1.6 Default to std in/out</a></li>
+<li><a href="./intro.html#orgcd60c36">1.7 Don't be chatty</a></li>
+<li><a href="./intro.html#orgc39539f">1.8 Use the input format for output</a></li>
+<li><a href="./intro.html#org89af35e">1.9 Let someone else do the hard part</a></li>
+<li><a href="./intro.html#org04904cc">1.10 Detour to write specilized tools</a></li>
 </ul></li>
-<li><a href="./intro.html#org171e488">1.11 Self contained scripts</a>
+<li><a href="./intro.html#org520b852">1.11 Self contained scripts</a>
 <ul class="org-ul">
-<li><a href="./intro.html#org54f1d86">1.12 Creating a script</a>
+<li><a href="./intro.html#org2cfcf2b">1.12 Creating a script</a>
 <ul class="org-ul">
-<li><a href="./intro.html#org6cd20e0">1.13 understand tools you can use</a></li>
-<li><a href="./intro.html#orged080d7">1.14 write it</a></li>
-<li><a href="./intro.html#orgbc81e7b">1.15 make it executable</a></li>
-<li><a href="./intro.html#orgbac16ed">1.16 run!</a></li>
-<li><a href="./intro.html#org6739ca9">1.17 Lets change our script</a></li>
+<li><a href="./intro.html#org8142065">1.13 understand tools you can use</a></li>
+<li><a href="./intro.html#org90a18f3">1.14 write it</a></li>
+<li><a href="./intro.html#orge6d0ec8">1.15 make it executable</a></li>
+<li><a href="./intro.html#orgadf123b">1.16 run!</a></li>
+<li><a href="./intro.html#org962e60c">1.17 Lets change our script</a></li>
 </ul></li>
-<li><a href="./intro.html#org7ebff6e">1.18 How simple script works</a></li>
+<li><a href="./intro.html#org168cb77">1.18 How simple script works</a></li>
+<li><a href="./intro.html#org889a078">1.19 Interpreter in a script</a></li>
+<li><a href="./intro.html#org0aa2987">1.20 <code>man</code> and <code>help</code></a></li>
 </ul></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org40b5a88" class="outline-3">
-<h3 id="org40b5a88"><a href="./shell-expansions.html">2.0 Shell Expansions</a></h3>
-<div class="outline-text-3" id="text-org40b5a88">
+<div id="outline-container-org23ab79f" class="outline-3">
+<h3 id="org23ab79f"><a href="./variables-and-simple-output.html">2.0 Variables and Simple Output</a></h3>
+<div class="outline-text-3" id="text-org23ab79f">
 <ul class="org-ul">
-<li><a href="./shell-expansions.html#orgfed9dcd">2.1 Default values</a></li>
-<li><a href="./shell-expansions.html#org8b9baf6">2.2 Required parameters with error</a></li>
-<li><a href="./shell-expansions.html#org35f5052">2.3 String manipulation</a></li>
+<li><a href="./variables-and-simple-output.html#orgf69ef6d">2.1 Variables</a>
+<ul class="org-ul">
+<li><a href="./variables-and-simple-output.html#org1bdd263">2.2 Quoting issues</a></li>
+</ul></li>
+<li><a href="./variables-and-simple-output.html#org6f92ada">2.3 Output</a>
+<ul class="org-ul">
+<li><a href="./variables-and-simple-output.html#org669ed77">2.4 <code>echo</code></a></li>
+<li><a href="./variables-and-simple-output.html#org3895f63">2.5 <code>printf</code></a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0e77e99" class="outline-3">
+<h3 id="org0e77e99"><a href="./arguments.html">3.0 Script Arguments</a></h3>
+<div class="outline-text-3" id="text-org0e77e99">
+<ul class="org-ul">
+<li><a href="./arguments.html#orgea98093">3.1 Getting arguments</a></li>
+<li><a href="./arguments.html#orgbb0eb3d">3.2 Processing arguments</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd25771c" class="outline-3">
+<h3 id="orgd25771c"><a href="./shell-expansions.html">100.0 Shell Expansions</a></h3>
+<div class="outline-text-3" id="text-orgd25771c">
+<ul class="org-ul">
+<li><a href="./shell-expansions.html#org6e67acb">100.1 Default values</a></li>
+<li><a href="./shell-expansions.html#orgd3ce7c5">100.2 Required parameters with error</a></li>
+<li><a href="./shell-expansions.html#orgbd33c33">100.3 String manipulation</a></li>
 </ul>
 </div>
 </div>

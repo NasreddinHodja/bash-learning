@@ -142,7 +142,7 @@ ls | wc -l
 *** write it
 Use a text editor and save it to a file.
 
-Using =who= and =cat=, we can:
+Using =who= and =wc=, we can:
 #+begin_src bash
 who | wc -l
 #+end_src
@@ -152,21 +152,21 @@ who | wc -l
 
 Lets save that to a file:
 #+begin_src bash
-echo "who | wc -l" > nusers
+echo "who | wc -l" > scripts/nusers
 #+end_src
 
 *** make it executable
 #+begin_src bash
-chmod +x ./nusers
+chmod +x ./scripts/nusers
 #+end_src
 
 *** run!
 #+begin_src bash
-./nusers
+./scripts/nusers
 #+end_src
 
 #+RESULTS:
-: 2
+: 3
 
 *** Lets change our script
 We can enhance it by printing *unique* logged in users
@@ -174,7 +174,7 @@ We can enhance it by printing *unique* logged in users
 We can edit the file using any text editor...
 
 #+begin_src bash
-who | awk '{print $1}' | sort | uniq | wc -l
+who | awk '{print $1}' | uniq | wc -l
 #+end_src
 
 #+RESULTS:
@@ -183,5 +183,26 @@ who | awk '{print $1}' | sort | uniq | wc -l
 Now we see that there is only me logged in
 
 ** How simple script works
-#+begin_src bash
-#+end_src
+[[../static/intro/script_execution_diagram.png]]
+
+1. You type the command in the parent shell
+2. Parent shell forks to a child shell and child shell tries to run the command with =exec=
+3. If the command fails (it's not a binary), child shell assumes that the command must be script and runs it
+4. When it's done, it exists to the parent shell
+
+** Interpreter in a script
+Shell scripts can be as simple text files containing shell scripts.
+
+But *this only works if the script is in the same language as your interactive shell*
+
++ Binary executables start with a "magic number" indicating the type of object file
++ Executable scripts start with a textual "magic number": =#!=
++ The full format: =#!/path/to/interpreter [<one_argument>]=
++ One optional argument may be supplied
++ Some systems have small limits on the path name length
+
+** =man= and =help=
+These are our friends in learning shell scripting.
+
++ =help [COMMAND]= displays a help page for *built-in bash commands*
++ =man [COMMAND]= diplays a manual for *system utilities*

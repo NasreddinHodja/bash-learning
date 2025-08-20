@@ -1,5 +1,5 @@
 #+title: Shell Expansions
-#+index: 2
+#+index: 100
 #+source: https://youtu.be/BhOqqsLWVyA?si=G3MfTkHbDmMzpXaF
 
 * Default values
@@ -13,7 +13,7 @@ DIR="${DIR:-/default/path}"
 #+end_src
 
 * String manipulation
-#+begin_src bash
+#+begin_src bash :results output verbatim
 filename="/path/to/file.txt"
 echo "${filename##*/}"
 echo "${filename%.*}"
@@ -21,6 +21,6 @@ echo "${filename##*.}"
 #+end_src
 
 #+RESULTS:
-| file.txt      |
-| /path/to/file |
-| txt           |
+: file.txt
+: /path/to/file
+: txt

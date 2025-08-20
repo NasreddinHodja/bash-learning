@@ -1,0 +1,140 @@
+#+title: Script Arguments
+#+index: 3
+
+* Getting arguments
+We can access the arguments passed to our script with the following:
+
++ =$#= gives us the number of arguments
++ =$1=, ..., =$9= gives us each argument
++ =$*= gives us all of the arguments
++ other
+
+=scripts/show-args.sh=:
+#+begin_src bash :tangle ./scripts/show-args.sh
+#!/bin/bash -
+
+arg_count() {
+    echo 'argument count:' $#
+}
+
+printf 'Number of arguments: %d\n\n' $#
+
+printf 'First arg is: %s\n\n' $1
+
+# without double quotes, these are essencially the same
+# these dont preserve whitespace
+echo 'All args: ' $*
+arg_count $*
+echo
+echo 'All args: ' $@
+arg_count $@
+echo
+
+echo
+
+# gives us all args AS A SINGLE ARG
+echo 'All args, double quoted:  ' "$*"
+arg_count "$*"
+echo
+# gives us all args as separate individual
+# double quoted strings (preserves whitespace)
+echo 'All args, double quoted:  ' "$@"
+arg_count "$@"
+#+end_src
+
+#+begin_src bash :results output verbatim
+./scripts/show-args.sh a b c d '1 2 3' e f
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Number of arguments: 7
+
+First arg is: a
+
+All args:  a b c d 1 2 3 e f
+argument count: 9
+
+All args:  a b c d 1 2 3 e f
+argument count: 9
+
+
+All args, double quoted:   a b c d 1 2 3 e f
+argument count: 1
+
+All args, double quoted:   a b c d 1 2 3 e f
+argument count: 7
+#+end_example
+
+*Always use ="$@"= to refer to all the command line args*
+
+*OBS*: In the command line, we dont have any args!
+#+begin_src bash
+echo $#
+#+end_src
+
+#+RESULTS:
+: 0
+
+* Processing arguments
+There are 2 ways:
+
++ using a =while= loop: (=scripts/process-args-while.sh=)
+#+begin_src bash :tangle ./scripts/process-args-while.sh
+#!/bin/bash -
+
+echo Processing $# arguments
+
+count=1
+while [ $# -gt 0 ]; do
+    # in a real scripts, do something with "$1"
+    printf "  Argument %d: '%s'\n" "$count" "$1"
+
+    let "count = count + 1"
+
+    shift # shifts the arguments of the end
+done
+#+end_src
+
+#+begin_src bash
+./scripts/process-args-while.sh a b c d '1 2 3' e f
+#+end_src
+
+#+RESULTS:
+: Processing 7 arguments
+:   Argument 1: 'a'
+:   Argument 2: 'b'
+:   Argument 3: 'c'
+:   Argument 4: 'd'
+:   Argument 5: '1 2 3'
+:   Argument 6: 'e'
+:   Argument 7: 'f'
+
++ a =for= loop, *most common*: (=scripts/process-args-for.sh=)
+#+begin_src bash
+#!/bin/bash -
+
+echo Processing $# arguments
+
+count=1
+for i; do
+    # in a real scripts, do something with "$1"
+    printf "  Argument %d: '%s'\n" "$count" "$1"
+
+    let "count = count + 1"
+done
+#+end_src
+
+#+begin_src bash
+./scripts/process-args-for.sh a b c d '1 2 3' e f
+#+end_src
+
+#+RESULTS:
+: Processing 7 arguments
+:   Argument 1: 'a'
+:   Argument 2: 'b'
+:   Argument 3: 'c'
+:   Argument 4: 'd'
+:   Argument 5: '1 2 3'
+:   Argument 6: 'e'
+:   Argument 7: 'f'
