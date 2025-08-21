@@ -70,6 +70,19 @@ The watch script:
 + Serves the site locally with browser-sync
 + Provides live reload functionality for seamless development
 
+* Running scripts in notes
+1. tangle code to =notes/scripts/[script]=
+#+begin_example
+#+begin_src bash :tangle ./scripts/show-args.sh
+#+end_example
+
+1. execute
+#+begin_example
+#+begin_src bash :results output verbatim
+./scripts/show-args.sh a b c d '1 2 3' e f
+#+end_src
+#+end_example
+
 * Dev progress
 + [X] general project structure
 + [X] =publish.el= & =build.sh= for publishing org files to html
