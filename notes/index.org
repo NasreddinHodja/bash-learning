@@ -34,6 +34,23 @@
 + [[./arguments.org::*Getting arguments][3.1 Getting arguments]]
 + [[./arguments.org::*Processing arguments][3.2 Processing arguments]]
 
+** [[./quoting-and-execution-tracing.org][4.0 Quoting and Execution Tracting]]
++ [[./quoting-and-execution-tracing.org::*Backslash escaping][4.1 Backslash escaping]]
++ [[./quoting-and-execution-tracing.org::*Single quotes][4.2 Single quotes]]
++ [[./quoting-and-execution-tracing.org::*Double quotes][4.3 Double quotes]]
++ [[./quoting-and-execution-tracing.org::*Execution tracing][4.4 Execution tracing]]
+  - [[./quoting-and-execution-tracing.org::*Demo 1 - sh][4.5 Demo 1 - sh]]
+  - [[./quoting-and-execution-tracing.org::*Demo 2 - bash][4.6 Demo 2 - bash]]
+
+** [[./redirection-and-special-files.org][5.0 Redirection and Special Files]]
++ [[./redirection-and-special-files.org::*File redirection][5.1 File redirection]]
++ [[./redirection-and-special-files.org::*Pipelines][5.2 Pipelines]]
++ [[./redirection-and-special-files.org::*Redirecting =stderr= vs =stdout=][5.3 Redirecting =stderr= vs =stdout=]]
++ [[./redirection-and-special-files.org::*Here documents][5.4 Here documents]]
++ [[./redirection-and-special-files.org::*Special files][5.5 Special files]]
+  - [[./redirection-and-special-files.org::*=/dev/null=][5.6 =/dev/null=]]
+  - [[./redirection-and-special-files.org::*=/dev/tty=][5.7 =/dev/tty=]]
+
 ** [[./shell-expansions.org][100.0 Shell Expansions]]
 + [[./shell-expansions.org::*Default values][100.1 Default values]]
 + [[./shell-expansions.org::*Required parameters with error][100.2 Required parameters with error]]

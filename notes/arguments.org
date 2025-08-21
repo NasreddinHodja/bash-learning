@@ -1,8 +1,8 @@
 #+title: Script Arguments
 #+index: 3
+#+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
 
 * Getting arguments
-#+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
 We can access the arguments passed to our script with the following:
 
 + =$#= gives us the number of arguments
@@ -78,7 +78,6 @@ echo $#
 : 0
 
 * Processing arguments
-#+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
 There are 2 ways:
 
 + using a =while= loop: (=scripts/process-args-while.sh=)
@@ -119,7 +118,7 @@ done
 echo Processing $# arguments
 
 count=1
-for i; do
+for i; do # default is for i in "$@"
     # in a real scripts, do something with "$1"
     printf "  Argument %d: '%s'\n" "$count" "$1"
 

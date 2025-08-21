@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Quoting and Execution Tracting</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/static/style.css" >
+
+<script>
+function toggleTOC() {
+    const content = document.getElementById('text-table-of-contents');
+    const icon = document.querySelector('.toggle-icon');
+
+    if (content && icon) {
+        content.classList.toggle('expanded');
+        icon.classList.toggle('expanded');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const content = document.getElementById('text-table-of-contents');
+    const icon = document.querySelector('.toggle-icon');
+
+    if (content && icon) {
+        content.classList.remove('expanded');
+        icon.classList.remove('expanded');
+    }
+});
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Quoting and Execution Tracting</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2 onclick="toggleTOC()">Table of Contents<span class="toggle-icon">▼</span></h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org377a082">Backslash escaping</a></li>
+<li><a href="#org1849fd6">Single quotes</a></li>
+<li><a href="#orga15818f">Double quotes</a></li>
+<li><a href="#org0a848b0">Execution tracing</a>
+<ul>
+<li><a href="#orgc82dafe">Demo 1 - sh</a></li>
+<li><a href="#org7b5b01b">Demo 2 - bash</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org377a082" class="outline-2">
+<h2 id="org377a082">Backslash escaping</h2>
+<div class="outline-text-2" id="text-org377a082">
+<p>
+Backslash escapes the single char that folows it
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">a</span>=hello
+
+<span style="font-weight: bold;">echo</span> $<span style="font-weight: bold; font-style: italic;">a</span>
+
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">\$</span><span style="font-weight: bold; font-style: italic;">a</span>
+</pre>
+</div>
+
+<pre class="example">
+hello
+$a
+</pre>
+</div>
+</div>
+<div id="outline-container-org1849fd6" class="outline-2">
+<h2 id="org1849fd6">Single quotes</h2>
+<div class="outline-text-2" id="text-org1849fd6">
+<p>
+Content inside is treated literally.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">a</span>=hello
+<span style="font-weight: bold; font-style: italic;">b</span>=world
+
+<span style="font-weight: bold;">echo</span> $<span style="font-weight: bold; font-style: italic;">a</span> $<span style="font-weight: bold; font-style: italic;">b</span>
+
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">'$a $b'</span>
+</pre>
+</div>
+
+<pre class="example">
+hello world
+$a $b
+</pre>
+
+
+<p>
+<b>OBS</b>: There is no way embed a single quote into a single quoted string! This is what you can do:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">echo</span> <span style="font-style: italic;">'string1 '\'' string 2'</span>
+</pre>
+</div>
+
+<pre class="example">
+string1 ' string 2
+</pre>
+
+
+<p>
+We can embed new lines:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">var</span>=<span style="font-style: italic;">'a
+b
+c'</span>
+
+<span style="font-weight: bold;">echo</span> $<span style="font-weight: bold; font-style: italic;">var</span>
+
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$var"</span>
+</pre>
+</div>
+
+<pre class="example">
+a b c
+a
+b
+c
+</pre>
+</div>
+</div>
+<div id="outline-container-orga15818f" class="outline-2">
+<h2 id="orga15818f">Double quotes</h2>
+<div class="outline-text-2" id="text-orga15818f">
+<p>
+Shell does some processing&#x2026;
+</p>
+
+<ul class="org-ul">
+<li><code>$</code></li>
+<li>command substitutions</li>
+</ul>
+
+<p>
+We can use <code>\</code> inside double quotes!
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">a</span>=hello
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"The value of \$a is $a"</span>
+
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"Here is a quote: \" - nice."</span>
+
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"Here is a backslash: \\ - nice."</span>
+</pre>
+</div>
+
+<pre class="example">
+The value of $a is hello
+Here is a quote: " - nice.
+Here is a backslash: \ - nice.
+</pre>
+</div>
+</div>
+<div id="outline-container-org0a848b0" class="outline-2">
+<h2 id="org0a848b0">Execution tracing</h2>
+<div class="outline-text-2" id="text-org0a848b0">
+<p>
+Useful for debugging script and see what it's actually doing.
+</p>
+
+<p>
+Enable with:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">set</span> -x
+
+<span style="font-weight: bold;">echo</span> hi there
+</pre>
+</div>
+
+<pre class="example">
++ echo hi there
+hi there
+</pre>
+
+
+<p>
+Turn it back off:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">set</span> +x
+</pre>
+</div>
+</div>
+<div id="outline-container-orgc82dafe" class="outline-3">
+<h3 id="orgc82dafe">Demo 1 - sh</h3>
+<div class="outline-text-3" id="text-orgc82dafe">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">!/bin/</span><span style="font-weight: bold;">sh</span><span style="font-weight: bold; font-style: italic;"> -
+</span>
+<span style="font-weight: bold;">set</span> -x
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Process args using for loop
+</span>
+<span style="font-weight: bold;">echo</span> Processing $<span style="font-weight: bold; font-style: italic;">#</span> args
+
+<span style="font-weight: bold; font-style: italic;">count</span>=1
+<span style="font-weight: bold;">for</span> i; <span style="font-weight: bold;">do</span>
+    printf <span style="font-style: italic;">"  Argument %d: '%s'\n"</span> <span style="font-style: italic;">"$count"</span> <span style="font-style: italic;">"$i"</span>
+
+    <span style="font-weight: bold; font-style: italic;">count</span>=<span style="font-weight: bold;">`expr $count + 1`</span>
+<span style="font-weight: bold;">done</span>
+
+<span style="font-weight: bold;">set</span> +x
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-bash">./scripts/quote-tracing-demo-1.sh a b <span style="font-style: italic;">'1 2 3'</span>
+</pre>
+</div>
+
+<pre class="example">
++ echo Processing 3 args
+Processing 3 args
++ count=1
++ for i in "$@"
++ printf '  Argument %d: '\''%s'\''\n' 1 a
+  Argument 1: 'a'
+++ expr 1 + 1
++ count=2
++ for i in "$@"
++ printf '  Argument %d: '\''%s'\''\n' 2 b
+  Argument 2: 'b'
+++ expr 2 + 1
++ count=3
++ for i in "$@"
++ printf '  Argument %d: '\''%s'\''\n' 3 '1 2 3'
+  Argument 3: '1 2 3'
+++ expr 3 + 1
++ count=4
++ set +x
+</pre>
+</div>
+</div>
+<div id="outline-container-org7b5b01b" class="outline-3">
+<h3 id="org7b5b01b">Demo 2 - bash</h3>
+<div class="outline-text-3" id="text-org7b5b01b">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">!/bin/</span><span style="font-weight: bold;">bash</span><span style="font-weight: bold; font-style: italic;"> -
+</span>
+<span style="font-weight: bold;">set</span> -x
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Process args using for loop
+</span>
+<span style="font-weight: bold;">echo</span> Processing $<span style="font-weight: bold; font-style: italic;">#</span> args
+
+<span style="font-weight: bold; font-style: italic;">count</span>=1
+<span style="font-weight: bold;">for</span> i; <span style="font-weight: bold;">do</span>
+    printf <span style="font-style: italic;">"  Argument %d: '%s'\n"</span> <span style="font-style: italic;">"$count"</span> <span style="font-style: italic;">"$i"</span>
+
+    <span style="font-weight: bold; font-style: italic;">count</span>=<span style="font-weight: bold;">`expr $count + 1`</span>
+<span style="font-weight: bold;">done</span>
+
+<span style="font-weight: bold;">set</span> +x
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-bash">./scripts/quote-tracing-demo-2.sh a b <span style="font-style: italic;">'1 2 3'</span>
+</pre>
+</div>
+
+<pre class="example">
++ echo Processing 3 args
+Processing 3 args
++ count=1
++ for i in "$@"
++ printf '  Argument %d: '\''%s'\''\n' 1 a
+  Argument 1: 'a'
+++ expr 1 + 1
++ count=2
++ for i in "$@"
++ printf '  Argument %d: '\''%s'\''\n' 2 b
+  Argument 2: 'b'
+++ expr 2 + 1
++ count=3
++ for i in "$@"
++ printf '  Argument %d: '\''%s'\''\n' 3 '1 2 3'
+  Argument 3: '1 2 3'
+++ expr 3 + 1
++ count=4
++ set +x
+</pre>
+
+
+<p>
+Bash quotes the single quotes! To follow the idea the our output should be feedable to other tools (like bash itself).
+</p>
+
+<p>
+<b>We should always quote the text we pass to commands!</b>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

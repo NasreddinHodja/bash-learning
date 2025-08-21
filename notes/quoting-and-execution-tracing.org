@@ -1,0 +1,194 @@
+#+title: Quoting and Execution Tracting
+#+index: 4
+#+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
+
+* Backslash escaping
+Backslash escapes the single char that folows it
+
+#+begin_src bash
+a=hello
+
+echo $a
+
+echo \$a
+#+end_src
+
+#+RESULTS:
+: hello
+: $a
+
+* Single quotes
+Content inside is treated literally.
+
+#+begin_src bash
+a=hello
+b=world
+
+echo $a $b
+
+echo '$a $b'
+#+end_src
+
+#+RESULTS:
+: hello world
+: $a $b
+
+*OBS*: There is no way embed a single quote into a single quoted string! This is what you can do:
+#+begin_src bash
+echo 'string1 '\'' string 2'
+#+end_src
+
+#+RESULTS:
+: string1 ' string 2
+
+We can embed new lines:
+#+begin_src bash
+var='a
+b
+c'
+
+echo $var
+
+echo "$var"
+#+end_src
+
+#+RESULTS:
+: a b c
+: a
+: b
+: c
+
+* Double quotes
+Shell does some processing...
+
++ =$=
++ command substitutions
+
+We can use =\= inside double quotes!
+
+#+begin_src bash
+a=hello
+echo "The value of \$a is $a"
+
+echo "Here is a quote: \" - nice."
+
+echo "Here is a backslash: \\ - nice."
+#+end_src
+
+#+RESULTS:
+: The value of $a is hello
+: Here is a quote: " - nice.
+: Here is a backslash: \ - nice.
+
+* Execution tracing
+Useful for debugging script and see what it's actually doing.
+
+Enable with:
+#+begin_src bash
+set -x
+
+echo hi there
+#+end_src
+
+#+RESULTS:
+: + echo hi there
+: hi there
+
+Turn it back off:
+#+begin_src bash
+set +x
+#+end_src
+
+** Demo 1 - sh
+#+begin_src bash :tangle ./scripts/quote-tracing-demo-1.sh :results output verbatim
+#!/bin/sh -
+
+set -x
+
+# Process args using for loop
+
+echo Processing $# args
+
+count=1
+for i; do
+    printf "  Argument %d: '%s'\n" "$count" "$i"
+
+    count=`expr $count + 1`
+done
+
+set +x
+#+end_src
+
+#+begin_src bash
+./scripts/quote-tracing-demo-1.sh a b '1 2 3'
+#+end_src
+
+#+RESULTS:
+: + echo Processing 3 args
+: Processing 3 args
+: + count=1
+: + for i in "$@"
+: + printf '  Argument %d: '\''%s'\''\n' 1 a
+:   Argument 1: 'a'
+: ++ expr 1 + 1
+: + count=2
+: + for i in "$@"
+: + printf '  Argument %d: '\''%s'\''\n' 2 b
+:   Argument 2: 'b'
+: ++ expr 2 + 1
+: + count=3
+: + for i in "$@"
+: + printf '  Argument %d: '\''%s'\''\n' 3 '1 2 3'
+:   Argument 3: '1 2 3'
+: ++ expr 3 + 1
+: + count=4
+: + set +x
+
+** Demo 2 - bash
+#+begin_src bash :tangle ./scripts/quote-tracing-demo-2.sh :results output verbatim
+#!/bin/bash -
+
+set -x
+
+# Process args using for loop
+
+echo Processing $# args
+
+count=1
+for i; do
+    printf "  Argument %d: '%s'\n" "$count" "$i"
+
+    count=`expr $count + 1`
+done
+
+set +x
+#+end_src
+
+#+begin_src bash
+./scripts/quote-tracing-demo-2.sh a b '1 2 3'
+#+end_src
+
+#+RESULTS:
+: + echo Processing 3 args
+: Processing 3 args
+: + count=1
+: + for i in "$@"
+: + printf '  Argument %d: '\''%s'\''\n' 1 a
+:   Argument 1: 'a'
+: ++ expr 1 + 1
+: + count=2
+: + for i in "$@"
+: + printf '  Argument %d: '\''%s'\''\n' 2 b
+:   Argument 2: 'b'
+: ++ expr 2 + 1
+: + count=3
+: + for i in "$@"
+: + printf '  Argument %d: '\''%s'\''\n' 3 '1 2 3'
+:   Argument 3: '1 2 3'
+: ++ expr 3 + 1
+: + count=4
+: + set +x
+
+Bash quotes the single quotes! To follow the idea the our output should be feedable to other tools (like bash itself).
+
+*We should always quote the text we pass to commands!*

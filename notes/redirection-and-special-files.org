@@ -1,0 +1,250 @@
+#+title: Redirection and Special Files
+#+index: 5
+#+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
+
+* File redirection
++ =<= redirects stdin
++ =>= redirects stdout
+#+begin_src bash
+# redirecting output
+echo "oiee" > oiee.txt
+
+# redirecting input
+cat < oiee.txt
+#+end_src
+
+#+RESULTS:
+: oiee
+
+We can copy files using cat lol:
+#+begin_src bash
+cat < oiee.txt > oiee2.txt
+
+cat oiee2.txt
+#+end_src
+
+#+RESULTS:
+: oiee
+
++ =>>= appends to the output file!
+
+#+begin_src bash
+cp oiee.txt test1.txt
+cat test1.txt
+
+echo one line > test1.txt
+cat test1.txt
+
+echo another line >> test1.txt
+cat test1
+#+end_src
+
+#+RESULTS:
+: oiee
+: one line
+: one line
+: another line
+
+* Pipelines
+They hook 2 files together.
+
+#+begin_src bash
+ls
+
+echo
+
+# tac reverts its input
+ls | tac
+#+end_src
+
+#+RESULTS:
+#+begin_example
+arguments.org
+index.org
+index.org~
+intro.org
+oiee2.txt
+oiee.txt
+quoting-and-execution-tracing.org
+redirection-and-special-files.org
+scripts
+shell-expansions.org
+test1.txt
+text1.txt
+variables-and-simple-output.org
+
+variables-and-simple-output.org
+text1.txt
+test1.txt
+shell-expansions.org
+scripts
+redirection-and-special-files.org
+quoting-and-execution-tracing.org
+oiee.txt
+oiee2.txt
+intro.org
+index.org~
+index.org
+arguments.org
+#+end_example
+
++ *try not using =cat= as the first command* because most commands accept a file as input
+
+* Redirecting =stderr= vs =stdout=
++ We can redirect =stderr= to other files with =2>=:
+#+begin_src bash :tangle ./scritps/error-and-output.sh
+#!/bin/bash
+
+echo "This goes to stdout (normal output)"
+echo "This also goes to stdout"
+echo "This goes to stderr (error output)" >&2
+echo "More stdout output"
+ls /nonexistent-directory  # This will generate stderr
+echo "Final stdout message"
+#+end_src
+
+#+begin_src bash
+./scripts/error-and-output 2> errors.txt
+#+end_src
+
+#+RESULTS:
+: This goes to stdout (normal output)
+: This also goes to stdout
+: More stdout output
+: Final stdout message
+
+
+#+begin_src bash
+cat errors.txt
+#+end_src
+
+#+RESULTS:
+: bash: line 1: ./scripts/error-and-output: No such file or directory
+
++ we can combine =stderr= and =stdout= with =2>&1=:
+
+#+begin_src bash
+# send stderr to stdout, tee to save to file and print
+./scripts/error-and-output.sh 2>&1 | tee errors # tee is "pipe fitting"
+
+# just save to a file to see later
+./scripts/error-and-output.sh > output.txt 2>&1 # this order is important!
+#+end_src
+
+We should:
++ capture =stderr= when it's appropriate
++ throw ouput away if we dont need it (or save for later)
+
+* Here documents
+=<<= is called a "here document".
+
+You type a command, then =<<= then a marker. The shell gathers everything after the marker until it sees another instance of it and provides that as =stdin= to the command
+
+*We can use these instead of separate data files!*
+
+#+begin_src bash
+cat << EOF
+Line 1
+Line 2
+Here is my home dir $HOME
+EOF
+#+end_src
+
+#+RESULTS:
+: Line 1
+: Line 2
+: Here is my home dir /home/nasreddin
+
+*OBS*: if you quote the marker then the shell doesn't process it
+
++ We use =<<-= if we want to use here documents inside a shell script file and want to allow the text of the here document to be intented with *tabs*
+
+#+begin_src sh
+cat << EOF
+This is a here document
+	This line has a tab at the start
+		This line has two tabs
+	Back to one tab
+No tabs here
+EOF
+
+echo
+
+cat <<- EOF
+	This is a here document with <<-
+		This line had a tab at the start (now stripped)
+			This line had two tabs (now stripped)
+		Back to one tab (now stripped)
+	No leading content, just a tab (stripped)
+EOF
+#+end_src
+
+#+RESULTS:
+#+begin_example
+This is a here document
+	This line has a tab at the start
+		This line has two tabs
+	Back to one tab
+No tabs here
+
+This is a here document with <<-
+This line had a tab at the start (now stripped)
+This line had two tabs (now stripped)
+Back to one tab (now stripped)
+No leading content, just a tab (stripped)
+#+end_example
+
+* Special files
+** =/dev/null=
+The *bit bucket*. Output to =/dev/null= is thrown away!
+
+Useful in cases where we dont care about the output but want exit status or other thing.
+
+** =/dev/tty=
+This is our terminal! ("tty" stands for "teletype")
+
+Important if we wish to communicate with the user. =stdout=, =stdin= and =stderr= can be redirected but with =/dev/tty= *we are working with the users terminal*!
+
+#+begin_src bash :tangle ./scripts/redirection-prompting.sh
+#!/bin/sh -
+
+pass=x pass2=y
+until [ "$pass" = "$pass2" ]; do
+    # turn off echoing
+    stty -echo
+
+    printf "Enter new password: "
+
+    # read password from tty
+    read pass < /dev/tty
+
+    printf "\nEnter again: "
+
+    # read password2 from tty
+    read pass2 < /dev/tty
+
+    # turn echoing back on
+    stty echo
+
+    echo
+
+    if [ "$pass" = "$pass2" ]; then
+        echo Passwords match
+    else
+        echo "Passwords don\'t match"
+    fi
+done
+#+end_src
+
+#+begin_src bash
+./scripts/redirection-prompting.sh
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Enter new password:
+Enter again:
+Passwords match
+#+end_example
+
+We cant see our passwords!

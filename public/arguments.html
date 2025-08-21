@@ -36,14 +36,14 @@ document.addEventListener('DOMContentLoaded', function() {
 <h2 onclick="toggleTOC()">Table of Contents<span class="toggle-icon">▼</span></h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org3b3d4af">Getting arguments</a></li>
-<li><a href="#org3aef049">Processing arguments</a></li>
+<li><a href="#org2c48d9c">Getting arguments</a></li>
+<li><a href="#org7be9900">Processing arguments</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org3b3d4af" class="outline-2">
-<h2 id="org3b3d4af">Getting arguments</h2>
-<div class="outline-text-2" id="text-org3b3d4af">
+<div id="outline-container-org2c48d9c" class="outline-2">
+<h2 id="org2c48d9c">Getting arguments</h2>
+<div class="outline-text-2" id="text-org2c48d9c">
 <p>
 We can access the arguments passed to our script with the following:
 </p>
@@ -96,7 +96,7 @@ arg_count <span style="font-style: italic;">"$@"</span>
 </pre>
 </div>
 
-<pre class="example" id="org1644579">
+<pre class="example" id="org0df4b3d">
 Number of arguments: 7
 
 First arg is: a
@@ -132,9 +132,9 @@ argument count: 7
 </pre>
 </div>
 </div>
-<div id="outline-container-org3aef049" class="outline-2">
-<h2 id="org3aef049">Processing arguments</h2>
-<div class="outline-text-2" id="text-org3aef049">
+<div id="outline-container-org7be9900" class="outline-2">
+<h2 id="org7be9900">Processing arguments</h2>
+<div class="outline-text-2" id="text-org7be9900">
 <p>
 There are 2 ways:
 </p>
@@ -185,8 +185,8 @@ Processing 7 arguments
 <span style="font-weight: bold;">echo</span> Processing $<span style="font-weight: bold; font-style: italic;">#</span> arguments
 
 <span style="font-weight: bold; font-style: italic;">count</span>=1
-<span style="font-weight: bold;">for</span> i; <span style="font-weight: bold;">do</span>
-    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">in a real scripts, do something with "$1"
+<span style="font-weight: bold;">for</span> i; <span style="font-weight: bold;">do</span> <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">default is for i in "$@"
+</span>    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">in a real scripts, do something with "$1"
 </span>    printf <span style="font-style: italic;">"  Argument %d: '%s'\n"</span> <span style="font-style: italic;">"$count"</span> <span style="font-style: italic;">"$1"</span>
 
     <span style="font-weight: bold;">let</span> <span style="font-style: italic;">"count = count + 1"</span>

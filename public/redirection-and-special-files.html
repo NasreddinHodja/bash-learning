@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Redirection and Special Files</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/static/style.css" >
+
+<script>
+function toggleTOC() {
+    const content = document.getElementById('text-table-of-contents');
+    const icon = document.querySelector('.toggle-icon');
+
+    if (content && icon) {
+        content.classList.toggle('expanded');
+        icon.classList.toggle('expanded');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const content = document.getElementById('text-table-of-contents');
+    const icon = document.querySelector('.toggle-icon');
+
+    if (content && icon) {
+        content.classList.remove('expanded');
+        icon.classList.remove('expanded');
+    }
+});
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Redirection and Special Files</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2 onclick="toggleTOC()">Table of Contents<span class="toggle-icon">▼</span></h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org5b86428">File redirection</a></li>
+<li><a href="#orgf02683f">Pipelines</a></li>
+<li><a href="#orgb343123">Redirecting <code>stderr</code> vs <code>stdout</code></a></li>
+<li><a href="#org01d35bd">Here documents</a></li>
+<li><a href="#org2fc2c77">Special files</a>
+<ul>
+<li><a href="#orga445c45"><code>/dev/null</code></a></li>
+<li><a href="#orge6276c1"><code>/dev/tty</code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5b86428" class="outline-2">
+<h2 id="org5b86428">File redirection</h2>
+<div class="outline-text-2" id="text-org5b86428">
+<ul class="org-ul">
+<li><code>&lt;</code> redirects stdin</li>
+<li><code>&gt;</code> redirects stdout</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">redirecting output
+</span><span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"oiee"</span> &gt; oiee.txt
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">redirecting input
+</span>cat &lt; oiee.txt
+</pre>
+</div>
+
+<pre class="example">
+oiee
+</pre>
+
+
+<p>
+We can copy files using cat lol:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">cat &lt; oiee.txt &gt; oiee2.txt
+
+cat oiee2.txt
+</pre>
+</div>
+
+<pre class="example">
+oiee
+</pre>
+
+
+<ul class="org-ul">
+<li><code>&gt;&gt;</code> appends to the output file!</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash">cp oiee.txt test1.txt
+cat test1.txt
+
+<span style="font-weight: bold;">echo</span> one line &gt; test1.txt
+cat test1.txt
+
+<span style="font-weight: bold;">echo</span> another line &gt;&gt; test1.txt
+cat test1
+</pre>
+</div>
+
+<pre class="example">
+oiee
+one line
+one line
+another line
+</pre>
+</div>
+</div>
+<div id="outline-container-orgf02683f" class="outline-2">
+<h2 id="orgf02683f">Pipelines</h2>
+<div class="outline-text-2" id="text-orgf02683f">
+<p>
+They hook 2 files together.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">ls
+
+<span style="font-weight: bold;">echo</span>
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">tac reverts its input
+</span>ls | tac
+</pre>
+</div>
+
+<pre class="example" id="org972b276">
+arguments.org
+index.org
+index.org~
+intro.org
+oiee2.txt
+oiee.txt
+quoting-and-execution-tracing.org
+redirection-and-special-files.org
+scripts
+shell-expansions.org
+test1.txt
+text1.txt
+variables-and-simple-output.org
+
+variables-and-simple-output.org
+text1.txt
+test1.txt
+shell-expansions.org
+scripts
+redirection-and-special-files.org
+quoting-and-execution-tracing.org
+oiee.txt
+oiee2.txt
+intro.org
+index.org~
+index.org
+arguments.org
+</pre>
+
+<ul class="org-ul">
+<li><b>try not using <code>cat</code> as the first command</b> because most commands accept a file as input</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb343123" class="outline-2">
+<h2 id="orgb343123">Redirecting <code>stderr</code> vs <code>stdout</code></h2>
+<div class="outline-text-2" id="text-orgb343123">
+<ul class="org-ul">
+<li>We can redirect <code>stderr</code> to other files with <code>2&gt;</code>:</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">!/bin/</span><span style="font-weight: bold;">bash</span><span style="font-weight: bold; font-style: italic;">
+</span>
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"This goes to stdout (normal output)"</span>
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"This also goes to stdout"</span>
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"This goes to stderr (error output)"</span> &gt;&amp;2
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"More stdout output"</span>
+ls /nonexistent-directory  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">This will generate stderr
+</span><span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"Final stdout message"</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-bash">./scripts/error-and-output 2&gt; errors.txt
+</pre>
+</div>
+
+<pre class="example">
+This goes to stdout (normal output)
+This also goes to stdout
+More stdout output
+Final stdout message
+</pre>
+
+
+
+<div class="org-src-container">
+<pre class="src src-bash">cat errors.txt
+</pre>
+</div>
+
+<pre class="example">
+bash: line 1: ./scripts/error-and-output: No such file or directory
+</pre>
+
+
+<ul class="org-ul">
+<li>we can combine <code>stderr</code> and <code>stdout</code> with <code>2&gt;&amp;1</code>:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">send stderr to stdout, tee to save to file and print
+</span>./scripts/error-and-output.sh 2&gt;&amp;1 | tee errors <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">tee is "pipe fitting"
+</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">just save to a file to see later
+</span>./scripts/error-and-output.sh &gt; output.txt 2&gt;&amp;1 <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">this order is important!</span>
+</pre>
+</div>
+
+<p>
+We should:
+</p>
+<ul class="org-ul">
+<li>capture <code>stderr</code> when it's appropriate</li>
+<li>throw ouput away if we dont need it (or save for later)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org01d35bd" class="outline-2">
+<h2 id="org01d35bd">Here documents</h2>
+<div class="outline-text-2" id="text-org01d35bd">
+<p>
+<code>&lt;&lt;</code> is called a "here document".
+</p>
+
+<p>
+You type a command, then <code>&lt;&lt;</code> then a marker. The shell gathers everything after the marker until it sees another instance of it and provides that as <code>stdin</code> to the command
+</p>
+
+<p>
+<b>We can use these instead of separate data files!</b>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">cat &lt;&lt; EOF<span style="font-weight: bold;">
+Line 1
+Line 2
+Here is my home dir $HOME
+EOF</span>
+</pre>
+</div>
+
+<pre class="example">
+Line 1
+Line 2
+Here is my home dir /home/nasreddin
+</pre>
+
+
+<p>
+<b>OBS</b>: if you quote the marker then the shell doesn't process it
+</p>
+
+<ul class="org-ul">
+<li>We use <code>&lt;&lt;-</code> if we want to use here documents inside a shell script file and want to allow the text of the here document to be intented with <b>tabs</b></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-sh">cat &lt;&lt; EOF<span style="font-weight: bold;">
+This is a here document
+        This line has a tab at the start
+                This line has two tabs
+        Back to one tab
+No tabs here
+EOF
+</span>
+<span style="font-weight: bold;">echo</span>
+
+cat &lt;&lt;- EOF<span style="font-weight: bold;">
+        This is a here document with &lt;&lt;-
+                This line had a tab at the start (now stripped)
+                        This line had two tabs (now stripped)
+                Back to one tab (now stripped)
+        No leading content, just a tab (stripped)
+EOF</span>
+</pre>
+</div>
+
+<pre class="example" id="orgbac0cc2">
+This is a here document
+	This line has a tab at the start
+		This line has two tabs
+	Back to one tab
+No tabs here
+
+This is a here document with &lt;&lt;-
+This line had a tab at the start (now stripped)
+This line had two tabs (now stripped)
+Back to one tab (now stripped)
+No leading content, just a tab (stripped)
+</pre>
+</div>
+</div>
+<div id="outline-container-org2fc2c77" class="outline-2">
+<h2 id="org2fc2c77">Special files</h2>
+<div class="outline-text-2" id="text-org2fc2c77">
+</div>
+<div id="outline-container-orga445c45" class="outline-3">
+<h3 id="orga445c45"><code>/dev/null</code></h3>
+<div class="outline-text-3" id="text-orga445c45">
+<p>
+The <b>bit bucket</b>. Output to <code>/dev/null</code> is thrown away!
+</p>
+
+<p>
+Useful in cases where we dont care about the output but want exit status or other thing.
+</p>
+</div>
+</div>
+<div id="outline-container-orge6276c1" class="outline-3">
+<h3 id="orge6276c1"><code>/dev/tty</code></h3>
+<div class="outline-text-3" id="text-orge6276c1">
+<p>
+This is our terminal! ("tty" stands for "teletype")
+</p>
+
+<p>
+Important if we wish to communicate with the user. <code>stdout</code>, <code>stdin</code> and <code>stderr</code> can be redirected but with <code>/dev/tty</code> <b>we are working with the users terminal</b>!
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">!/bin/</span><span style="font-weight: bold;">sh</span><span style="font-weight: bold; font-style: italic;"> -
+</span>
+<span style="font-weight: bold; font-style: italic;">pass</span>=x <span style="font-weight: bold; font-style: italic;">pass2</span>=y
+<span style="font-weight: bold;">until</span> [ <span style="font-style: italic;">"$pass"</span> = <span style="font-style: italic;">"$pass2"</span> ]; <span style="font-weight: bold;">do</span>
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">turn off echoing
+</span>    stty -echo
+
+    printf <span style="font-style: italic;">"Enter new password: "</span>
+
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">read password from tty
+</span>    <span style="font-weight: bold;">read</span> pass &lt; /dev/tty
+
+    printf <span style="font-style: italic;">"\nEnter again: "</span>
+
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">read password2 from tty
+</span>    <span style="font-weight: bold;">read</span> pass2 &lt; /dev/tty
+
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">turn echoing back on
+</span>    stty echo
+
+    <span style="font-weight: bold;">echo</span>
+
+    <span style="font-weight: bold;">if</span> [ <span style="font-style: italic;">"$pass"</span> = <span style="font-style: italic;">"$pass2"</span> ]; <span style="font-weight: bold;">then</span>
+        <span style="font-weight: bold;">echo</span> Passwords match
+    <span style="font-weight: bold;">else</span>
+        <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"Passwords don\'t match"</span>
+    <span style="font-weight: bold;">fi</span>
+<span style="font-weight: bold;">done</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-bash">./scripts/redirection-prompting.sh
+</pre>
+</div>
+
+<pre class="example" id="org4956ce6">
+Enter new password:
+Enter again:
+Passwords match
+</pre>
+
+<p>
+We cant see our passwords!
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
