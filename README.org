@@ -71,17 +71,8 @@ The watch script:
 + Provides live reload functionality for seamless development
 
 * Running scripts in notes
-1. tangle code to =notes/scripts/[script]=
-#+begin_example
-#+begin_src bash :tangle ./scripts/show-args.sh
-#+end_example
-
-1. execute
-#+begin_example
-#+begin_src bash :results output verbatim
-./scripts/show-args.sh a b c d '1 2 3' e f
-#+end_src
-#+end_example
+1. tangle org src block to =notes/scripts/=
+2. execute =notes/scripts/[script]=
 
 * Dev progress
 + [X] general project structure
