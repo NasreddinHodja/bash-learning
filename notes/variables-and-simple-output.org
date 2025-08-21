@@ -2,6 +2,7 @@
 #+index: 2
 
 * Variables
+#+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
 Variable names:
 + start with a letter then letter/underscore/digits
 + not case insensitive
@@ -71,6 +72,7 @@ echo '$a'
 : $a
 
 * Output
+#+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
 ** =echo=
 We've already seen the =echo= command.
 

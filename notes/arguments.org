@@ -2,6 +2,7 @@
 #+index: 3
 
 * Getting arguments
+#+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
 We can access the arguments passed to our script with the following:
 
 + =$#= gives us the number of arguments
@@ -77,6 +78,7 @@ echo $#
 : 0
 
 * Processing arguments
+#+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
 There are 2 ways:
 
 + using a =while= loop: (=scripts/process-args-while.sh=)
