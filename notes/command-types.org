@@ -1,0 +1,92 @@
+#+title: Command Types; Command and Directory Searching
+#+index: 6
+#+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
+
+* Types of commands
+There are 3 different kinds of commands:
++ *built-in shell commands*
++ *external commands* (live in the filesystem)
++ *shell functions*
+
+The =type= command gives us the type of a given command:
+#+begin_src bash :tangle ./scripts/describe-commands.sh
+#!/bin/bash -
+
+# demonstrate the different kinds of commands
+
+count_unique_users() {
+    who | awk '{ print $1 }' | sort -u | wc -l
+}
+
+commands=(cd read pwd test printf count_unique_users ls who sort)
+
+for cmd in "${commands[@]}"; do
+    type $cmd
+done
+#+end_src
+
+#+begin_src bash :results output verbatim
+./scripts/describe-commands.sh
+#+end_src
+
+#+RESULTS:
+#+begin_example
+cd is a shell builtin
+read is a shell builtin
+pwd is a shell builtin
+test is a shell builtin
+printf is a shell builtin
+count_unique_users is a function
+count_unique_users ()
+{
+    who | awk '{ print $1 }' | sort -u | wc -l
+}
+ls is /usr/bin/ls
+who is /usr/bin/who
+sort is /usr/bin/sort
+#+end_example
+
+* =PATH=
+Shell searches for commands in the following order:
+1. special built-ins
+2. functions
+3. "regular" built-ins
+4. external commands
+
+How does the shell find commands that live in the file system?
+
+For this, we have the =PATH= var:
+
+#+begin_src bash
+echo $PATH
+#+end_src
+
+#+RESULTS:
+: /home/nasreddin/.nvm/versions/node/v18.19.0/bin:/home/nasreddin/.yarn/bin:/home/nasreddin/.local/bin:/home/nasreddin/.yarn/bin:/home/nasreddin/.local/bin:/home/nasreddin/.cargo/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/var/lib/flatpak/exports/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/var/lib/snapd/snap/bin:/home/nasreddin/.local/share/gem/ruby/3.0.0/bin:/home/nasreddin/.local/bin:/home/nasreddin/.local/share/gem/ruby/3.0.0/bin:/home/nasreddin/.local/bin
+
+Just a big string of all the paths containing external commands, separated by =:=!
+
+
+*The shell scans this sequencially from colon to colon until it finds the command.*
+
+We can get the shell to find programs in the current dir:
++ we can use an empty entry in the path variable: add a leading colon or at the end (probably the best).
++ or we can put an explicit =.= in the path variable (probably better at the end)
++ *don't do this lol*
+
+For user, we can have a dir, usually called =bin=, to hold all our scripts that we want the shell to be able to find. And then we add that dir to the =PATH=.
+
+#+begin_src bash
+echo $PATH
+PATH=$HOME/.local/bin:$PATH
+#+end_src
+
+*OBS*: We can you the =command= command to run a specific builtin command (if there is an override)
+#+begin_src bash
+command pwd
+#+end_src
+
+#+RESULTS:
+: /home/nasreddin/Prog/bash-learning/notes
+
+*OBS*: =CDPATH= var to define a specific path for =cd= (if path passed is invalid for current dir)

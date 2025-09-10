@@ -1,0 +1,15 @@
+/bin
+/usr/bin
+/usr/local/bin
+/usr/local/sbin
+/usr/bin/core_perl
+/usr/bin/site_perl
+/usr/bin/vendor_perl
+/usr/lib/jvm/default/bin
+/var/lib/flatpak/exports/bin
+/var/lib/snapd/snap/bin
+/home/nasreddin/.local/share/gem/ruby/3.0.0/bin
+/home/nasreddin/.nvm/versions/node/v23.8.0/bin
+/home/nasreddin/.yarn/bin
+/home/nasreddin/.cargo/bin
+path.txt/home/nasreddin/.local/bin

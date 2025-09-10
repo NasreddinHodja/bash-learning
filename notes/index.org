@@ -51,6 +51,10 @@
   - [[./redirection-and-special-files.org::*=/dev/null=][5.6 =/dev/null=]]
   - [[./redirection-and-special-files.org::*=/dev/tty=][5.7 =/dev/tty=]]
 
+** [[./command-types.org][6.0 Command Types; Command and Directory Searching]]
++ [[./command-types.org::*Types of commands][6.1 Types of commands]]
++ [[./command-types.org::*=PATH=][6.2 =PATH=]]
+
 ** [[./shell-expansions.org][100.0 Shell Expansions]]
 + [[./shell-expansions.org::*Default values][100.1 Default values]]
 + [[./shell-expansions.org::*Required parameters with error][100.2 Required parameters with error]]

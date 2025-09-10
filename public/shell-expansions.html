@@ -36,33 +36,33 @@ document.addEventListener('DOMContentLoaded', function() {
 <h2 onclick="toggleTOC()">Table of Contents<span class="toggle-icon">▼</span></h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9c6e27d">Default values</a></li>
-<li><a href="#orgac7b443">Required parameters with error</a></li>
-<li><a href="#orgb160100">String manipulation</a></li>
+<li><a href="#org1576a28">Default values</a></li>
+<li><a href="#org6c7c757">Required parameters with error</a></li>
+<li><a href="#org26d7e09">String manipulation</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org9c6e27d" class="outline-2">
-<h2 id="org9c6e27d">Default values</h2>
-<div class="outline-text-2" id="text-org9c6e27d">
+<div id="outline-container-org1576a28" class="outline-2">
+<h2 id="org1576a28">Default values</h2>
+<div class="outline-text-2" id="text-org1576a28">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">DIR</span>=<span style="font-style: italic;">"${DIR:-/default/path}"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgac7b443" class="outline-2">
-<h2 id="orgac7b443">Required parameters with error</h2>
-<div class="outline-text-2" id="text-orgac7b443">
+<div id="outline-container-org6c7c757" class="outline-2">
+<h2 id="org6c7c757">Required parameters with error</h2>
+<div class="outline-text-2" id="text-org6c7c757">
 <div class="org-src-container">
 <pre class="src src-bash">: <span style="font-style: italic;">"${REQUIRED_VAR:?Error: REQUIRED_VAR must be set}"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgb160100" class="outline-2">
-<h2 id="orgb160100">String manipulation</h2>
-<div class="outline-text-2" id="text-orgb160100">
+<div id="outline-container-org26d7e09" class="outline-2">
+<h2 id="org26d7e09">String manipulation</h2>
+<div class="outline-text-2" id="text-org26d7e09">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">filename</span>=<span style="font-style: italic;">"/path/to/file.txt"</span>
 <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"${filename##*/}"</span>
