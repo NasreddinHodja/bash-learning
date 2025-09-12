@@ -1,5 +1,7 @@
 #+title: Variables and Simple Output
 #+index: 2
+#+back: << Intro:/intro.html
+#+next: >> Script Arguments:/arguments.html
 #+breadcrumbs: index:/index.html
 
 * Variables

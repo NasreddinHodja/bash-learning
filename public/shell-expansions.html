@@ -21,33 +21,33 @@
 </div>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org6890bb3">Default values</a></li>
-<li><a href="#org60d49e8">Required parameters with error</a></li>
-<li><a href="#org8be0e32">String manipulation</a></li>
+<li><a href="#orge94928f">Default values</a></li>
+<li><a href="#orgf390687">Required parameters with error</a></li>
+<li><a href="#org5e086ba">String manipulation</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org6890bb3" class="outline-2">
-<h2 id="org6890bb3">Default values</h2>
-<div class="outline-text-2" id="text-org6890bb3">
+<div id="outline-container-orge94928f" class="outline-2">
+<h2 id="orge94928f">Default values</h2>
+<div class="outline-text-2" id="text-orge94928f">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">DIR</span>=<span style="font-style: italic;">"${DIR:-/default/path}"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org60d49e8" class="outline-2">
-<h2 id="org60d49e8">Required parameters with error</h2>
-<div class="outline-text-2" id="text-org60d49e8">
+<div id="outline-container-orgf390687" class="outline-2">
+<h2 id="orgf390687">Required parameters with error</h2>
+<div class="outline-text-2" id="text-orgf390687">
 <div class="org-src-container">
 <pre class="src src-bash">: <span style="font-style: italic;">"${REQUIRED_VAR:?Error: REQUIRED_VAR must be set}"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org8be0e32" class="outline-2">
-<h2 id="org8be0e32">String manipulation</h2>
-<div class="outline-text-2" id="text-org8be0e32">
+<div id="outline-container-org5e086ba" class="outline-2">
+<h2 id="org5e086ba">String manipulation</h2>
+<div class="outline-text-2" id="text-org5e086ba">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">filename</span>=<span style="font-style: italic;">"/path/to/file.txt"</span>
 <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"${filename##*/}"</span>

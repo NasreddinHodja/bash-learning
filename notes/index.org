@@ -62,7 +62,7 @@
 + [[./simple-text-processing.org::*Converting tabs vs spaces][7.3 Converting tabs vs spaces]]
 + [[./simple-text-processing.org::*First or last few lines][7.4 First or last few lines]]
 
-** [[./intro-to-regex.org][8.0 Intro To Regex]]
+** [[./intro-to-regex.org][8.0 Intro to Regex]]
 + [[./intro-to-regex.org::*Regular expression concepts][8.1 Regular expression concepts]]
   - [[./intro-to-regex.org::*=grep= options][8.2 =grep= options]]
   - [[./intro-to-regex.org::*Robustness][8.3 Robustness]]

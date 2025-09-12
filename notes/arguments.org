@@ -1,6 +1,8 @@
 #+title: Script Arguments
 #+index: 3
 #+breadcrumbs: index:/index.html
+#+back: << Variables and Simple Output:/variables-and-simple-output.html
+#+next: >> Quoting and Execution Tracing:/quoting-and-execution-tracing.html
 #+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
 
 * Getting arguments

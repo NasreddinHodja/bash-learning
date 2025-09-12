@@ -1,9 +1,9 @@
 :root {
-  /* Set sans-serif & mono fonts */
   --sans-font: -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir,
     "Nimbus Sans L", Roboto, "Noto Sans", "Segoe UI", Arial, Helvetica,
     "Helvetica Neue", sans-serif;
   --mono-font: Consolas, Menlo, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+
   --standard-border-radius: 0px;
   --border-width: 1px;
 
@@ -50,6 +50,7 @@ body {
   display: grid;
   grid-template-columns: 1fr min(45rem, 90%) 1fr;
   margin: 0;
+  padding: 3em 0 6em 0;
 }
 body > * {
   grid-column: 2;
@@ -812,15 +813,13 @@ sub {
 }
 .breadcrumbs {
     margin: 1em 0;
-    padding: 0 0 1em 0;
     font-size: 0.9em;
     color: var(--text-light);
-    /* border-bottom: 1px solid #eee; */
 }
 
 .breadcrumbs a {
     color: var(--accent);
-    text-decoration: none;
+    /* text-decoration: none; */
 }
 
 .breadcrumbs a:hover {
@@ -834,4 +833,11 @@ sub {
 
 .breadcrumbs span {
     color: var(--text);
+}
+
+.nav-buttons {
+  margin: 0 0 2em 0;
+  font-size: 0.9em;
+  display: flex;
+  gap: 1em
 }

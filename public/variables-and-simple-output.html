@@ -14,6 +14,10 @@
 <nav class="breadcrumbs">
 <a href="/index.html">index</a> <span class="separator">/</span> <span>.</span>
 </nav>
+<div class="nav-buttons">
+<a href="/intro.html" class="nav-button"><< Intro</a>
+<a href="/arguments.html" class="nav-button">>> Script Arguments</a>
+</div>
 <div id="table-of-contents" role="doc-toc">
 <div class="toc-header" onclick="toggleToc()">
 <h2>Table of Contents</h2>
@@ -21,23 +25,23 @@
 </div>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org48d2d36">Variables</a>
+<li><a href="#org3c5df04">Variables</a>
 <ul>
-<li><a href="#orgfe448d0">Quoting issues</a></li>
+<li><a href="#orgc4139a4">Quoting issues</a></li>
 </ul>
 </li>
-<li><a href="#org5c951a4">Output</a>
+<li><a href="#org5533fed">Output</a>
 <ul>
-<li><a href="#orga20f8ea"><code>echo</code></a></li>
-<li><a href="#org859461d"><code>printf</code></a></li>
+<li><a href="#org7303dfa"><code>echo</code></a></li>
+<li><a href="#org39dc032"><code>printf</code></a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org48d2d36" class="outline-2">
-<h2 id="org48d2d36">Variables</h2>
-<div class="outline-text-2" id="text-org48d2d36">
+<div id="outline-container-org3c5df04" class="outline-2">
+<h2 id="org3c5df04">Variables</h2>
+<div class="outline-text-2" id="text-org3c5df04">
 <p>
 Variable names:
 </p>
@@ -64,9 +68,9 @@ Tomazine Bizine
 bizineeee
 </pre>
 </div>
-<div id="outline-container-orgfe448d0" class="outline-3">
-<h3 id="orgfe448d0">Quoting issues</h3>
-<div class="outline-text-3" id="text-orgfe448d0">
+<div id="outline-container-orgc4139a4" class="outline-3">
+<h3 id="orgc4139a4">Quoting issues</h3>
+<div class="outline-text-3" id="text-orgc4139a4">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">a</span>=<span style="font-style: italic;">"a      b"</span>
 
@@ -137,13 +141,13 @@ $a
 </div>
 </div>
 </div>
-<div id="outline-container-org5c951a4" class="outline-2">
-<h2 id="org5c951a4">Output</h2>
-<div class="outline-text-2" id="text-org5c951a4">
+<div id="outline-container-org5533fed" class="outline-2">
+<h2 id="org5533fed">Output</h2>
+<div class="outline-text-2" id="text-org5533fed">
 </div>
-<div id="outline-container-orga20f8ea" class="outline-3">
-<h3 id="orga20f8ea"><code>echo</code></h3>
-<div class="outline-text-3" id="text-orga20f8ea">
+<div id="outline-container-org7303dfa" class="outline-3">
+<h3 id="org7303dfa"><code>echo</code></h3>
+<div class="outline-text-3" id="text-org7303dfa">
 <p>
 We've already seen the <code>echo</code> command.
 </p>
@@ -178,9 +182,9 @@ Different versions of <code>echo</code> do different things&#x2026;
 </p>
 </div>
 </div>
-<div id="outline-container-org859461d" class="outline-3">
-<h3 id="org859461d"><code>printf</code></h3>
-<div class="outline-text-3" id="text-org859461d">
+<div id="outline-container-org39dc032" class="outline-3">
+<h3 id="org39dc032"><code>printf</code></h3>
+<div class="outline-text-3" id="text-org39dc032">
 <p>
 Alternative to <code>echo</code> (more reliable) and works like the <code>printf</code> in C.
 </p>

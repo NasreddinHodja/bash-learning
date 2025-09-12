@@ -1,6 +1,8 @@
-#+title: Intro To Regex
+#+title: Intro to Regex
 #+index: 8
 #+breadcrumbs: index:/index.html
+#+back: << Simple Text Processing:/simple-text-processing.html
+#+next: >> Extended Regular Expressions:/extended-regular-expressions.html
 #+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
 
 * Regular expression concepts

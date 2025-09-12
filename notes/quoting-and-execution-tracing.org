@@ -1,6 +1,8 @@
 #+title: Quoting and Execution Tracting
 #+index: 4
 #+breadcrumbs: index:/index.html
+#+back: << Script Arguments:/arguments.html
+#+next: >> Redirection and Special Files:/redirection-and-special-files.html
 #+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
 
 * Backslash escaping

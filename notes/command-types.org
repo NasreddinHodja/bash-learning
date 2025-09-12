@@ -1,6 +1,8 @@
 #+title: Command Types; Command and Directory Searching
 #+index: 6
 #+breadcrumbs: index:/index.html
+#+back: << Redirection and Special Files:/redirection-and-special-files.html
+#+next: >> Simple Text Processing:/simple-text-processing.html
 #+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
 
 * Types of commands

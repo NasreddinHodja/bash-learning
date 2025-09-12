@@ -3,17 +3,21 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Intro To Regex</title>
+<title>Intro to Regex</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="/static/style.css" >
 <script src="/static/toc-toggle.js"></script>
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Intro To Regex</h1>
+<h1 class="title">Intro to Regex</h1>
 <nav class="breadcrumbs">
 <a href="/index.html">index</a> <span class="separator">/</span> <span>.</span>
 </nav>
+<div class="nav-buttons">
+<a href="/simple-text-processing.html" class="nav-button"><< Simple Text Processing</a>
+<a href="/extended-regular-expressions.html" class="nav-button">>> Extended Regular Expressions</a>
+</div>
 <div id="table-of-contents" role="doc-toc">
 <div class="toc-header" onclick="toggleToc()">
 <h2>Table of Contents</h2>
@@ -21,30 +25,30 @@
 </div>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga4cb9c8">Regular expression concepts</a>
+<li><a href="#org9c48019">Regular expression concepts</a>
 <ul>
-<li><a href="#orgc54a9c7"><code>grep</code> options</a></li>
-<li><a href="#org9580a93">Robustness</a></li>
+<li><a href="#org969727a"><code>grep</code> options</a></li>
+<li><a href="#org8e1059c">Robustness</a></li>
 </ul>
 </li>
-<li><a href="#orgd5368d3">Basic regex components</a>
+<li><a href="#org34793fa">Basic regex components</a>
 <ul>
-<li><a href="#org7c3122a">single char expressions</a></li>
-<li><a href="#org4b52b66">bracket expressions</a></li>
-<li><a href="#org7360e7a">repetition - zero or more</a></li>
-<li><a href="#org8e87ee7">repetition - interval expressions</a></li>
-<li><a href="#orgcc7fded">achoring maches</a></li>
-<li><a href="#org6f9d2e2">parenthasized subexpressions</a></li>
-<li><a href="#orgd280699">operator precedence</a></li>
-<li><a href="#org0c833f6">longest, leftmost match</a></li>
+<li><a href="#org88870b6">single char expressions</a></li>
+<li><a href="#org8ebe56c">bracket expressions</a></li>
+<li><a href="#org98f82a9">repetition - zero or more</a></li>
+<li><a href="#org2afbb52">repetition - interval expressions</a></li>
+<li><a href="#org64ae20a">achoring maches</a></li>
+<li><a href="#org4e2cb1e">parenthasized subexpressions</a></li>
+<li><a href="#org998fbd4">operator precedence</a></li>
+<li><a href="#org137524a">longest, leftmost match</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orga4cb9c8" class="outline-2">
-<h2 id="orga4cb9c8">Regular expression concepts</h2>
-<div class="outline-text-2" id="text-orga4cb9c8">
+<div id="outline-container-org9c48019" class="outline-2">
+<h2 id="org9c48019">Regular expression concepts</h2>
+<div class="outline-text-2" id="text-org9c48019">
 <p>
 A regex is a language describing text to be matched
 </p>
@@ -96,9 +100,9 @@ What programs use regex?
 <li>scripting languages, usually with their on flavours</li>
 </ul>
 </div>
-<div id="outline-container-orgc54a9c7" class="outline-3">
-<h3 id="orgc54a9c7"><code>grep</code> options</h3>
-<div class="outline-text-3" id="text-orgc54a9c7">
+<div id="outline-container-org969727a" class="outline-3">
+<h3 id="org969727a"><code>grep</code> options</h3>
+<div class="outline-text-3" id="text-org969727a">
 <ul class="org-ul">
 <li>use <code>pat</code> as pattern: <code>-e pat</code></li>
 <li>read list of patterns from file: <code>-f file</code></li>
@@ -113,9 +117,9 @@ What programs use regex?
 </ul>
 </div>
 </div>
-<div id="outline-container-org9580a93" class="outline-3">
-<h3 id="org9580a93">Robustness</h3>
-<div class="outline-text-3" id="text-org9580a93">
+<div id="outline-container-org8e1059c" class="outline-3">
+<h3 id="org8e1059c">Robustness</h3>
+<div class="outline-text-3" id="text-org8e1059c">
 <ul class="org-ul">
 <li>invest time in learning regexs</li>
 <li>use EREs wherever possible</li>
@@ -124,13 +128,13 @@ What programs use regex?
 </div>
 </div>
 </div>
-<div id="outline-container-orgd5368d3" class="outline-2">
-<h2 id="orgd5368d3">Basic regex components</h2>
-<div class="outline-text-2" id="text-orgd5368d3">
+<div id="outline-container-org34793fa" class="outline-2">
+<h2 id="org34793fa">Basic regex components</h2>
+<div class="outline-text-2" id="text-org34793fa">
 </div>
-<div id="outline-container-org7c3122a" class="outline-3">
-<h3 id="org7c3122a">single char expressions</h3>
-<div class="outline-text-3" id="text-org7c3122a">
+<div id="outline-container-org88870b6" class="outline-3">
+<h3 id="org88870b6">single char expressions</h3>
+<div class="outline-text-3" id="text-org88870b6">
 <ul class="org-ul">
 <li>reg chars, like "A" or "#" match themselves</li>
 <li>case matters: "A" and "a" are different</li>
@@ -169,9 +173,9 @@ tolstoy says im toldtoy
 </pre>
 </div>
 </div>
-<div id="outline-container-org4b52b66" class="outline-3">
-<h3 id="org4b52b66">bracket expressions</h3>
-<div class="outline-text-3" id="text-org4b52b66">
+<div id="outline-container-org8ebe56c" class="outline-3">
+<h3 id="org8ebe56c">bracket expressions</h3>
+<div class="outline-text-3" id="text-org8ebe56c">
 <ul class="org-ul">
 <li>any one of a set: <code>[aeiouy]</code> matches <i>one</i> Englis vowel</li>
 <li>any not in a set: <code>[^aieouy]</code> matches a non-vowel</li>
@@ -224,9 +228,9 @@ Complemented bracket expressions &amp; char classes:
 </pre>
 </div>
 </div>
-<div id="outline-container-org7360e7a" class="outline-3">
-<h3 id="org7360e7a">repetition - zero or more</h3>
-<div class="outline-text-3" id="text-org7360e7a">
+<div id="outline-container-org98f82a9" class="outline-3">
+<h3 id="org98f82a9">repetition - zero or more</h3>
+<div class="outline-text-3" id="text-org98f82a9">
 <p>
 Asterisk ("star") indicates zero or more of the preceding char
 </p>
@@ -238,9 +242,9 @@ Asterisk ("star") indicates zero or more of the preceding char
 </ul>
 </div>
 </div>
-<div id="outline-container-org8e87ee7" class="outline-3">
-<h3 id="org8e87ee7">repetition - interval expressions</h3>
-<div class="outline-text-3" id="text-org8e87ee7">
+<div id="outline-container-org2afbb52" class="outline-3">
+<h3 id="org2afbb52">repetition - interval expressions</h3>
+<div class="outline-text-3" id="text-org2afbb52">
 <ul class="org-ul">
 <li><code>c\{N\}</code> - <i>N</i> occurrences of <i>c</i></li>
 <li><code>c\{N,\}</code> - at least <i>N</i> occurrences of <i>c</i></li>
@@ -252,9 +256,9 @@ Here <i>c</i> means a single char as described earlier
 </p>
 </div>
 </div>
-<div id="outline-container-orgcc7fded" class="outline-3">
-<h3 id="orgcc7fded">achoring maches</h3>
-<div class="outline-text-3" id="text-orgcc7fded">
+<div id="outline-container-org64ae20a" class="outline-3">
+<h3 id="org64ae20a">achoring maches</h3>
+<div class="outline-text-3" id="text-org64ae20a">
 <ul class="org-ul">
 <li>cared ("up arrow", "hat", <code>^</code>) - match must start at beginning of line or string</li>
 <li>dollar sign (<code>$</code>) - match must occur at end of line or string</li>
@@ -276,9 +280,9 @@ Here <i>c</i> means a single char as described earlier
 </pre>
 </div>
 </div>
-<div id="outline-container-org6f9d2e2" class="outline-3">
-<h3 id="org6f9d2e2">parenthasized subexpressions</h3>
-<div class="outline-text-3" id="text-org6f9d2e2">
+<div id="outline-container-org4e2cb1e" class="outline-3">
+<h3 id="org4e2cb1e">parenthasized subexpressions</h3>
+<div class="outline-text-3" id="text-org4e2cb1e">
 <ul class="org-ul">
 <li><code>\(a[bc\)\(123\)xx\2\1</code> - same as <code>a[bc]123xxM2M1</code>
 <ul class="org-ul">
@@ -307,9 +311,9 @@ pre ab123xx123xab post
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd280699" class="outline-3">
-<h3 id="orgd280699">operator precedence</h3>
-<div class="outline-text-3" id="text-orgd280699">
+<div id="outline-container-org998fbd4" class="outline-3">
+<h3 id="org998fbd4">operator precedence</h3>
+<div class="outline-text-3" id="text-org998fbd4">
 <p>
 From heighest to lowest:
 </p>
@@ -324,9 +328,9 @@ From heighest to lowest:
 </ol>
 </div>
 </div>
-<div id="outline-container-org0c833f6" class="outline-3">
-<h3 id="org0c833f6">longest, leftmost match</h3>
-<div class="outline-text-3" id="text-org0c833f6">
+<div id="outline-container-org137524a" class="outline-3">
+<h3 id="org137524a">longest, leftmost match</h3>
+<div class="outline-text-3" id="text-org137524a">
 <ul class="org-ul">
 <li>regexs match the longest possible, leftmost ocurrence of text that can match</li>
 <li>the match ends at the first character that cannot be matched</li>

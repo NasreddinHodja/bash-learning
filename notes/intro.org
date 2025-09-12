@@ -1,5 +1,6 @@
 #+title: Intro
 #+index: 1
+#+next: >> Variables and Simple Output:/variables-and-simple-output.html
 #+breadcrumbs: index:/index.html
 
 * History
