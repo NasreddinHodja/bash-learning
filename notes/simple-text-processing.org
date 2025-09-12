@@ -1,0 +1,34 @@
+#+title: Simple Text Processing
+#+index: 7
+#+breadcrumbs: index:/index.html
+#+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
+
+* Counting lines, words, chars
+We use =wc= ("word count")
++ =-l= for lines
++ =-w= for words
++ =-m= for chars
++ =-c= for bytes
+
+* Transforming text
+=tr= command "transforms" text
+
++ usual usage is mapping one set to another:
+#+begin_src bash
+tr [:lower:] [:upper:]
+#+end_src
+
++ =-d= deletes chars in set
++ =-c set1 set2= maps complement of =set1= to =set2=
++ =-s= squezes out repeated chars
+
+* Converting tabs vs spaces
++ =expand= command converts tabs to spaces
++ =unexpand= command converts spaces to tabs
+
+* First or last few lines
++ =tail= prints last =N= lines
+  - =-n N= posix (*more robust to use posix options*); =-N= traditional
+  - =-f= "follows" the file, printing end as it goes
+
++ =head= prints first =N= lines

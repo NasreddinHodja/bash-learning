@@ -6,44 +6,29 @@
 <title>Command Types; Command and Directory Searching</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="/static/style.css" >
-
-<script>
-function toggleTOC() {
-    const content = document.getElementById('text-table-of-contents');
-    const icon = document.querySelector('.toggle-icon');
-
-    if (content && icon) {
-        content.classList.toggle('expanded');
-        icon.classList.toggle('expanded');
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    const content = document.getElementById('text-table-of-contents');
-    const icon = document.querySelector('.toggle-icon');
-
-    if (content && icon) {
-        content.classList.remove('expanded');
-        icon.classList.remove('expanded');
-    }
-});
-</script>
+<script src="/static/toc-toggle.js"></script>
 </head>
 <body>
 <div id="content" class="content">
 <h1 class="title">Command Types; Command and Directory Searching</h1>
+<nav class="breadcrumbs">
+<a href="/index.html">index</a> <span class="separator">/</span> <span>.</span>
+</nav>
 <div id="table-of-contents" role="doc-toc">
-<h2 onclick="toggleTOC()">Table of Contents<span class="toggle-icon">▼</span></h2>
+<div class="toc-header" onclick="toggleToc()">
+<h2>Table of Contents</h2>
+<div class="toggle-icon">+</div>
+</div>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1dc7838">Types of commands</a></li>
-<li><a href="#org7a8d38e"><code>PATH</code></a></li>
+<li><a href="#org3ff1059">Types of commands</a></li>
+<li><a href="#org3a52264"><code>PATH</code></a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org1dc7838" class="outline-2">
-<h2 id="org1dc7838">Types of commands</h2>
-<div class="outline-text-2" id="text-org1dc7838">
+<div id="outline-container-org3ff1059" class="outline-2">
+<h2 id="org3ff1059">Types of commands</h2>
+<div class="outline-text-2" id="text-org3ff1059">
 <p>
 There are 3 different kinds of commands:
 </p>
@@ -78,7 +63,7 @@ The <code>type</code> command gives us the type of a given command:
 </pre>
 </div>
 
-<pre class="example" id="org7ab340d">
+<pre class="example" id="org42117b3">
 cd is a shell builtin
 read is a shell builtin
 pwd is a shell builtin
@@ -95,9 +80,9 @@ sort is /usr/bin/sort
 </pre>
 </div>
 </div>
-<div id="outline-container-org7a8d38e" class="outline-2">
-<h2 id="org7a8d38e"><code>PATH</code></h2>
-<div class="outline-text-2" id="text-org7a8d38e">
+<div id="outline-container-org3a52264" class="outline-2">
+<h2 id="org3a52264"><code>PATH</code></h2>
+<div class="outline-text-2" id="text-org3a52264">
 <p>
 Shell searches for commands in the following order:
 </p>

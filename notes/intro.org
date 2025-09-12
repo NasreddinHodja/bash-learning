@@ -1,5 +1,6 @@
 #+title: Intro
 #+index: 1
+#+breadcrumbs: index:/index.html
 
 * History
 #+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U

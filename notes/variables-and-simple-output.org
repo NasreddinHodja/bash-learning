@@ -1,5 +1,6 @@
 #+title: Variables and Simple Output
 #+index: 2
+#+breadcrumbs: index:/index.html
 
 * Variables
 #+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U

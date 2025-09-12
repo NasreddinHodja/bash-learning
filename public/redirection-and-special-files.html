@@ -6,52 +6,37 @@
 <title>Redirection and Special Files</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="/static/style.css" >
-
-<script>
-function toggleTOC() {
-    const content = document.getElementById('text-table-of-contents');
-    const icon = document.querySelector('.toggle-icon');
-
-    if (content && icon) {
-        content.classList.toggle('expanded');
-        icon.classList.toggle('expanded');
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    const content = document.getElementById('text-table-of-contents');
-    const icon = document.querySelector('.toggle-icon');
-
-    if (content && icon) {
-        content.classList.remove('expanded');
-        icon.classList.remove('expanded');
-    }
-});
-</script>
+<script src="/static/toc-toggle.js"></script>
 </head>
 <body>
 <div id="content" class="content">
 <h1 class="title">Redirection and Special Files</h1>
+<nav class="breadcrumbs">
+<a href="/index.html">index</a> <span class="separator">/</span> <span>.</span>
+</nav>
 <div id="table-of-contents" role="doc-toc">
-<h2 onclick="toggleTOC()">Table of Contents<span class="toggle-icon">▼</span></h2>
+<div class="toc-header" onclick="toggleToc()">
+<h2>Table of Contents</h2>
+<div class="toggle-icon">+</div>
+</div>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga2201d1">File redirection</a></li>
-<li><a href="#orgc731101">Pipelines</a></li>
-<li><a href="#orgc96737a">Redirecting <code>stderr</code> vs <code>stdout</code></a></li>
-<li><a href="#org3943f71">Here documents</a></li>
-<li><a href="#orgdaaa7b3">Special files</a>
+<li><a href="#org5be90cc">File redirection</a></li>
+<li><a href="#orgc544dce">Pipelines</a></li>
+<li><a href="#org659d8f4">Redirecting <code>stderr</code> vs <code>stdout</code></a></li>
+<li><a href="#org97f7384">Here documents</a></li>
+<li><a href="#org5ddbbaf">Special files</a>
 <ul>
-<li><a href="#org24ced8b"><code>/dev/null</code></a></li>
-<li><a href="#org9379633"><code>/dev/tty</code></a></li>
+<li><a href="#orgd03fc1f"><code>/dev/null</code></a></li>
+<li><a href="#org1a1d0e3"><code>/dev/tty</code></a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orga2201d1" class="outline-2">
-<h2 id="orga2201d1">File redirection</h2>
-<div class="outline-text-2" id="text-orga2201d1">
+<div id="outline-container-org5be90cc" class="outline-2">
+<h2 id="org5be90cc">File redirection</h2>
+<div class="outline-text-2" id="text-org5be90cc">
 <ul class="org-ul">
 <li><code>&lt;</code> redirects stdin</li>
 <li><code>&gt;</code> redirects stdout</li>
@@ -109,9 +94,9 @@ another line
 </pre>
 </div>
 </div>
-<div id="outline-container-orgc731101" class="outline-2">
-<h2 id="orgc731101">Pipelines</h2>
-<div class="outline-text-2" id="text-orgc731101">
+<div id="outline-container-orgc544dce" class="outline-2">
+<h2 id="orgc544dce">Pipelines</h2>
+<div class="outline-text-2" id="text-orgc544dce">
 <p>
 They hook 2 files together.
 </p>
@@ -126,7 +111,7 @@ They hook 2 files together.
 </pre>
 </div>
 
-<pre class="example" id="orge90c41e">
+<pre class="example" id="orgf901a7f">
 arguments.org
 index.org
 index.org~
@@ -161,9 +146,9 @@ arguments.org
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc96737a" class="outline-2">
-<h2 id="orgc96737a">Redirecting <code>stderr</code> vs <code>stdout</code></h2>
-<div class="outline-text-2" id="text-orgc96737a">
+<div id="outline-container-org659d8f4" class="outline-2">
+<h2 id="org659d8f4">Redirecting <code>stderr</code> vs <code>stdout</code></h2>
+<div class="outline-text-2" id="text-org659d8f4">
 <ul class="org-ul">
 <li>We can redirect <code>stderr</code> to other files with <code>2&gt;</code>:</li>
 </ul>
@@ -225,9 +210,9 @@ We should:
 </ul>
 </div>
 </div>
-<div id="outline-container-org3943f71" class="outline-2">
-<h2 id="org3943f71">Here documents</h2>
-<div class="outline-text-2" id="text-org3943f71">
+<div id="outline-container-org97f7384" class="outline-2">
+<h2 id="org97f7384">Here documents</h2>
+<div class="outline-text-2" id="text-org97f7384">
 <p>
 <code>&lt;&lt;</code> is called a "here document".
 </p>
@@ -285,7 +270,7 @@ EOF</span>
 </pre>
 </div>
 
-<pre class="example" id="org7018503">
+<pre class="example" id="org2baba2b">
 This is a here document
 	This line has a tab at the start
 		This line has two tabs
@@ -300,13 +285,13 @@ No leading content, just a tab (stripped)
 </pre>
 </div>
 </div>
-<div id="outline-container-orgdaaa7b3" class="outline-2">
-<h2 id="orgdaaa7b3">Special files</h2>
-<div class="outline-text-2" id="text-orgdaaa7b3">
+<div id="outline-container-org5ddbbaf" class="outline-2">
+<h2 id="org5ddbbaf">Special files</h2>
+<div class="outline-text-2" id="text-org5ddbbaf">
 </div>
-<div id="outline-container-org24ced8b" class="outline-3">
-<h3 id="org24ced8b"><code>/dev/null</code></h3>
-<div class="outline-text-3" id="text-org24ced8b">
+<div id="outline-container-orgd03fc1f" class="outline-3">
+<h3 id="orgd03fc1f"><code>/dev/null</code></h3>
+<div class="outline-text-3" id="text-orgd03fc1f">
 <p>
 The <b>bit bucket</b>. Output to <code>/dev/null</code> is thrown away!
 </p>
@@ -316,9 +301,9 @@ Useful in cases where we dont care about the output but want exit status or othe
 </p>
 </div>
 </div>
-<div id="outline-container-org9379633" class="outline-3">
-<h3 id="org9379633"><code>/dev/tty</code></h3>
-<div class="outline-text-3" id="text-org9379633">
+<div id="outline-container-org1a1d0e3" class="outline-3">
+<h3 id="org1a1d0e3"><code>/dev/tty</code></h3>
+<div class="outline-text-3" id="text-org1a1d0e3">
 <p>
 This is our terminal! ("tty" stands for "teletype")
 </p>
@@ -364,7 +349,7 @@ Important if we wish to communicate with the user. <code>stdout</code>, <code>st
 </pre>
 </div>
 
-<pre class="example" id="org0885d0b">
+<pre class="example" id="orgf6562a7">
 Enter new password:
 Enter again:
 Passwords match

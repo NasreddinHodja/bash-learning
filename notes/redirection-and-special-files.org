@@ -1,5 +1,6 @@
 #+title: Redirection and Special Files
 #+index: 5
+#+breadcrumbs: index:/index.html
 #+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
 
 * File redirection

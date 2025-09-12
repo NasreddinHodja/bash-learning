@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Extended Regular Expressions</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/static/style.css" >
+<script src="/static/toc-toggle.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Extended Regular Expressions</h1>
+<nav class="breadcrumbs">
+<a href="/index.html">index</a> <span class="separator">/</span> <span>.</span>
+</nav>
+<div id="table-of-contents" role="doc-toc">
+<div class="toc-header" onclick="toggleToc()">
+<h2>Table of Contents</h2>
+<div class="toggle-icon">+</div>
+</div>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org3b4d236">Regular expression concepts</a>
+<ul>
+<li><a href="#orgb055f56"><code>grep</code> options</a></li>
+<li><a href="#orgf246528">Robustness</a></li>
+</ul>
+</li>
+<li><a href="#orgb3ba741">Basic regex components</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3b4d236" class="outline-2">
+<h2 id="org3b4d236">Regular expression concepts</h2>
+<div class="outline-text-2" id="text-org3b4d236">
+<p>
+A regex is a language describing text to be matched
+</p>
+
+<p>
+A regex is composed of:
+</p>
+<ul class="org-ul">
+<li><b>regular chars</b> that stand for themselves</li>
+<li><b>metachars</b> that stand for a regular expression</li>
+<li><b>expressions</b> denoting categories of chars or sub-parts of a regex</li>
+</ul>
+
+<p>
+Historically, different tools used different regex "flavors"
+</p>
+
+<p>
+POSIX standardizes 2 flavours.
+Other tools enhances regexs beyond what we cover here
+</p>
+
+<ul class="org-ul">
+<li><b>Basic Regucal Expression (BRE)</b>
+<ul class="org-ul">
+<li>simpler to learn, less computationally expensive</li>
+</ul></li>
+<li><b>Extended Regucal Expression (*ERE)</b>
+<ul class="org-ul">
+<li>much more powerful, more expensive</li>
+<li>on moern systems, no real difference in "expense"</li>
+</ul></li>
+</ul>
+
+<p>
+What programs use regex?
+</p>
+<ul class="org-ul">
+<li>The <code>grep</code> family
+<ul class="org-ul">
+<li><code>grep</code> - BRE</li>
+<li><code>egrep</code> and <code>grep -E</code> - ERE</li>
+<li><code>fgrep</code> and <code>grep -F</code> - string matching in parallel</li>
+<li>POSIX standardizing brings them all into the single <code>grep</code> command</li>
+</ul></li>
+<li><code>sed</code> - text matching and substitution</li>
+<li><code>awk</code> - pattern matching with programming</li>
+<li>text editors: <code>ed</code>, <code>ex</code>, <code>vim</code>, <code>emacs</code></li>
+<li>scripting languages, usually with their on flavours</li>
+</ul>
+</div>
+<div id="outline-container-orgb055f56" class="outline-3">
+<h3 id="orgb055f56"><code>grep</code> options</h3>
+<div class="outline-text-3" id="text-orgb055f56">
+<ul class="org-ul">
+<li>use <code>pat</code> as pattern: <code>-e pat</code></li>
+<li>read list of patterns from file: <code>-f file</code></li>
+<li>ignore case in input: <code>-i</code></li>
+<li>list matching input files: <code>-l</code></li>
+<li>print lines that don't match: <code>-v</code></li>
+<li>supress output ("quiet", exit status only): <code>-q</code>
+<ul class="org-ul">
+<li>often, you can use <code>&gt; /dev/null</code> instead (more obvious)</li>
+</ul></li>
+<li>don't print errors ("silent"): <code>-s</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf246528" class="outline-3">
+<h3 id="orgf246528">Robustness</h3>
+<div class="outline-text-3" id="text-orgf246528">
+<ul class="org-ul">
+<li>invest time in learning regexs</li>
+<li>use EREs wherever possible</li>
+<li><b>always quote your regexs on the shell command line</b></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb3ba741" class="outline-2">
+<h2 id="orgb3ba741">Basic regex components</h2>
+</div>
+</div>
+</body>
+</html>

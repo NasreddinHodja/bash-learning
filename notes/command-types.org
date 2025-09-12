@@ -1,5 +1,6 @@
 #+title: Command Types; Command and Directory Searching
 #+index: 6
+#+breadcrumbs: index:/index.html
 #+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
 
 * Types of commands

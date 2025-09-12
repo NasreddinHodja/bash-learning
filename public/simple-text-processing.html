@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Simple Text Processing</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/static/style.css" >
+<script src="/static/toc-toggle.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Simple Text Processing</h1>
+<nav class="breadcrumbs">
+<a href="/index.html">index</a> <span class="separator">/</span> <span>.</span>
+</nav>
+<div id="table-of-contents" role="doc-toc">
+<div class="toc-header" onclick="toggleToc()">
+<h2>Table of Contents</h2>
+<div class="toggle-icon">+</div>
+</div>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orge51eb28">Counting lines, words, chars</a></li>
+<li><a href="#orgdd69c61">Transforming text</a></li>
+<li><a href="#org79d8e66">Converting tabs vs spaces</a></li>
+<li><a href="#org4b45e8f">First or last few lines</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge51eb28" class="outline-2">
+<h2 id="orge51eb28">Counting lines, words, chars</h2>
+<div class="outline-text-2" id="text-orge51eb28">
+<p>
+We use <code>wc</code> ("word count")
+</p>
+<ul class="org-ul">
+<li><code>-l</code> for lines</li>
+<li><code>-w</code> for words</li>
+<li><code>-m</code> for chars</li>
+<li><code>-c</code> for bytes</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgdd69c61" class="outline-2">
+<h2 id="orgdd69c61">Transforming text</h2>
+<div class="outline-text-2" id="text-orgdd69c61">
+<p>
+<code>tr</code> command "transforms" text
+</p>
+
+<ul class="org-ul">
+<li>usual usage is mapping one set to another:</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-bash">tr [:lower:] [:upper:]
+</pre>
+</div>
+
+<ul class="org-ul">
+<li><code>-d</code> deletes chars in set</li>
+<li><code>-c set1 set2</code> maps complement of <code>set1</code> to <code>set2</code></li>
+<li><code>-s</code> squezes out repeated chars</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org79d8e66" class="outline-2">
+<h2 id="org79d8e66">Converting tabs vs spaces</h2>
+<div class="outline-text-2" id="text-org79d8e66">
+<ul class="org-ul">
+<li><code>expand</code> command converts tabs to spaces</li>
+<li><code>unexpand</code> command converts spaces to tabs</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4b45e8f" class="outline-2">
+<h2 id="org4b45e8f">First or last few lines</h2>
+<div class="outline-text-2" id="text-org4b45e8f">
+<ul class="org-ul">
+<li><code>tail</code> prints last <code>N</code> lines
+<ul class="org-ul">
+<li><code>-n N</code> posix (<b>more robust to use posix options</b>); <code>-N</code> traditional</li>
+<li><code>-f</code> "follows" the file, printing end as it goes</li>
+</ul></li>
+
+<li><code>head</code> prints first <code>N</code> lines</li>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>

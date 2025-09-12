@@ -1,4 +1,5 @@
 #+title: Bash Notes
+#+options: toc:nil
 
 * Table of Contents
 ** [[./intro.org][1.0 Intro]]
@@ -54,6 +55,32 @@
 ** [[./command-types.org][6.0 Command Types; Command and Directory Searching]]
 + [[./command-types.org::*Types of commands][6.1 Types of commands]]
 + [[./command-types.org::*=PATH=][6.2 =PATH=]]
+
+** [[./simple-text-processing.org][7.0 Simple Text Processing]]
++ [[./simple-text-processing.org::*Counting lines, words, chars][7.1 Counting lines, words, chars]]
++ [[./simple-text-processing.org::*Transforming text][7.2 Transforming text]]
++ [[./simple-text-processing.org::*Converting tabs vs spaces][7.3 Converting tabs vs spaces]]
++ [[./simple-text-processing.org::*First or last few lines][7.4 First or last few lines]]
+
+** [[./intro-to-regex.org][8.0 Intro To Regex]]
++ [[./intro-to-regex.org::*Regular expression concepts][8.1 Regular expression concepts]]
+  - [[./intro-to-regex.org::*=grep= options][8.2 =grep= options]]
+  - [[./intro-to-regex.org::*Robustness][8.3 Robustness]]
++ [[./intro-to-regex.org::*Basic regex components][8.4 Basic regex components]]
+  - [[./intro-to-regex.org::*single char expressions][8.5 single char expressions]]
+  - [[./intro-to-regex.org::*bracket expressions][8.6 bracket expressions]]
+  - [[./intro-to-regex.org::*repetition - zero or more][8.7 repetition - zero or more]]
+  - [[./intro-to-regex.org::*repetition - interval expressions][8.8 repetition - interval expressions]]
+  - [[./intro-to-regex.org::*achoring maches][8.9 achoring maches]]
+  - [[./intro-to-regex.org::*parenthasized subexpressions][8.10 parenthasized subexpressions]]
+  - [[./intro-to-regex.org::*operator precedence][8.11 operator precedence]]
+  - [[./intro-to-regex.org::*longest, leftmost match][8.12 longest, leftmost match]]
+
+** [[./extended-regular-expressions.org][9.0 Extended Regular Expressions]]
++ [[./extended-regular-expressions.org::*Regular expression concepts][9.1 Regular expression concepts]]
+  - [[./extended-regular-expressions.org::*=grep= options][9.2 =grep= options]]
+  - [[./extended-regular-expressions.org::*Robustness][9.3 Robustness]]
++ [[./extended-regular-expressions.org::*Basic regex components][9.4 Basic regex components]]
 
 ** [[./shell-expansions.org][100.0 Shell Expansions]]
 + [[./shell-expansions.org::*Default values][100.1 Default values]]

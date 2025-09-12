@@ -1,5 +1,6 @@
 #+title: Script Arguments
 #+index: 3
+#+breadcrumbs: index:/index.html
 #+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
 
 * Getting arguments

@@ -6,63 +6,48 @@
 <title>Shell Expansions</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="/static/style.css" >
-
-<script>
-function toggleTOC() {
-    const content = document.getElementById('text-table-of-contents');
-    const icon = document.querySelector('.toggle-icon');
-
-    if (content && icon) {
-        content.classList.toggle('expanded');
-        icon.classList.toggle('expanded');
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    const content = document.getElementById('text-table-of-contents');
-    const icon = document.querySelector('.toggle-icon');
-
-    if (content && icon) {
-        content.classList.remove('expanded');
-        icon.classList.remove('expanded');
-    }
-});
-</script>
+<script src="/static/toc-toggle.js"></script>
 </head>
 <body>
 <div id="content" class="content">
 <h1 class="title">Shell Expansions</h1>
+<nav class="breadcrumbs">
+<a href="/index.html">index</a> <span class="separator">/</span> <span>.</span>
+</nav>
 <div id="table-of-contents" role="doc-toc">
-<h2 onclick="toggleTOC()">Table of Contents<span class="toggle-icon">▼</span></h2>
+<div class="toc-header" onclick="toggleToc()">
+<h2>Table of Contents</h2>
+<div class="toggle-icon">+</div>
+</div>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1576a28">Default values</a></li>
-<li><a href="#org6c7c757">Required parameters with error</a></li>
-<li><a href="#org26d7e09">String manipulation</a></li>
+<li><a href="#org6890bb3">Default values</a></li>
+<li><a href="#org60d49e8">Required parameters with error</a></li>
+<li><a href="#org8be0e32">String manipulation</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org1576a28" class="outline-2">
-<h2 id="org1576a28">Default values</h2>
-<div class="outline-text-2" id="text-org1576a28">
+<div id="outline-container-org6890bb3" class="outline-2">
+<h2 id="org6890bb3">Default values</h2>
+<div class="outline-text-2" id="text-org6890bb3">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">DIR</span>=<span style="font-style: italic;">"${DIR:-/default/path}"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org6c7c757" class="outline-2">
-<h2 id="org6c7c757">Required parameters with error</h2>
-<div class="outline-text-2" id="text-org6c7c757">
+<div id="outline-container-org60d49e8" class="outline-2">
+<h2 id="org60d49e8">Required parameters with error</h2>
+<div class="outline-text-2" id="text-org60d49e8">
 <div class="org-src-container">
 <pre class="src src-bash">: <span style="font-style: italic;">"${REQUIRED_VAR:?Error: REQUIRED_VAR must be set}"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org26d7e09" class="outline-2">
-<h2 id="org26d7e09">String manipulation</h2>
-<div class="outline-text-2" id="text-org26d7e09">
+<div id="outline-container-org8be0e32" class="outline-2">
+<h2 id="org8be0e32">String manipulation</h2>
+<div class="outline-text-2" id="text-org8be0e32">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">filename</span>=<span style="font-style: italic;">"/path/to/file.txt"</span>
 <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"${filename##*/}"</span>

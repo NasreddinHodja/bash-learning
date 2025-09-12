@@ -1,9 +1,7 @@
 #+title: Bash Learning Notes
 
 * Overview
-A comprehensive collection of Bash scripting notes and tutorials, organized as a structured learning resource.
-
-This repository contains my personal notes while learning Bash, structured to eventually become a comprehensive tutorial website. The notes are written in Org-mode format for easy organization.
+These are my personal notes while learning Bash, structured to eventually become a comprehensive tutorial website. The notes are written in Org-mode format.
 
 * Project Structure
 #+begin_example
@@ -23,7 +21,7 @@ bash-learning/
 └── watch.sh               # development server with live reload
 #+end_example
 
-* Organization System
+* Content
 Each topic is contained in its own =.org= file within the =notes/= directory.
 
 #+begin_src org
@@ -34,50 +32,31 @@ Each topic is contained in its own =.org= file within the =notes/= directory.
 ,*** ...
 #+end_src
 
-The =#+index:= property determines the order in the table of contents.
++ =#+index:= determines the order in the [[* Table of Contents Generation][table of contents]].
 
 * Table of Contents Generation
-The =build-toc.el= automatically generates a hierarchical table of contents in =notes/index.org= by:
+=build-toc.el= automatically generates a hierarchical table of contents in =notes/index.org= by:
 1. Scanning all =.org= files in the =notes/= directory
 2. Extracting titles, index numbers, and heading structures
 3. Creating a numbered, hierarchical TOC with proper Org-mode links
 4. Updating the "Table of Contents" section in =index.org=
 
-* Publishing System
+* Publishing
 ** HTML Generation
-The =publish.el= script uses Org's built-in publishing system to generate a static website:
-
+=publish.el= script uses Org's built-in publishing system to generate a static website:
 + Converts all =.org= files in =notes/= to HTML in =public/=
 + Includes custom CSS styling and collapsible TOC functionality
 + Automatically cleans up orphaned HTML files (when source =.org= files are deleted)
 + Copies static assets (CSS, images) from =static/= to =public/static/=
 
-** Build Process
+** Build
 #+begin_src bash
-./build.sh    # generate html from org files
+./build.sh    # runs all the publishing scripts
 #+end_src
 
 The build script runs =publish.el= through Emacs in batch mode for automated publishing.
 
-** Development Workflow
+** Dev Workflow
 #+begin_src bash
-./watch.sh    # start development server with live reload
+./watch.sh    # starts dev server with browser-sync
 #+end_src
-
-The watch script:
-+ Monitors changes to content files and build scripts
-+ Automatically rebuilds the site when files change
-+ Serves the site locally with browser-sync
-+ Provides live reload functionality for seamless development
-
-* Running scripts in notes
-1. tangle org src block to =notes/scripts/=
-2. execute =notes/scripts/[script]=
-
-* Dev progress
-+ [X] general project structure
-+ [X] =publish.el= & =build.sh= for publishing org files to html
-+ [X] =watch.sh= to reload browser tab on changes
-+ [ ] publish src blocks with syntax highlighting
-+ [ ] publish results of src blocks
-+ [ ] =build-toc.el= for generating index file with TOC

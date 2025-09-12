@@ -6,53 +6,38 @@
 <title>Variables and Simple Output</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="/static/style.css" >
-
-<script>
-function toggleTOC() {
-    const content = document.getElementById('text-table-of-contents');
-    const icon = document.querySelector('.toggle-icon');
-
-    if (content && icon) {
-        content.classList.toggle('expanded');
-        icon.classList.toggle('expanded');
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    const content = document.getElementById('text-table-of-contents');
-    const icon = document.querySelector('.toggle-icon');
-
-    if (content && icon) {
-        content.classList.remove('expanded');
-        icon.classList.remove('expanded');
-    }
-});
-</script>
+<script src="/static/toc-toggle.js"></script>
 </head>
 <body>
 <div id="content" class="content">
 <h1 class="title">Variables and Simple Output</h1>
+<nav class="breadcrumbs">
+<a href="/index.html">index</a> <span class="separator">/</span> <span>.</span>
+</nav>
 <div id="table-of-contents" role="doc-toc">
-<h2 onclick="toggleTOC()">Table of Contents<span class="toggle-icon">▼</span></h2>
+<div class="toc-header" onclick="toggleToc()">
+<h2>Table of Contents</h2>
+<div class="toggle-icon">+</div>
+</div>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf0bad1d">Variables</a>
+<li><a href="#org48d2d36">Variables</a>
 <ul>
-<li><a href="#org6bcece8">Quoting issues</a></li>
+<li><a href="#orgfe448d0">Quoting issues</a></li>
 </ul>
 </li>
-<li><a href="#orgff00c17">Output</a>
+<li><a href="#org5c951a4">Output</a>
 <ul>
-<li><a href="#org108c6c9"><code>echo</code></a></li>
-<li><a href="#org6e88c76"><code>printf</code></a></li>
+<li><a href="#orga20f8ea"><code>echo</code></a></li>
+<li><a href="#org859461d"><code>printf</code></a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf0bad1d" class="outline-2">
-<h2 id="orgf0bad1d">Variables</h2>
-<div class="outline-text-2" id="text-orgf0bad1d">
+<div id="outline-container-org48d2d36" class="outline-2">
+<h2 id="org48d2d36">Variables</h2>
+<div class="outline-text-2" id="text-org48d2d36">
 <p>
 Variable names:
 </p>
@@ -79,9 +64,9 @@ Tomazine Bizine
 bizineeee
 </pre>
 </div>
-<div id="outline-container-org6bcece8" class="outline-3">
-<h3 id="org6bcece8">Quoting issues</h3>
-<div class="outline-text-3" id="text-org6bcece8">
+<div id="outline-container-orgfe448d0" class="outline-3">
+<h3 id="orgfe448d0">Quoting issues</h3>
+<div class="outline-text-3" id="text-orgfe448d0">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">a</span>=<span style="font-style: italic;">"a      b"</span>
 
@@ -152,13 +137,13 @@ $a
 </div>
 </div>
 </div>
-<div id="outline-container-orgff00c17" class="outline-2">
-<h2 id="orgff00c17">Output</h2>
-<div class="outline-text-2" id="text-orgff00c17">
+<div id="outline-container-org5c951a4" class="outline-2">
+<h2 id="org5c951a4">Output</h2>
+<div class="outline-text-2" id="text-org5c951a4">
 </div>
-<div id="outline-container-org108c6c9" class="outline-3">
-<h3 id="org108c6c9"><code>echo</code></h3>
-<div class="outline-text-3" id="text-org108c6c9">
+<div id="outline-container-orga20f8ea" class="outline-3">
+<h3 id="orga20f8ea"><code>echo</code></h3>
+<div class="outline-text-3" id="text-orga20f8ea">
 <p>
 We've already seen the <code>echo</code> command.
 </p>
@@ -193,9 +178,9 @@ Different versions of <code>echo</code> do different things&#x2026;
 </p>
 </div>
 </div>
-<div id="outline-container-org6e88c76" class="outline-3">
-<h3 id="org6e88c76"><code>printf</code></h3>
-<div class="outline-text-3" id="text-org6e88c76">
+<div id="outline-container-org859461d" class="outline-3">
+<h3 id="org859461d"><code>printf</code></h3>
+<div class="outline-text-3" id="text-org859461d">
 <p>
 Alternative to <code>echo</code> (more reliable) and works like the <code>printf</code> in C.
 </p>

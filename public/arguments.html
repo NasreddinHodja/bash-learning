@@ -6,44 +6,29 @@
 <title>Script Arguments</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="/static/style.css" >
-
-<script>
-function toggleTOC() {
-    const content = document.getElementById('text-table-of-contents');
-    const icon = document.querySelector('.toggle-icon');
-
-    if (content && icon) {
-        content.classList.toggle('expanded');
-        icon.classList.toggle('expanded');
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    const content = document.getElementById('text-table-of-contents');
-    const icon = document.querySelector('.toggle-icon');
-
-    if (content && icon) {
-        content.classList.remove('expanded');
-        icon.classList.remove('expanded');
-    }
-});
-</script>
+<script src="/static/toc-toggle.js"></script>
 </head>
 <body>
 <div id="content" class="content">
 <h1 class="title">Script Arguments</h1>
+<nav class="breadcrumbs">
+<a href="/index.html">index</a> <span class="separator">/</span> <span>.</span>
+</nav>
 <div id="table-of-contents" role="doc-toc">
-<h2 onclick="toggleTOC()">Table of Contents<span class="toggle-icon">▼</span></h2>
+<div class="toc-header" onclick="toggleToc()">
+<h2>Table of Contents</h2>
+<div class="toggle-icon">+</div>
+</div>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org6253619">Getting arguments</a></li>
-<li><a href="#orgffa87fc">Processing arguments</a></li>
+<li><a href="#org6e769e3">Getting arguments</a></li>
+<li><a href="#org26acdef">Processing arguments</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org6253619" class="outline-2">
-<h2 id="org6253619">Getting arguments</h2>
-<div class="outline-text-2" id="text-org6253619">
+<div id="outline-container-org6e769e3" class="outline-2">
+<h2 id="org6e769e3">Getting arguments</h2>
+<div class="outline-text-2" id="text-org6e769e3">
 <p>
 We can access the arguments passed to our script with the following:
 </p>
@@ -96,7 +81,7 @@ arg_count <span style="font-style: italic;">"$@"</span>
 </pre>
 </div>
 
-<pre class="example" id="org22acea8">
+<pre class="example" id="orgec38daa">
 Number of arguments: 7
 
 First arg is: a
@@ -132,9 +117,9 @@ argument count: 7
 </pre>
 </div>
 </div>
-<div id="outline-container-orgffa87fc" class="outline-2">
-<h2 id="orgffa87fc">Processing arguments</h2>
-<div class="outline-text-2" id="text-orgffa87fc">
+<div id="outline-container-org26acdef" class="outline-2">
+<h2 id="org26acdef">Processing arguments</h2>
+<div class="outline-text-2" id="text-org26acdef">
 <p>
 There are 2 ways:
 </p>

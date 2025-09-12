@@ -12,30 +12,75 @@
 
 ;; setup project publishing
 (use-package htmlize)
-
 (require 'ox-publish)
 (require 'ox-html)
 
 ;; htmlize output
 (setq org-html-htmlize-output-type 'inline-css)
 (setq org-export-with-sub-superscripts nil)
-
 (setq org-html-doctype "html5")
 
-;; collapsible TOC filter using final output
+(defun nas/breadcrumbs-filter (string backend info)
+  "Add breadcrumbs below the title in HTML output."
+  (when (eq backend 'html)
+    (let* ((input-file (plist-get info :input-file))
+           (breadcrumbs (nas/get-breadcrumbs-from-file input-file)))
+
+      (when breadcrumbs
+        (with-temp-buffer
+          (insert string)
+          (goto-char (point-min))
+
+          ;; find the title and insert breadcrumbs after it
+          (when (re-search-forward "<h1[^>]*class=\"title\"[^>]*>.*?</h1>" nil t)
+            (let* ((crumbs-list (split-string breadcrumbs " > "))
+                   (breadcrumb-html (nas/generate-breadcrumb-html (append crumbs-list '(".")))))
+              (insert "\n" breadcrumb-html)
+          (buffer-string))))))))
+
+(defun nas/get-breadcrumbs-from-file (filename)
+  "Extract BREADCRUMBS keyword from org file."
+  (when (and filename (file-exists-p filename))
+    (with-temp-buffer
+      (insert-file-contents filename)
+      (goto-char (point-min))
+
+      (when (re-search-forward "^[ \t]*#\\+breadcrumbs:[ \t]*\\(.+\\)[ \t]*$" nil t)
+        (string-trim (match-string 1))))))
+
+(defun nas/generate-breadcrumb-html (crumbs-list)
+  "Generate HTML for breadcrumbs from a list of crumb specifications."
+  (let ((breadcrumb-items
+         (mapcar (lambda (crumb)
+                   (let ((parts (split-string crumb ":")))
+                     (if (= (length parts) 2)
+                         ;; format: "text:url"
+                         (format "<a href=\"%s\">%s</a>"
+                                (string-trim (cadr parts))
+                                (string-trim (car parts)))
+                       ;; format: "text" (no link)
+                       (format "<span>%s</span>" (string-trim crumb)))))
+                 crumbs-list)))
+
+    (format "<nav class=\"breadcrumbs\">\n%s\n</nav>"
+            (mapconcat 'identity breadcrumb-items " <span class=\"separator\">/</span> "))))
+
+;; filter for replacing toc
 (defun my-collapsible-toc-filter (string backend _info)
   "Add collapsible functionality to TOC in final HTML output."
   (when (eq backend 'html)
     (with-temp-buffer
       (insert string)
       (goto-char (point-min))
-      ;; Find and replace the TOC header
+
+      ;; find and replace the toc header
       (when (re-search-forward "<div id=\"table-of-contents\" role=\"doc-toc\">\n<h2>\\([^<]+\\)</h2>" nil t)
-        (replace-match "<div id=\"table-of-contents\" role=\"doc-toc\">\n<h2 onclick=\"toggleTOC()\">\\1<span class=\"toggle-icon\">▼</span></h2>"))
+        (replace-match "<div id=\"table-of-contents\" role=\"doc-toc\">\n<div class=\"toc-header\" onclick=\"toggleToc()\">\n<h2>\\1</h2>\n<div class=\"toggle-icon\">+</div>\n</div>"))
       (buffer-string))))
 
-;; add the filter
+;; add both filters
 (add-to-list 'org-export-filter-final-output-functions 'my-collapsible-toc-filter)
+(add-to-list 'org-export-filter-final-output-functions 'nas/breadcrumbs-filter)
 
 ;; set default header arguments for all source blocks
 (setq org-babel-default-header-args
@@ -59,40 +104,14 @@
          :with-toc t
          :section-numbers nil
          :time-stamp-file nil
-         :html-head-extra "
-<script>
-function toggleTOC() {
-    const content = document.getElementById('text-table-of-contents');
-    const icon = document.querySelector('.toggle-icon');
-
-    if (content && icon) {
-        content.classList.toggle('expanded');
-        icon.classList.toggle('expanded');
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    const content = document.getElementById('text-table-of-contents');
-    const icon = document.querySelector('.toggle-icon');
-
-    if (content && icon) {
-        content.classList.remove('expanded');
-        icon.classList.remove('expanded');
-    }
-});
-</script>
-"
-         )
-
+         :html-head-extra "<script src=\"/static/toc-toggle.js\"></script>")
         ("static"
          :base-directory "./static"
          :base-extension "css\\|js\\|png\\|jpg\\|gif\\|svg"
          :publishing-directory "./public/static"
          :recursive t
          :publishing-function org-publish-attachment)
-
         ("website" :components ("content" "static"))))
-
 
 ;; customize html output
 (setq org-html-validation-link nil
@@ -100,10 +119,10 @@ document.addEventListener('DOMContentLoaded', function() {
       org-html-head-include-default-style nil
       org-html-head "<link rel=\"stylesheet\" href=\"/static/style.css\" >")
 
-;; generate site output
+;; generate output
 (org-publish-all t)
 
-;; compute which html files are still valid based on existing .org files
+;; remove .html files in public/ that no longer have a matching .org source
 (let* ((org-src-dir (expand-file-name "./notes"))
        (output-dir (expand-file-name "./public"))
        (org-html-files
@@ -115,7 +134,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     (expand-file-name (file-relative-name f org-src-dir) output-dir))
                    ".html"))
                 org-html-files)))
-  ;; remove .html files in public/ that no longer have a matching .org source
   (dolist (html-file (directory-files-recursively output-dir "\\.html$"))
     (unless (member html-file valid-html)
       (delete-file html-file)

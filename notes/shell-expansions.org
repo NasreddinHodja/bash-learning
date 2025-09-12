@@ -1,5 +1,6 @@
 #+title: Shell Expansions
 #+index: 100
+#+breadcrumbs: index:/index.html
 #+source: https://youtu.be/BhOqqsLWVyA?si=G3MfTkHbDmMzpXaF
 
 * Default values
