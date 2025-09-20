@@ -17,6 +17,258 @@
 <div class="nav-buttons">
 <a href="/regular-expressions.html" class="nav-button"><< Regular Expressions</a>
 </div>
+<div id="table-of-contents" role="doc-toc">
+<div class="toc-header" onclick="toggleToc()">
+<h2>Table of Contents</h2>
+<div class="toggle-icon">+</div>
+</div>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgc01d052">Intro</a></li>
+<li><a href="#org1121510">Input flow</a></li>
+<li><a href="#org9f4ca54">Options</a></li>
+<li><a href="#org9264232">Command structure</a></li>
+<li><a href="#org132b400">Substitute command</a>
+<ul>
+<li><a href="#orgf52f547">Replacement</a></li>
+<li><a href="#org6980d19">Flags</a></li>
+<li><a href="#orgabae7d9">Robustness</a></li>
+</ul>
+</li>
+<li><a href="#org0a1ccb0">Examples</a>
+<ul>
+<li><a href="#org70b0509">Matching and removing</a></li>
+<li><a href="#org1494956">Printing</a></li>
+<li><a href="#org365ff18">Quit command</a></li>
+<li><a href="#org204271a">Generate commands</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc01d052" class="outline-2">
+<h2 id="orgc01d052">Intro</h2>
+<div class="outline-text-2" id="text-orgc01d052">
+<p>
+<code>sed</code> ("stream editor") is a <i>batch-mode</i> text editor.
+</p>
+
+<ul class="org-ul">
+<li>mostly used for substitution</li>
+<li>input from command line files and/or stdint</li>
+<li>editing commands from command line and/or script</li>
+<li>ouput to stdout</li>
+<li>original input files are unchanged</li>
+<li>large command set</li>
+<li>primary command is <code>s</code> (substitute) for text replacements</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1121510" class="outline-2">
+<h2 id="org1121510">Input flow</h2>
+<div class="outline-text-2" id="text-org1121510">
+
+<div id="orgcdd854a" class="figure">
+<p><img src="../static/sed/input-flow.png" alt="input-flow.png">
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9f4ca54" class="outline-2">
+<h2 id="org9f4ca54">Options</h2>
+<div class="outline-text-2" id="text-org9f4ca54">
+<ul class="org-ul">
+<li><code>-f script</code> reads commands from <code>script</code></li>
+<li><code>-e 'script'</code> also does that</li>
+<li><code>-n</code> don't print lines by default</li>
+<li><code>-i</code> edit files in place</li>
+<li><code>-r</code> use EREs (GNU <code>sed</code>)</li>
+<li>&#x2026; (see man page)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9264232" class="outline-2">
+<h2 id="org9264232">Command structure</h2>
+<div class="outline-text-2" id="text-org9264232">
+<div class="org-src-container">
+<pre class="src src-text">&lt;address&gt; &lt;command&gt; [ &lt;operands&gt; [ &lt;flags&gt; ] ]
+</pre>
+</div>
+
+<ul class="org-ul">
+<li><code>address</code>:
+<ul class="org-ul">
+<li>can be 0, 1 or 2 line numbers, use <code>$</code> to mean last line</li>
+<li>pattern to match (a BRE)</li>
+</ul></li>
+
+<li><code>command</code>: a single letter (<code>s</code> and <code>p</code> are most useful)</li>
+
+<li><code>operands</code>: different commands take different operands</li>
+
+<li><code>flags</code>: modifiers for <code>s</code> command</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org132b400" class="outline-2">
+<h2 id="org132b400">Substitute command</h2>
+<div class="outline-text-2" id="text-org132b400">
+<div class="org-src-container">
+<pre class="src src-text">s / pattern / replacement / [ flags ]
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>delimiter is any puntuation character, <code>/</code> is most commmon
+<ul class="org-ul">
+<li>use <code>\/</code> in pattern or replacement for real <code>/</code> (or other delimiter)</li>
+</ul></li>
+<li><code>pattern</code> is BRE</li>
+<li><code>replacement</code> is text to replace matched input text</li>
+<li><code>flags</code> are optional modifiers</li>
+</ul>
+</div>
+<div id="outline-container-orgf52f547" class="outline-3">
+<h3 id="orgf52f547">Replacement</h3>
+<div class="outline-text-3" id="text-orgf52f547">
+<ul class="org-ul">
+<li>empty - matched text is deleted</li>
+<li>plain text- matched text is replaced by contents</li>
+<li><code>&amp;</code> in replacement text means "text matching the pattern"</li>
+<li><code>\&amp;</code> is a real <code>&amp;</code></li>
+<li><code>\1</code> through <code>\9</code> - matching <code>\(...\)</code> in the BRE</li>
+<li><code>\\</code> is real <code>\</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6980d19" class="outline-3">
+<h3 id="org6980d19">Flags</h3>
+<div class="outline-text-3" id="text-org6980d19">
+<ul class="org-ul">
+<li>by default, substitution replaces first ocurrence only</li>
+<li>portable flags are:
+<ul class="org-ul">
+<li><code>g</code> replace every match on input line</li>
+<li><code>digit</code> replace nth match on input line</li>
+</ul></li>
+<li><code>i</code> for ignore case</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgabae7d9" class="outline-3">
+<h3 id="orgabae7d9">Robustness</h3>
+<div class="outline-text-3" id="text-orgabae7d9">
+<ul class="org-ul">
+<li>stick to BREs and  simple use of <code>sed</code> for <b>portability and readability</b></li>
+<li>keep editing commands on the <code>sed</code> command line to make you script more self-contained and readable</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org0a1ccb0" class="outline-2">
+<h2 id="org0a1ccb0">Examples</h2>
+<div class="outline-text-2" id="text-org0a1ccb0">
+</div>
+<div id="outline-container-org70b0509" class="outline-3">
+<h3 id="org70b0509">Matching and removing</h3>
+<div class="outline-text-3" id="text-org70b0509">
+<div class="org-src-container">
+<pre class="src src-bash">grep <span style="font-style: italic;">'/home/'</span> /etc/passwd | <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">find real users
+</span>    sed <span style="font-style: italic;">'s/:.*//'</span> |         <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">remove everything after user name
+</span>    sort -u
+</pre>
+</div>
+
+<pre class="example">
+nasreddin
+</pre>
+</div>
+</div>
+<div id="outline-container-org1494956" class="outline-3">
+<h3 id="org1494956">Printing</h3>
+<div class="outline-text-3" id="text-org1494956">
+<div class="org-src-container">
+<pre class="src src-bash">sed -n <span style="font-style: italic;">'/nas/p'</span> /etc/passwd <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">print lines that match 'nas'</span>
+</pre>
+</div>
+
+<pre class="example">
+nasreddin:x:1000:1000::/home/nasreddin:/usr/bin/zsh
+</pre>
+</div>
+</div>
+<div id="outline-container-org365ff18" class="outline-3">
+<h3 id="org365ff18">Quit command</h3>
+<div class="outline-text-3" id="text-org365ff18">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">head --- print first n lines
+</span>
+<span style="font-weight: bold; font-style: italic;">count</span>=$<span style="font-weight: bold; font-style: italic;">1</span>
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">'q' for quit at line $1
+</span>sed <span style="font-style: italic;">"${count}q"</span> $<span style="font-weight: bold; font-style: italic;">2</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-bash">./head 5 /etc/passwd
+</pre>
+</div>
+
+<pre class="example">
+root:x:0:0::/root:/usr/bin/zsh
+bin:x:1:1::/:/usr/bin/nologin
+daemon:x:2:2::/:/usr/bin/nologin
+mail:x:8:12::/var/spool/mail:/usr/bin/nologin
+ftp:x:14:11::/srv/ftp:/usr/bin/nologin
+</pre>
+
+
+<p>
+We could also use <code>-n</code> for printing <i>n</i> lines. Here we print lines 1 through 5:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">sed -n <span style="font-style: italic;">'1,5p'</span> /etc/passwd
+</pre>
+</div>
+
+<pre class="example">
+root:x:0:0::/root:/usr/bin/zsh
+bin:x:1:1::/:/usr/bin/nologin
+daemon:x:2:2::/:/usr/bin/nologin
+mail:x:8:12::/var/spool/mail:/usr/bin/nologin
+ftp:x:14:11::/srv/ftp:/usr/bin/nologin
+</pre>
+</div>
+</div>
+<div id="outline-container-org204271a" class="outline-3">
+<h3 id="org204271a">Generate commands</h3>
+<div class="outline-text-3" id="text-org204271a">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">user</span>=$<span style="font-weight: bold; font-style: italic;">1</span>
+
+find <span style="font-style: italic;">"/home/$user"</span> -type -d -print 2&gt; /dev/null | <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">get dir list
+</span>    sed <span style="font-style: italic;">"s;/home/$user;&amp;-back;"</span> |                 <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">change name
+</span>    sed <span style="font-style: italic;">"s/^/mkdir /"</span>                             <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">inserted mkdir command</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-bash">./make-backups.sh nasreddin | head -n 3
+</pre>
+</div>
+
+<pre class="example">
+mkdir /home/nasreddin
+mkdir /home/nasreddin/Downloads
+mkdir /home/nasreddin/Downloads/rofi
+mkdir /home/nasreddin/Downloads/rofi/theme
+mkdir /home/nasreddin/Downloads/rofi/.git
+</pre>
+</div>
+</div>
+</div>
 </div>
 </body>
 </html>

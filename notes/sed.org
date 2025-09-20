@@ -4,3 +4,148 @@
 #+back: << Regular Expressions:/regular-expressions.html
 #+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
 
+* Intro
+=sed= ("stream editor") is a /batch-mode/ text editor.
+
++ mostly used for substitution
++ input from command line files and/or stdint
++ editing commands from command line and/or script
++ ouput to stdout
++ original input files are unchanged
++ large command set
++ primary command is =s= (substitute) for text replacements
+
+* Input flow
+
+[[../static/sed/input-flow.png]]
+
+* Options
++ =-f script= reads commands from =script=
++ =-e 'script'= also does that
++ =-n= don't print lines by default
++ =-i= edit files in place
++ =-r= use EREs (GNU =sed=)
++ ... (see man page)
+
+* Command structure
+
+#+begin_src text
+<address> <command> [ <operands> [ <flags> ] ]
+#+end_src
+
++ =address=:
+  - can be 0, 1 or 2 line numbers, use =$= to mean last line
+  - pattern to match (a BRE)
+
++ =command=: a single letter (=s= and =p= are most useful)
+
++ =operands=: different commands take different operands
+
++ =flags=: modifiers for =s= command
+
+* Substitute command
+
+#+begin_src text
+s / pattern / replacement / [ flags ]
+#+end_src
+
++ delimiter is any puntuation character, =/= is most commmon
+  - use =\/= in pattern or replacement for real =/= (or other delimiter)
++ =pattern= is BRE
++ =replacement= is text to replace matched input text
++ =flags= are optional modifiers
+
+** Replacement
++ empty - matched text is deleted
++ plain text- matched text is replaced by contents
++ =&= in replacement text means "text matching the pattern"
++ =\&= is a real =&=
++ =\1= through =\9= - matching =\(...\)= in the BRE
++ =\\= is real =\=
+
+** Flags
++ by default, substitution replaces first ocurrence only
++ portable flags are:
+  - =g= replace every match on input line
+  - =digit= replace nth match on input line
++ =i= for ignore case
+
+** Robustness
++ stick to BREs and  simple use of =sed= for *portability and readability*
++ keep editing commands on the =sed= command line to make you script more self-contained and readable
+
+* Examples
+** Matching and removing
+
+#+begin_src bash
+grep '/home/' /etc/passwd | # find real users
+    sed 's/:.*//' |         # remove everything after user name
+    sort -u
+#+end_src
+
+#+RESULTS:
+: nasreddin
+
+** Printing
+
+#+begin_src bash
+sed -n '/nas/p' /etc/passwd # print lines that match 'nas'
+#+end_src
+
+#+RESULTS:
+: nasreddin:x:1000:1000::/home/nasreddin:/usr/bin/zsh
+
+** Quit command
+
+#+begin_src bash :cmdline "5" "/etc/passwd" :results output verbatim
+# head --- print first n lines
+
+count=$1
+
+# 'q' for quit at line $1
+sed "${count}q" $2
+#+end_src
+
+#+begin_src bash
+./head 5 /etc/passwd
+#+end_src
+
+#+RESULTS:
+: root:x:0:0::/root:/usr/bin/zsh
+: bin:x:1:1::/:/usr/bin/nologin
+: daemon:x:2:2::/:/usr/bin/nologin
+: mail:x:8:12::/var/spool/mail:/usr/bin/nologin
+: ftp:x:14:11::/srv/ftp:/usr/bin/nologin
+
+We could also use =-n= for printing /n/ lines. Here we print lines 1 through 5:
+
+#+begin_src bash :results output verbatim
+sed -n '1,5p' /etc/passwd
+#+end_src
+
+#+RESULTS:
+: root:x:0:0::/root:/usr/bin/zsh
+: bin:x:1:1::/:/usr/bin/nologin
+: daemon:x:2:2::/:/usr/bin/nologin
+: mail:x:8:12::/var/spool/mail:/usr/bin/nologin
+: ftp:x:14:11::/srv/ftp:/usr/bin/nologin
+
+** Generate commands
+#+begin_src bash :cmdline "nasreddin" :post "head -n 3"
+user=$1
+
+find "/home/$user" -type -d -print 2> /dev/null | # get dir list
+    sed "s;/home/$user;&-back;" |                 # change name
+    sed "s/^/mkdir /"                             # inserted mkdir command
+#+end_src
+
+#+begin_src bash
+./make-backups.sh nasreddin | head -n 3
+#+end_src
+
+#+RESULTS:
+: mkdir /home/nasreddin
+: mkdir /home/nasreddin/Downloads
+: mkdir /home/nasreddin/Downloads/rofi
+: mkdir /home/nasreddin/Downloads/rofi/theme
+: mkdir /home/nasreddin/Downloads/rofi/.git

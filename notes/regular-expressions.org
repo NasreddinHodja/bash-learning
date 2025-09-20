@@ -93,8 +93,8 @@ echo 123 eafg | grep -o '[aeiouy]'
 #+end_src
 
 #+RESULTS:
-| e |
-| a |
+: e
+: a
 
 Using =sed= to substitute, matches only the first:
 #+begin_src bash
