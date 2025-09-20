@@ -2,7 +2,7 @@
 #+index: 7
 #+breadcrumbs: index:/index.html
 #+back: << Command Types; Command and Directory Searching:/command-types.html
-#+next: >> Intro to Regex:/intro-to-regex.html
+#+next: >> Regular Expressions:/regular-expressions.html
 #+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
 
 * Counting lines, words, chars

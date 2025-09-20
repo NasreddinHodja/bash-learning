@@ -15,6 +15,24 @@
 (require 'ox-publish)
 (require 'ox-html)
 
+(require 'ansi-color)
+
+(defun nas/org-ansi-colorize-blocks (beg end)
+  "Apply ANSI colors to source block results in region."
+  (save-excursion
+    (goto-char beg)
+    (while (re-search-forward "^[[:space:]]*:.*" end t)
+      (let ((inhibit-read-only t))
+        (ansi-color-apply-on-region (match-beginning 0) (match-end 0))))))
+
+(add-hook 'org-babel-after-execute-hook
+          (lambda ()
+            (when (derived-mode-p 'org-mode)
+              (nas/org-ansi-colorize-blocks
+               (org-babel-where-is-src-block-result)
+               (org-babel-result-end)))))
+
+
 ;; htmlize output
 (setq org-html-htmlize-output-type 'inline-css)
 (setq org-export-with-sub-superscripts nil)
@@ -121,7 +139,7 @@
         (replace-match "<div id=\"table-of-contents\" role=\"doc-toc\">\n<div class=\"toc-header\" onclick=\"toggleToc()\">\n<h2>\\1</h2>\n<div class=\"toggle-icon\">+</div>\n</div>"))
       (buffer-string))))
 
-;; add both filters
+;; add filters
 (add-to-list 'org-export-filter-final-output-functions 'my-collapsible-toc-filter)
 (add-to-list 'org-export-filter-final-output-functions 'nas/breadcrumbs-filter)
 (add-to-list 'org-export-filter-final-output-functions 'nas/nav-buttons-filter)

@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Regular Expressions</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/static/style.css" >
+<script src="/static/toc-toggle.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Regular Expressions</h1>
+<nav class="breadcrumbs">
+<a href="/index.html">index</a> <span class="separator">/</span> <span>.</span>
+</nav>
+<div class="nav-buttons">
+<a href="/simple-text-processing.html" class="nav-button"><< Simple Text Processing</a>
+<a href="/sed.html" class="nav-button">>> sed</a>
+</div>
+<div id="table-of-contents" role="doc-toc">
+<div class="toc-header" onclick="toggleToc()">
+<h2>Table of Contents</h2>
+<div class="toggle-icon">+</div>
+</div>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgfc97cba">BREs</a>
+<ul>
+<li><a href="#org5a5f0c3">Regular expression concepts</a>
+<ul>
+<li><a href="#org7621893"><code>grep</code> options</a></li>
+<li><a href="#org1299045">Robustness</a></li>
+</ul>
+</li>
+<li><a href="#orgc3d3a3a">Basic regex components</a>
+<ul>
+<li><a href="#org4927b04">single char expressions</a></li>
+<li><a href="#org6048a4b">bracket expressions</a></li>
+<li><a href="#org7aa02f8">repetition - zero or more</a></li>
+<li><a href="#orgca9dc81">repetition - interval expressions</a></li>
+<li><a href="#org7ce9dee">achoring maches</a></li>
+<li><a href="#org629b3f0">parenthasized subexpressions</a></li>
+<li><a href="#orge38e228">operator precedence</a></li>
+<li><a href="#org215eb25">longest, leftmost match</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org9342c05">EREs</a>
+<ul>
+<li><a href="#org1928a8b">Regular expression concepts</a>
+<ul>
+<li><a href="#org99b6248"><code>grep</code> options</a></li>
+<li><a href="#org4a239b5">Robustness</a></li>
+</ul>
+</li>
+<li><a href="#org86d2b13">Basic regex components</a></li>
+<li><a href="#org26d81ed">Aditional repetition operators</a></li>
+<li><a href="#org403cbf8">Grouping with parenthesis</a></li>
+<li><a href="#org8dbebd1">Alternation</a></li>
+<li><a href="#org06a67b2">ERE operator precedence</a></li>
+<li><a href="#org59f8873">Robustness</a></li>
+<li><a href="#org4d4820c">Using plain grep</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgfc97cba" class="outline-2">
+<h2 id="orgfc97cba">BREs</h2>
+<div class="outline-text-2" id="text-orgfc97cba">
+</div>
+<div id="outline-container-org5a5f0c3" class="outline-3">
+<h3 id="org5a5f0c3">Regular expression concepts</h3>
+<div class="outline-text-3" id="text-org5a5f0c3">
+<p>
+A regex is a language describing text to be matched
+</p>
+
+<p>
+A regex is composed of:
+</p>
+<ul class="org-ul">
+<li><b>regular chars</b> that stand for themselves</li>
+<li><b>metachars</b> that stand for a regular expression</li>
+<li><b>expressions</b> denoting categories of chars or sub-parts of a regex</li>
+</ul>
+
+<p>
+Historically, different tools used different regex "flavors"
+</p>
+
+<p>
+POSIX standardizes 2 flavours.
+Other tools enhances regexs beyond what we cover here
+</p>
+
+<ul class="org-ul">
+<li><b>Basic Regucal Expression (BRE)</b>
+<ul class="org-ul">
+<li>simpler to learn, less computationally expensive</li>
+</ul></li>
+<li><b>Extended Regucal Expression (*ERE)</b>
+<ul class="org-ul">
+<li>much more powerful, more expensive</li>
+<li>on moern systems, no real difference in "expense"</li>
+</ul></li>
+</ul>
+
+<p>
+What programs use regex?
+</p>
+<ul class="org-ul">
+<li>The <code>grep</code> family
+<ul class="org-ul">
+<li><code>grep</code> - BRE</li>
+<li><code>egrep</code> and <code>grep -E</code> - ERE</li>
+<li><code>fgrep</code> and <code>grep -F</code> - string matching in parallel</li>
+<li>POSIX standardizing brings them all into the single <code>grep</code> command</li>
+</ul></li>
+<li><code>sed</code> - text matching and substitution</li>
+<li><code>awk</code> - pattern matching with programming</li>
+<li>text editors: <code>ed</code>, <code>ex</code>, <code>vim</code>, <code>emacs</code></li>
+<li>scripting languages, usually with their on flavours</li>
+</ul>
+</div>
+<div id="outline-container-org7621893" class="outline-4">
+<h4 id="org7621893"><code>grep</code> options</h4>
+<div class="outline-text-4" id="text-org7621893">
+<ul class="org-ul">
+<li>use <code>pat</code> as pattern: <code>-e pat</code></li>
+<li>read list of patterns from file: <code>-f file</code></li>
+<li>ignore case in input: <code>-i</code></li>
+<li>list matching input files: <code>-l</code></li>
+<li>print lines that don't match: <code>-v</code></li>
+<li>supress output ("quiet", exit status only): <code>-q</code>
+<ul class="org-ul">
+<li>often, you can use <code>&gt; /dev/null</code> instead (more obvious)</li>
+</ul></li>
+<li>don't print errors ("silent"): <code>-s</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1299045" class="outline-4">
+<h4 id="org1299045">Robustness</h4>
+<div class="outline-text-4" id="text-org1299045">
+<ul class="org-ul">
+<li>invest time in learning regexs</li>
+<li>use EREs wherever possible</li>
+<li><b>always quote your regexs on the shell command line</b></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc3d3a3a" class="outline-3">
+<h3 id="orgc3d3a3a">Basic regex components</h3>
+<div class="outline-text-3" id="text-orgc3d3a3a">
+</div>
+<div id="outline-container-org4927b04" class="outline-4">
+<h4 id="org4927b04">single char expressions</h4>
+<div class="outline-text-4" id="text-org4927b04">
+<ul class="org-ul">
+<li>reg chars, like "A" or "#" match themselves</li>
+<li>case matters: "A" and "a" are different</li>
+<li>period ("dot") matches any single char
+<ul class="org-ul">
+<li>may or may not match newline, program dependent</li>
+</ul></li>
+<li>escaped metachar:
+<ul class="org-ul">
+<li><code>\.</code> matches a real period</li>
+<li><code>\\</code> matches a real backslash</li>
+</ul></li>
+
+<li>reg chars match themselves:</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">echo 'Hi there how are you' | grep --color=always 'how'
+</span><span style="font-weight: bold;">echo</span> <span style="font-style: italic;">'Hi there how are you'</span> | grep -o <span style="font-style: italic;">'how'</span>
+</pre>
+</div>
+
+<pre class="example">
+how
+</pre>
+
+
+<ul class="org-ul">
+<li>dot matches any single char:</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">echo</span> tolstoy says im toldtoy | grep -o tol.toy
+</pre>
+</div>
+
+<pre class="example">
+tolstoy
+toldtoy
+</pre>
+</div>
+</div>
+<div id="outline-container-org6048a4b" class="outline-4">
+<h4 id="org6048a4b">bracket expressions</h4>
+<div class="outline-text-4" id="text-org6048a4b">
+<ul class="org-ul">
+<li>any one of a set: <code>[aeiouy]</code> matches <i>one</i> Englis vowel</li>
+<li>any not in a set: <code>[^aieouy]</code> matches a non-vowel</li>
+<li>ranges: <code>[0-9]</code> -&gt; a digit, <code>[a-z]</code> -&gt; a lowercase letter
+<ul class="org-ul">
+<li>locale dependent (messy)</li>
+</ul></li>
+<li>characted classes: digits, punctuation, letters, &#x2026;
+<ul class="org-ul">
+<li>classes: alnum, alpha, blank, cntrl, digit, graph, lower, print, punct, space, upper, digit</li>
+</ul></li>
+
+<li><code>grep</code> matches all ocurrences</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">echo</span> 123 eafg | grep -o <span style="font-style: italic;">'[aeiouy]'</span>
+</pre>
+</div>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">e</td>
+</tr>
+
+<tr>
+<td class="org-left">a</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Using <code>sed</code> to substitute, matches only the first:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">echo</span> 123 eafg | sed <span style="font-style: italic;">'s/[aeiouy]/X/'</span>
+</pre>
+</div>
+
+<pre class="example">
+123 Xafg
+</pre>
+
+
+<p>
+Complemented bracket expressions &amp; char classes:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">echo</span> 123 eafg | grep -o <span style="font-style: italic;">'[^aeiouy]'</span>
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"---"</span>
+<span style="font-weight: bold;">echo</span> 123 eafg | grep -o <span style="font-style: italic;">'[[:digit:]]'</span>
+</pre>
+</div>
+
+<pre class="example" id="org3330446">
+1
+2
+3
+
+f
+g
+---
+1
+2
+3
+</pre>
+</div>
+</div>
+<div id="outline-container-org7aa02f8" class="outline-4">
+<h4 id="org7aa02f8">repetition - zero or more</h4>
+<div class="outline-text-4" id="text-org7aa02f8">
+<p>
+Asterisk ("star") indicates zero or more of the preceding char
+</p>
+
+<ul class="org-ul">
+<li><code>ab*c</code> matches <code>ac</code>, <code>abc</code>, <code>abbc</code>,  <code>abbbc</code>, &#x2026;</li>
+<li>zero of "x" does not mean one or more of "y"</li>
+<li><code>.*</code> matches any single char, 0 or more times (careful, <b>also matches null string</b>)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgca9dc81" class="outline-4">
+<h4 id="orgca9dc81">repetition - interval expressions</h4>
+<div class="outline-text-4" id="text-orgca9dc81">
+<ul class="org-ul">
+<li><code>c\{N\}</code> - <i>N</i> occurrences of <i>c</i></li>
+<li><code>c\{N,\}</code> - at least <i>N</i> occurrences of <i>c</i></li>
+<li><code>c\{N, M\}</code> - <i>N</i> to <i>M</i> occurrences of <i>c</i> (<i>N</i>, <i>M</i> up to <code>RE_DUP_MAX</code>)</li>
+</ul>
+
+<p>
+Here <i>c</i> means a single char as described earlier
+</p>
+</div>
+</div>
+<div id="outline-container-org7ce9dee" class="outline-4">
+<h4 id="org7ce9dee">achoring maches</h4>
+<div class="outline-text-4" id="text-org7ce9dee">
+<ul class="org-ul">
+<li>cared ("up arrow", "hat", <code>^</code>) - match must start at beginning of line or string</li>
+<li>dollar sign (<code>$</code>) - match must occur at end of line or string</li>
+<li><code>^</code> and <code>$</code> in the middle of a BRE stand for themselves</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">echo</span> 123 you 123 | grep -o <span style="font-style: italic;">'^[[:digit:]]*'</span>
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"---"</span>
+<span style="font-weight: bold;">echo</span> 123 you 123 | grep -o <span style="font-style: italic;">'^[^[:digit:]]*'</span>
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"---"</span>
+<span style="font-weight: bold;">echo</span> 123 you 123 | grep -o <span style="font-style: italic;">'[^[:digit:]]*$'</span>
+</pre>
+</div>
+
+<pre class="example">
+123
+---
+---
+</pre>
+</div>
+</div>
+<div id="outline-container-org629b3f0" class="outline-4">
+<h4 id="org629b3f0">parenthasized subexpressions</h4>
+<div class="outline-text-4" id="text-org629b3f0">
+<ul class="org-ul">
+<li><code>\(a[bc\)\(123\)xx\2\1</code> - same as <code>a[bc]123xxM2M1</code>
+<ul class="org-ul">
+<li><i>M1</i> and <i>M2</i> are the actual text that matched the expressions in the parentheses</li>
+<li>contents of parentheses can be any regex!</li>
+</ul></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">echo</span> pre ab123xx123xab post | grep -o <span style="font-style: italic;">'\(a[bc]\)\([0-9][0-9]*\)xx\2x\1'</span>
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">'---'</span>
+<span style="font-weight: bold;">echo</span> pre ab123xx321xac post | grep -o <span style="font-style: italic;">'\(a[bc]\)\([0-9][0-9]*\)xx\2x\1'</span>
+</pre>
+</div>
+
+<pre class="example">
+ab123xx123xab
+---
+</pre>
+
+
+<ul class="org-ul">
+<li>up to 9 parenthesized subexpres are allowed</li>
+
+<li>often termed "backreferences"</li>
+
+<li><b>BREs only</b></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge38e228" class="outline-4">
+<h4 id="orge38e228">operator precedence</h4>
+<div class="outline-text-4" id="text-orge38e228">
+<p>
+From heighest to lowest:
+</p>
+<ol class="org-ol">
+<li>bracket symbols: <code>[:class:]</code>, <code>[=c=]</code>, <code>[.cs.]</code></li>
+<li><code>\metachar</code></li>
+<li>bracket expressions</li>
+<li><code>\(...\)</code> and <code>\digit</code></li>
+<li><code>*</code> and <code>\{...\}</code></li>
+<li>concatenation (<code>abc</code> is a followed by <code>b</code> followed by <code>c</code>)</li>
+<li><code>^</code> and <code>$</code> anchors</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org215eb25" class="outline-4">
+<h4 id="org215eb25">longest, leftmost match</h4>
+<div class="outline-text-4" id="text-org215eb25">
+<ul class="org-ul">
+<li>regexs match the longest possible, leftmost ocurrence of text that can match</li>
+<li>the match ends at the first character that cannot be matched</li>
+<li>if some text matched, that text is used, even if a longer match occurs later on the line</li>
+<li>this matters when doing substitutions (replacing matched text with <code>sed</code>, <code>awk</code>, &#x2026;)</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">echo</span> 123 eafg 123 youyou | sed <span style="font-style: italic;">'s/[aeiouy]*/X/'</span>
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">g for matching ALL
+</span><span style="font-weight: bold;">echo</span> 123 eafg 123 youyou | sed <span style="font-style: italic;">'s/[aeiouy][aeiouy]*/X/g'</span>
+</pre>
+</div>
+
+<pre class="example">
+X123 eafg 123 youyou
+123 Xfg 123 X
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org9342c05" class="outline-2">
+<h2 id="org9342c05">EREs</h2>
+<div class="outline-text-2" id="text-org9342c05">
+</div>
+<div id="outline-container-org1928a8b" class="outline-3">
+<h3 id="org1928a8b">Regular expression concepts</h3>
+<div class="outline-text-3" id="text-org1928a8b">
+<p>
+A regex is a language describing text to be matched
+</p>
+
+<p>
+A regex is composed of:
+</p>
+<ul class="org-ul">
+<li><b>regular chars</b> that stand for themselves</li>
+<li><b>metachars</b> that stand for a regular expression</li>
+<li><b>expressions</b> denoting categories of chars or sub-parts of a regex</li>
+</ul>
+
+<p>
+Historically, different tools used different regex "flavors"
+</p>
+
+<p>
+POSIX standardizes 2 flavours.
+Other tools enhances regexs beyond what we cover here
+</p>
+
+<ul class="org-ul">
+<li><b>Basic Regucal Expression (BRE)</b>
+<ul class="org-ul">
+<li>simpler to learn, less computationally expensive</li>
+</ul></li>
+<li><b>Extended Regucal Expression (*ERE)</b>
+<ul class="org-ul">
+<li>much more powerful, more expensive</li>
+<li>on moern systems, no real difference in "expense"</li>
+</ul></li>
+</ul>
+
+<p>
+What programs use regex?
+</p>
+<ul class="org-ul">
+<li>The <code>grep</code> family
+<ul class="org-ul">
+<li><code>grep</code> - BRE</li>
+<li><code>egrep</code> and <code>grep -E</code> - ERE</li>
+<li><code>fgrep</code> and <code>grep -F</code> - string matching in parallel</li>
+<li>POSIX standardizing brings them all into the single <code>grep</code> command</li>
+</ul></li>
+<li><code>sed</code> - text matching and substitution</li>
+<li><code>awk</code> - pattern matching with programming</li>
+<li>text editors: <code>ed</code>, <code>ex</code>, <code>vim</code>, <code>emacs</code></li>
+<li>scripting languages, usually with their on flavours</li>
+</ul>
+</div>
+<div id="outline-container-org99b6248" class="outline-4">
+<h4 id="org99b6248"><code>grep</code> options</h4>
+<div class="outline-text-4" id="text-org99b6248">
+<ul class="org-ul">
+<li>use <code>pat</code> as pattern: <code>-e pat</code></li>
+<li>read list of patterns from file: <code>-f file</code></li>
+<li>ignore case in input: <code>-i</code></li>
+<li>list matching input files: <code>-l</code></li>
+<li>print lines that don't match: <code>-v</code></li>
+<li>supress output ("quiet", exit status only): <code>-q</code>
+<ul class="org-ul">
+<li>often, you can use <code>&gt; /dev/null</code> instead (more obvious)</li>
+</ul></li>
+<li>don't print errors ("silent"): <code>-s</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4a239b5" class="outline-4">
+<h4 id="org4a239b5">Robustness</h4>
+<div class="outline-text-4" id="text-org4a239b5">
+<ul class="org-ul">
+<li>invest time in learning regexs</li>
+<li>use EREs wherever possible</li>
+<li><b>always quote your regexs on the shell command line</b></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org86d2b13" class="outline-3">
+<h3 id="org86d2b13">Basic regex components</h3>
+<div class="outline-text-3" id="text-org86d2b13">
+<p>
+Same as BREs:
+</p>
+<ul class="org-ul">
+<li>matching single chars
+<ul class="org-ul">
+<li>reg chars, "dot", escaped metachars</li>
+<li>bracket expressions: ranges and classes</li>
+</ul></li>
+<li>repetition with <code>*</code> and interval expression (<code>{...}</code>)</li>
+<li>anchoring with <code>^</code> and <code>$</code></li>
+<li>longest leftmost chars</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org26d81ed" class="outline-3">
+<h3 id="org26d81ed">Aditional repetition operators</h3>
+<div class="outline-text-3" id="text-org26d81ed">
+<ul class="org-ul">
+<li><code>re?</code> matches zero or one of <code>re</code> - "optional"</li>
+<li><code>re+</code> matches one or more of <code>re</code> - "at least one of"</li>
+</ul>
+
+<p>
+Note that <code>re</code> can be more than 1 char&#x2026;
+</p>
+<ul class="org-ul">
+<li>applies to <code>*</code> and <code>{...}</code> also</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">echo</span> ac abc abbc abbbc | grep -oE <span style="font-style: italic;">'ab?c'</span>
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">'---'</span>
+<span style="font-weight: bold;">echo</span> ac abc abbc abbbc | grep -oE <span style="font-style: italic;">'ab+c'</span>
+</pre>
+</div>
+
+<pre class="example">
+ac
+abc
+---
+abc
+abbc
+abbbc
+</pre>
+</div>
+</div>
+<div id="outline-container-org403cbf8" class="outline-3">
+<h3 id="org403cbf8">Grouping with parenthesis</h3>
+<div class="outline-text-3" id="text-org403cbf8">
+<p>
+Parentheses group smaller REs into larger ones.
+</p>
+
+<ul class="org-ul">
+<li><code>([[:digit:]]{3}-[[:digit:]]{4}_)+</code> is one or more US phone numbers ("_" marks space for presentation purposes)</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">echo</span> abc 555-1212 555-2121 cba | grep -oE <span style="font-style: italic;">'([[:digit:]]{3}-[[:digit:]]{4} )+'</span>
+</pre>
+</div>
+
+<pre class="example">
+555-1212 555-2121
+</pre>
+
+
+<ul class="org-ul">
+<li><b>EREs do not have backreferences!</b></li>
+
+<li>here too, things get cryptic quickly. Read from the <b>outside in</b></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8dbebd1" class="outline-3">
+<h3 id="org8dbebd1">Alternation</h3>
+<div class="outline-text-3" id="text-org8dbebd1">
+<p>
+Separate alternatives with <code>|</code>
+</p>
+
+<ul class="org-ul">
+<li><code>(hello|hi)_world</code> matches <code>hello_world</code> and <code>hi_world</code></li>
+<li>often used with parenthesis, as shown above</li>
+<li>lowest precedence of all operators
+<ul class="org-ul">
+<li><code>^hello|hi$</code> -&gt; <code>(^hello)|(hi$)</code>, not <code>^(hello|hi)$</code></li>
+</ul></li>
+<li>makes EREs much more expressive than BREs</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">echo</span> <span style="font-style: italic;">'hi there
+hello there'</span> | grep -oE <span style="font-style: italic;">'hello|hi'</span>
+</pre>
+</div>
+
+<pre class="example">
+hi
+hello
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">echo</span> <span style="font-style: italic;">'hi there
+hello there'</span> | grep -oE <span style="font-style: italic;">'^hello|hi$'</span>
+
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">'---'</span>
+
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">'hi there
+hello there'</span> | grep -oE <span style="font-style: italic;">'^(hello|hi)$'</span>
+</pre>
+</div>
+
+<pre class="example">
+hello
+---
+</pre>
+</div>
+</div>
+<div id="outline-container-org06a67b2" class="outline-3">
+<h3 id="org06a67b2">ERE operator precedence</h3>
+<div class="outline-text-3" id="text-org06a67b2">
+<ol class="org-ol">
+<li>bracket symbols: <code>[:class:]</code>, <code>[=c=]</code>, <code>[.cs.]</code></li>
+<li><code>\metacharacter</code></li>
+<li>bracket expressions</li>
+<li><code>(...)</code> grouping</li>
+<li><code>*</code> <code>+</code> <code>?</code> and <code>{...}</code></li>
+<li>concatenation</li>
+<li><code>^</code> and <code>$</code> anchors</li>
+<li>alternation</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org59f8873" class="outline-3">
+<h3 id="org59f8873">Robustness</h3>
+<div class="outline-text-3" id="text-org59f8873">
+<ul class="org-ul">
+<li>always quote your REs
+<ul class="org-ul">
+<li>single quotes are much better than double</li>
+</ul></li>
+<li>with great power comes great responsability&#x2026;
+<ul class="org-ul">
+<li>pay more attention when using EREs</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4d4820c" class="outline-3">
+<h3 id="org4d4820c">Using plain grep</h3>
+<div class="outline-text-3" id="text-org4d4820c">
+<p>
+Without the <code>-E</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">echo</span> abc 555-1212 555-2121 cba | grep -o <span style="font-style: italic;">'\([[:digit:]]]\{3\}-[[:digit:]]\{4\} \)\+'</span>
+
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">'hello
+hi
+howdy'</span> | grep -o <span style="font-style: italic;">'^\(hello\|hi\)$'</span>
+</pre>
+</div>
+
+<pre class="example">
+hello
+hi
+</pre>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
