@@ -24,31 +24,31 @@
 </div>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org569bb62">Intro</a></li>
-<li><a href="#org4c5d71b">Input flow</a></li>
-<li><a href="#org86cba56">Options</a></li>
-<li><a href="#orga557a15">Command structure</a></li>
-<li><a href="#org8323c4d">Substitute command</a>
+<li><a href="#org487f77b">Intro</a></li>
+<li><a href="#org4861b8f">Input flow</a></li>
+<li><a href="#orga28a207">Options</a></li>
+<li><a href="#org0174ea4">Command structure</a></li>
+<li><a href="#orgec2db13">Substitute command</a>
 <ul>
-<li><a href="#org6a0b560">Replacement</a></li>
-<li><a href="#org4ac214e">Flags</a></li>
-<li><a href="#orgcc42380">Robustness</a></li>
+<li><a href="#org1eaccf7">Replacement</a></li>
+<li><a href="#orge0061fe">Flags</a></li>
+<li><a href="#org7976f9c">Robustness</a></li>
 </ul>
 </li>
-<li><a href="#orgb2fc061">Examples</a>
+<li><a href="#orga4ed106">Examples</a>
 <ul>
-<li><a href="#org3e403e0">Matching and removing</a></li>
-<li><a href="#orgf7577a6">Printing</a></li>
-<li><a href="#org39f244e">Quit command</a></li>
-<li><a href="#orgc794987">Generate commands</a></li>
+<li><a href="#org1cc2a1d">Matching and removing</a></li>
+<li><a href="#org9fa17c2">Printing</a></li>
+<li><a href="#org954af81">Quit command</a></li>
+<li><a href="#orga6bb7b7">Generate commands</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org569bb62" class="outline-2">
-<h2 id="org569bb62">Intro</h2>
-<div class="outline-text-2" id="text-org569bb62">
+<div id="outline-container-org487f77b" class="outline-2">
+<h2 id="org487f77b">Intro</h2>
+<div class="outline-text-2" id="text-org487f77b">
 <p>
 <code>sed</code> ("stream editor") is a <i>batch-mode</i> text editor.
 </p>
@@ -64,19 +64,19 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org4c5d71b" class="outline-2">
-<h2 id="org4c5d71b">Input flow</h2>
-<div class="outline-text-2" id="text-org4c5d71b">
+<div id="outline-container-org4861b8f" class="outline-2">
+<h2 id="org4861b8f">Input flow</h2>
+<div class="outline-text-2" id="text-org4861b8f">
 
-<div id="org4209a8b" class="figure">
+<div id="orga52f6d7" class="figure">
 <p><img src="../static/sed/input-flow.png" alt="input-flow.png">
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org86cba56" class="outline-2">
-<h2 id="org86cba56">Options</h2>
-<div class="outline-text-2" id="text-org86cba56">
+<div id="outline-container-orga28a207" class="outline-2">
+<h2 id="orga28a207">Options</h2>
+<div class="outline-text-2" id="text-orga28a207">
 <ul class="org-ul">
 <li><code>-f script</code> reads commands from <code>script</code></li>
 <li><code>-e 'script'</code> also does that</li>
@@ -87,9 +87,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orga557a15" class="outline-2">
-<h2 id="orga557a15">Command structure</h2>
-<div class="outline-text-2" id="text-orga557a15">
+<div id="outline-container-org0174ea4" class="outline-2">
+<h2 id="org0174ea4">Command structure</h2>
+<div class="outline-text-2" id="text-org0174ea4">
 <div class="org-src-container">
 <pre class="src src-text">&lt;address&gt; &lt;command&gt; [ &lt;operands&gt; [ &lt;flags&gt; ] ]
 </pre>
@@ -110,9 +110,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org8323c4d" class="outline-2">
-<h2 id="org8323c4d">Substitute command</h2>
-<div class="outline-text-2" id="text-org8323c4d">
+<div id="outline-container-orgec2db13" class="outline-2">
+<h2 id="orgec2db13">Substitute command</h2>
+<div class="outline-text-2" id="text-orgec2db13">
 <div class="org-src-container">
 <pre class="src src-text">s / pattern / replacement / [ flags ]
 </pre>
@@ -128,9 +128,9 @@
 <li><code>flags</code> are optional modifiers</li>
 </ul>
 </div>
-<div id="outline-container-org6a0b560" class="outline-3">
-<h3 id="org6a0b560">Replacement</h3>
-<div class="outline-text-3" id="text-org6a0b560">
+<div id="outline-container-org1eaccf7" class="outline-3">
+<h3 id="org1eaccf7">Replacement</h3>
+<div class="outline-text-3" id="text-org1eaccf7">
 <ul class="org-ul">
 <li>empty - matched text is deleted</li>
 <li>plain text- matched text is replaced by contents</li>
@@ -141,9 +141,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org4ac214e" class="outline-3">
-<h3 id="org4ac214e">Flags</h3>
-<div class="outline-text-3" id="text-org4ac214e">
+<div id="outline-container-orge0061fe" class="outline-3">
+<h3 id="orge0061fe">Flags</h3>
+<div class="outline-text-3" id="text-orge0061fe">
 <ul class="org-ul">
 <li>by default, substitution replaces first ocurrence only</li>
 <li>portable flags are:
@@ -155,9 +155,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcc42380" class="outline-3">
-<h3 id="orgcc42380">Robustness</h3>
-<div class="outline-text-3" id="text-orgcc42380">
+<div id="outline-container-org7976f9c" class="outline-3">
+<h3 id="org7976f9c">Robustness</h3>
+<div class="outline-text-3" id="text-org7976f9c">
 <ul class="org-ul">
 <li>stick to BREs and  simple use of <code>sed</code> for <b>portability and readability</b></li>
 <li>keep editing commands on the <code>sed</code> command line to make you script more self-contained and readable</li>
@@ -165,13 +165,13 @@
 </div>
 </div>
 </div>
-<div id="outline-container-orgb2fc061" class="outline-2">
-<h2 id="orgb2fc061">Examples</h2>
-<div class="outline-text-2" id="text-orgb2fc061">
+<div id="outline-container-orga4ed106" class="outline-2">
+<h2 id="orga4ed106">Examples</h2>
+<div class="outline-text-2" id="text-orga4ed106">
 </div>
-<div id="outline-container-org3e403e0" class="outline-3">
-<h3 id="org3e403e0">Matching and removing</h3>
-<div class="outline-text-3" id="text-org3e403e0">
+<div id="outline-container-org1cc2a1d" class="outline-3">
+<h3 id="org1cc2a1d">Matching and removing</h3>
+<div class="outline-text-3" id="text-org1cc2a1d">
 <div class="org-src-container">
 <pre class="src src-bash">grep <span style="font-style: italic;">'/home/'</span> /etc/passwd | <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">find real users
 </span>    sed <span style="font-style: italic;">'s/:.*//'</span> |         <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">remove everything after user name
@@ -184,9 +184,9 @@ nasreddin
 </pre>
 </div>
 </div>
-<div id="outline-container-orgf7577a6" class="outline-3">
-<h3 id="orgf7577a6">Printing</h3>
-<div class="outline-text-3" id="text-orgf7577a6">
+<div id="outline-container-org9fa17c2" class="outline-3">
+<h3 id="org9fa17c2">Printing</h3>
+<div class="outline-text-3" id="text-org9fa17c2">
 <div class="org-src-container">
 <pre class="src src-bash">sed -n <span style="font-style: italic;">'/nas/p'</span> /etc/passwd <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">print lines that match 'nas'</span>
 </pre>
@@ -197,9 +197,9 @@ nasreddin:x:1000:1000::/home/nasreddin:/usr/bin/zsh
 </pre>
 </div>
 </div>
-<div id="outline-container-org39f244e" class="outline-3">
-<h3 id="org39f244e">Quit command</h3>
-<div class="outline-text-3" id="text-org39f244e">
+<div id="outline-container-org954af81" class="outline-3">
+<h3 id="org954af81">Quit command</h3>
+<div class="outline-text-3" id="text-org954af81">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">head --- print first n lines
 </span>
@@ -242,9 +242,9 @@ ftp:x:14:11::/srv/ftp:/usr/bin/nologin
 </pre>
 </div>
 </div>
-<div id="outline-container-orgc794987" class="outline-3">
-<h3 id="orgc794987">Generate commands</h3>
-<div class="outline-text-3" id="text-orgc794987">
+<div id="outline-container-orga6bb7b7" class="outline-3">
+<h3 id="orga6bb7b7">Generate commands</h3>
+<div class="outline-text-3" id="text-orga6bb7b7">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">user</span>=$<span style="font-weight: bold; font-style: italic;">1</span>
 

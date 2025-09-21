@@ -103,7 +103,10 @@
   - [[./sed.org::*Quit command][9.12 Quit command]]
   - [[./sed.org::*Generate commands][9.13 Generate commands]]
 
-** [[./tilde-wildcards-and-hidden-files.org][10.0 Tilde Wildcards and Hidden Files]]
+** [[./tilde-wildcards-and-hidden-files.org][10.0 Tilde, Wildcards and Hidden Files]]
++ [[./tilde-wildcards-and-hidden-files.org::*Tilde expansion][10.1 Tilde expansion]]
++ [[./tilde-wildcards-and-hidden-files.org::*Wildcarding][10.2 Wildcarding]]
++ [[./tilde-wildcards-and-hidden-files.org::*Hidden files][10.3 Hidden files]]
 
 ** [[./shell-expansions.org][100.0 Shell Expansions]]
 + [[./shell-expansions.org::*Default values][100.1 Default values]]

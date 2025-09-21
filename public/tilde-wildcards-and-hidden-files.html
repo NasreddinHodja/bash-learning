@@ -3,19 +3,148 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tilde Wildcards and Hidden Files</title>
+<title>Tilde, Wildcards and Hidden Files</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="/static/style.css" >
 <script src="/static/toc-toggle.js"></script>
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Tilde Wildcards and Hidden Files</h1>
+<h1 class="title">Tilde, Wildcards and Hidden Files</h1>
 <nav class="breadcrumbs">
 <a href="/index.html">index</a> <span class="separator">/</span> <span>.</span>
 </nav>
 <div class="nav-buttons">
 <a href="/sed.html" class="nav-button"><< sedf</a>
+</div>
+<div id="table-of-contents" role="doc-toc">
+<div class="toc-header" onclick="toggleToc()">
+<h2>Table of Contents</h2>
+<div class="toggle-icon">+</div>
+</div>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgdfd49ea">Tilde expansion</a></li>
+<li><a href="#org481f702">Wildcarding</a></li>
+<li><a href="#orgef9acbb">Hidden files</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgdfd49ea" class="outline-2">
+<h2 id="orgdfd49ea">Tilde expansion</h2>
+<div class="outline-text-2" id="text-orgdfd49ea">
+<p>
+Shorthand for a user's home dir.
+</p>
+
+<ul class="org-ul">
+<li><code>~/file</code> for <i>file</i> in current user's home dir</li>
+<li><code>~user/file</code> for <i>file</i> in specific <i>user</i>'s home dir</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash">ls -l ~/.profile
+ls -l ~nasreddin/.profile
+</pre>
+</div>
+
+<pre class="example">
+lrwxrwxrwx 1 nasreddin nasreddin 13 Apr 22  2024 /home/nasreddin/.profile -&gt; Dots/.profile
+lrwxrwxrwx 1 nasreddin nasreddin 13 Apr 22  2024 /home/nasreddin/.profile -&gt; Dots/.profile
+</pre>
+
+
+<ul class="org-ul">
+<li>common extensions:
+<ul class="org-ul">
+<li><code>~+</code> for current dir</li>
+<li><code>~-</code> for previous dir</li>
+</ul></li>
+<li>occurs after var expansion: <code>~$user</code> works</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">pwd</span>
+<span style="font-weight: bold;">cd</span> /tmp
+<span style="font-weight: bold;">echo</span> Now<span style="font-weight: bold;"> in</span> ~+
+<span style="font-weight: bold;">echo</span> We were<span style="font-weight: bold;"> in</span> ~-
+</pre>
+</div>
+
+<pre class="example">
+/home/nasreddin/Prog/bash-learning/notes
+Now in /tmp
+We were in /home/nasreddin/Prog/bash-learning/notes
+</pre>
+</div>
+</div>
+<div id="outline-container-org481f702" class="outline-2">
+<h2 id="org481f702">Wildcarding</h2>
+<div class="outline-text-2" id="text-org481f702">
+<p>
+Based on REs, but much simpler
+</p>
+
+<ul class="org-ul">
+<li>use wildard for file name and REs for file content</li>
+<li><code>*</code> matches any sequence of chars (like RE <code>.*</code>)</li>
+<li><code>?</code> matches any single char (like RE <code>.</code>)</li>
+<li>bracket expanssions are like RE's
+<ul class="org-ul">
+<li>ranges and <code>[[:class:]]</code></li>
+<li>however, use <code>[!...]</code> to complement a set (not <code>^</code>)</li>
+</ul></li>
+<li>anchoring is implicit: <code>.c</code> -&gt; <code>^.*\.c$</code></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash">ls ./scripts/*.sh
+</pre>
+</div>
+
+<pre class="example">
+./scripts/describe-commands.sh
+./scripts/error-and-output.sh
+./scripts/process-args-for.sh
+./scripts/process-args-while.sh
+./scripts/quote-tracing-demo-1.sh
+./scripts/quote-tracing-demo-2.sh
+./scripts/redirection-prompting.sh
+./scripts/show-args.sh
+</pre>
+</div>
+</div>
+<div id="outline-container-orgef9acbb" class="outline-2">
+<h2 id="orgef9acbb">Hidden files</h2>
+<div class="outline-text-2" id="text-orgef9acbb">
+<p>
+By convention, files whose names start with a dot:
+</p>
+<ul class="org-ul">
+<li>are not shown by <code>ls</code></li>
+<li>are not matched by wildcards</li>
+</ul>
+
+<p>
+We can:
+</p>
+<ul class="org-ul">
+<li>use <code>ls -a</code> to see such files ("a" is for "all")</li>
+<li>use an explicit leading dot to match them</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash">ls -l ~/.bash*
+</pre>
+</div>
+
+<pre class="example">
+-rw-------  1 nasreddin nasreddin 1838 Sep  4 03:05 /home/nasreddin/.bash_history
+-rw-r-xr--+ 1 nasreddin nasreddin   21 Jan 16  2024 /home/nasreddin/.bash_logout
+-rw-r--r--  1 nasreddin nasreddin   78 Apr 22  2024 /home/nasreddin/.bash_profile
+-rw-r--r--  1 nasreddin nasreddin    0 Aug 23 22:06 /home/nasreddin/.bashrc
+</pre>
+</div>
 </div>
 </div>
 </body>
