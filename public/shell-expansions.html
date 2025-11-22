@@ -7,6 +7,7 @@
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="/static/style.css" >
 <script src="/static/toc-toggle.js"></script>
+<script src="/static/scroll-to-top.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -21,33 +22,33 @@
 </div>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org7b7df24">Default values</a></li>
-<li><a href="#orgd640683">Required parameters with error</a></li>
-<li><a href="#org88376bc">String manipulation</a></li>
+<li><a href="#org9b4c9e8">Default values</a></li>
+<li><a href="#orga62cfb0">Required parameters with error</a></li>
+<li><a href="#org825255d">String manipulation</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org7b7df24" class="outline-2">
-<h2 id="org7b7df24">Default values</h2>
-<div class="outline-text-2" id="text-org7b7df24">
+<div id="outline-container-org9b4c9e8" class="outline-2">
+<h2 id="org9b4c9e8">Default values</h2>
+<div class="outline-text-2" id="text-org9b4c9e8">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">DIR</span>=<span style="font-style: italic;">"${DIR:-/default/path}"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgd640683" class="outline-2">
-<h2 id="orgd640683">Required parameters with error</h2>
-<div class="outline-text-2" id="text-orgd640683">
+<div id="outline-container-orga62cfb0" class="outline-2">
+<h2 id="orga62cfb0">Required parameters with error</h2>
+<div class="outline-text-2" id="text-orga62cfb0">
 <div class="org-src-container">
 <pre class="src src-bash">: <span style="font-style: italic;">"${REQUIRED_VAR:?Error: REQUIRED_VAR must be set}"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org88376bc" class="outline-2">
-<h2 id="org88376bc">String manipulation</h2>
-<div class="outline-text-2" id="text-org88376bc">
+<div id="outline-container-org825255d" class="outline-2">
+<h2 id="org825255d">String manipulation</h2>
+<div class="outline-text-2" id="text-org825255d">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">filename</span>=<span style="font-style: italic;">"/path/to/file.txt"</span>
 <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"${filename##*/}"</span>
@@ -66,6 +67,8 @@ txt
 </div>
 
 <div class="footer">
+<button class="scroll-to-top" onclick="scrollToTop()">^ home</button>
+
 <nav class="breadcrumbs footer">
 <a href="/index.html">index</a> <span class="separator">/</span> <span>.</span>
 </nav>

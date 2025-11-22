@@ -7,6 +7,7 @@
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="/static/style.css" >
 <script src="/static/toc-toggle.js"></script>
+<script src="/static/scroll-to-top.js"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -25,55 +26,55 @@
 </div>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1a94c94">BREs</a>
+<li><a href="#org39d9d4e">BREs</a>
 <ul>
-<li><a href="#orga1df5d6">Regular expression concepts</a>
+<li><a href="#orgf7a81a2">Regular expression concepts</a>
 <ul>
-<li><a href="#org23e303e"><code>grep</code> options</a></li>
-<li><a href="#org442e822">Robustness</a></li>
+<li><a href="#org4ac2889"><code>grep</code> options</a></li>
+<li><a href="#org8aeb278">Robustness</a></li>
 </ul>
 </li>
-<li><a href="#orgcc9b7b9">Basic regex components</a>
+<li><a href="#org8840637">Basic regex components</a>
 <ul>
-<li><a href="#org772aa79">single char expressions</a></li>
-<li><a href="#org6d124fe">bracket expressions</a></li>
-<li><a href="#orgc8163f1">repetition - zero or more</a></li>
-<li><a href="#orgca5965f">repetition - interval expressions</a></li>
-<li><a href="#org9f56731">achoring maches</a></li>
-<li><a href="#org203f618">parenthasized subexpressions</a></li>
-<li><a href="#orgef5b45d">operator precedence</a></li>
-<li><a href="#org9de0f0e">longest, leftmost match</a></li>
+<li><a href="#org6152618">single char expressions</a></li>
+<li><a href="#org9103f1c">bracket expressions</a></li>
+<li><a href="#org56bfd87">repetition - zero or more</a></li>
+<li><a href="#org22391bd">repetition - interval expressions</a></li>
+<li><a href="#orge033e84">achoring maches</a></li>
+<li><a href="#org502d597">parenthasized subexpressions</a></li>
+<li><a href="#orgc0eb059">operator precedence</a></li>
+<li><a href="#orgbcd5c3d">longest, leftmost match</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgee0e884">EREs</a>
+<li><a href="#org7044054">EREs</a>
 <ul>
-<li><a href="#orgd785350">Regular expression concepts</a>
+<li><a href="#org7331e3d">Regular expression concepts</a>
 <ul>
-<li><a href="#orgb8c7aec"><code>grep</code> options</a></li>
-<li><a href="#org85f3fd3">Robustness</a></li>
+<li><a href="#org3a5732f"><code>grep</code> options</a></li>
+<li><a href="#org50af7f5">Robustness</a></li>
 </ul>
 </li>
-<li><a href="#org09854f0">Basic regex components</a></li>
-<li><a href="#org3814b03">Aditional repetition operators</a></li>
-<li><a href="#org13f140c">Grouping with parenthesis</a></li>
-<li><a href="#orgf1b4bd1">Alternation</a></li>
-<li><a href="#org6ff2199">ERE operator precedence</a></li>
-<li><a href="#orgb93f74b">Robustness</a></li>
-<li><a href="#org392f897">Using plain grep</a></li>
+<li><a href="#org0845b90">Basic regex components</a></li>
+<li><a href="#orgb598a15">Aditional repetition operators</a></li>
+<li><a href="#orgf9dd492">Grouping with parenthesis</a></li>
+<li><a href="#orgf769bfb">Alternation</a></li>
+<li><a href="#org9c33068">ERE operator precedence</a></li>
+<li><a href="#orgdbc5b1a">Robustness</a></li>
+<li><a href="#org9f1d7aa">Using plain grep</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org1a94c94" class="outline-2">
-<h2 id="org1a94c94">BREs</h2>
-<div class="outline-text-2" id="text-org1a94c94">
+<div id="outline-container-org39d9d4e" class="outline-2">
+<h2 id="org39d9d4e">BREs</h2>
+<div class="outline-text-2" id="text-org39d9d4e">
 </div>
-<div id="outline-container-orga1df5d6" class="outline-3">
-<h3 id="orga1df5d6">Regular expression concepts</h3>
-<div class="outline-text-3" id="text-orga1df5d6">
+<div id="outline-container-orgf7a81a2" class="outline-3">
+<h3 id="orgf7a81a2">Regular expression concepts</h3>
+<div class="outline-text-3" id="text-orgf7a81a2">
 <p>
 A regex is a language describing text to be matched
 </p>
@@ -125,9 +126,9 @@ What programs use regex?
 <li>scripting languages, usually with their on flavours</li>
 </ul>
 </div>
-<div id="outline-container-org23e303e" class="outline-4">
-<h4 id="org23e303e"><code>grep</code> options</h4>
-<div class="outline-text-4" id="text-org23e303e">
+<div id="outline-container-org4ac2889" class="outline-4">
+<h4 id="org4ac2889"><code>grep</code> options</h4>
+<div class="outline-text-4" id="text-org4ac2889">
 <ul class="org-ul">
 <li>use <code>pat</code> as pattern: <code>-e pat</code></li>
 <li>read list of patterns from file: <code>-f file</code></li>
@@ -142,9 +143,9 @@ What programs use regex?
 </ul>
 </div>
 </div>
-<div id="outline-container-org442e822" class="outline-4">
-<h4 id="org442e822">Robustness</h4>
-<div class="outline-text-4" id="text-org442e822">
+<div id="outline-container-org8aeb278" class="outline-4">
+<h4 id="org8aeb278">Robustness</h4>
+<div class="outline-text-4" id="text-org8aeb278">
 <ul class="org-ul">
 <li>invest time in learning regexs</li>
 <li>use EREs wherever possible</li>
@@ -153,13 +154,13 @@ What programs use regex?
 </div>
 </div>
 </div>
-<div id="outline-container-orgcc9b7b9" class="outline-3">
-<h3 id="orgcc9b7b9">Basic regex components</h3>
-<div class="outline-text-3" id="text-orgcc9b7b9">
+<div id="outline-container-org8840637" class="outline-3">
+<h3 id="org8840637">Basic regex components</h3>
+<div class="outline-text-3" id="text-org8840637">
 </div>
-<div id="outline-container-org772aa79" class="outline-4">
-<h4 id="org772aa79">single char expressions</h4>
-<div class="outline-text-4" id="text-org772aa79">
+<div id="outline-container-org6152618" class="outline-4">
+<h4 id="org6152618">single char expressions</h4>
+<div class="outline-text-4" id="text-org6152618">
 <ul class="org-ul">
 <li>reg chars, like "A" or "#" match themselves</li>
 <li>case matters: "A" and "a" are different</li>
@@ -200,9 +201,9 @@ toldtoy
 </pre>
 </div>
 </div>
-<div id="outline-container-org6d124fe" class="outline-4">
-<h4 id="org6d124fe">bracket expressions</h4>
-<div class="outline-text-4" id="text-org6d124fe">
+<div id="outline-container-org9103f1c" class="outline-4">
+<h4 id="org9103f1c">bracket expressions</h4>
+<div class="outline-text-4" id="text-org9103f1c">
 <ul class="org-ul">
 <li>any one of a set: <code>[aeiouy]</code> matches <i>one</i> Englis vowel</li>
 <li>any not in a set: <code>[^aieouy]</code> matches a non-vowel</li>
@@ -251,7 +252,7 @@ Complemented bracket expressions &amp; char classes:
 </pre>
 </div>
 
-<pre class="example" id="orgb69aa65">
+<pre class="example" id="orge577a5d">
 1
 2
 3
@@ -265,9 +266,9 @@ g
 </pre>
 </div>
 </div>
-<div id="outline-container-orgc8163f1" class="outline-4">
-<h4 id="orgc8163f1">repetition - zero or more</h4>
-<div class="outline-text-4" id="text-orgc8163f1">
+<div id="outline-container-org56bfd87" class="outline-4">
+<h4 id="org56bfd87">repetition - zero or more</h4>
+<div class="outline-text-4" id="text-org56bfd87">
 <p>
 Asterisk ("star") indicates zero or more of the preceding char
 </p>
@@ -279,9 +280,9 @@ Asterisk ("star") indicates zero or more of the preceding char
 </ul>
 </div>
 </div>
-<div id="outline-container-orgca5965f" class="outline-4">
-<h4 id="orgca5965f">repetition - interval expressions</h4>
-<div class="outline-text-4" id="text-orgca5965f">
+<div id="outline-container-org22391bd" class="outline-4">
+<h4 id="org22391bd">repetition - interval expressions</h4>
+<div class="outline-text-4" id="text-org22391bd">
 <ul class="org-ul">
 <li><code>c\{N\}</code> - <i>N</i> occurrences of <i>c</i></li>
 <li><code>c\{N,\}</code> - at least <i>N</i> occurrences of <i>c</i></li>
@@ -293,9 +294,9 @@ Here <i>c</i> means a single char as described earlier
 </p>
 </div>
 </div>
-<div id="outline-container-org9f56731" class="outline-4">
-<h4 id="org9f56731">achoring maches</h4>
-<div class="outline-text-4" id="text-org9f56731">
+<div id="outline-container-orge033e84" class="outline-4">
+<h4 id="orge033e84">achoring maches</h4>
+<div class="outline-text-4" id="text-orge033e84">
 <ul class="org-ul">
 <li>cared ("up arrow", "hat", <code>^</code>) - match must start at beginning of line or string</li>
 <li>dollar sign (<code>$</code>) - match must occur at end of line or string</li>
@@ -318,9 +319,9 @@ Here <i>c</i> means a single char as described earlier
 </pre>
 </div>
 </div>
-<div id="outline-container-org203f618" class="outline-4">
-<h4 id="org203f618">parenthasized subexpressions</h4>
-<div class="outline-text-4" id="text-org203f618">
+<div id="outline-container-org502d597" class="outline-4">
+<h4 id="org502d597">parenthasized subexpressions</h4>
+<div class="outline-text-4" id="text-org502d597">
 <ul class="org-ul">
 <li><code>\(a[bc\)\(123\)xx\2\1</code> - same as <code>a[bc]123xxM2M1</code>
 <ul class="org-ul">
@@ -351,9 +352,9 @@ ab123xx123xab
 </ul>
 </div>
 </div>
-<div id="outline-container-orgef5b45d" class="outline-4">
-<h4 id="orgef5b45d">operator precedence</h4>
-<div class="outline-text-4" id="text-orgef5b45d">
+<div id="outline-container-orgc0eb059" class="outline-4">
+<h4 id="orgc0eb059">operator precedence</h4>
+<div class="outline-text-4" id="text-orgc0eb059">
 <p>
 From heighest to lowest:
 </p>
@@ -368,9 +369,9 @@ From heighest to lowest:
 </ol>
 </div>
 </div>
-<div id="outline-container-org9de0f0e" class="outline-4">
-<h4 id="org9de0f0e">longest, leftmost match</h4>
-<div class="outline-text-4" id="text-org9de0f0e">
+<div id="outline-container-orgbcd5c3d" class="outline-4">
+<h4 id="orgbcd5c3d">longest, leftmost match</h4>
+<div class="outline-text-4" id="text-orgbcd5c3d">
 <ul class="org-ul">
 <li>regexs match the longest possible, leftmost ocurrence of text that can match</li>
 <li>the match ends at the first character that cannot be matched</li>
@@ -394,13 +395,13 @@ X123 eafg 123 youyou
 </div>
 </div>
 </div>
-<div id="outline-container-orgee0e884" class="outline-2">
-<h2 id="orgee0e884">EREs</h2>
-<div class="outline-text-2" id="text-orgee0e884">
+<div id="outline-container-org7044054" class="outline-2">
+<h2 id="org7044054">EREs</h2>
+<div class="outline-text-2" id="text-org7044054">
 </div>
-<div id="outline-container-orgd785350" class="outline-3">
-<h3 id="orgd785350">Regular expression concepts</h3>
-<div class="outline-text-3" id="text-orgd785350">
+<div id="outline-container-org7331e3d" class="outline-3">
+<h3 id="org7331e3d">Regular expression concepts</h3>
+<div class="outline-text-3" id="text-org7331e3d">
 <p>
 A regex is a language describing text to be matched
 </p>
@@ -452,9 +453,9 @@ What programs use regex?
 <li>scripting languages, usually with their on flavours</li>
 </ul>
 </div>
-<div id="outline-container-orgb8c7aec" class="outline-4">
-<h4 id="orgb8c7aec"><code>grep</code> options</h4>
-<div class="outline-text-4" id="text-orgb8c7aec">
+<div id="outline-container-org3a5732f" class="outline-4">
+<h4 id="org3a5732f"><code>grep</code> options</h4>
+<div class="outline-text-4" id="text-org3a5732f">
 <ul class="org-ul">
 <li>use <code>pat</code> as pattern: <code>-e pat</code></li>
 <li>read list of patterns from file: <code>-f file</code></li>
@@ -469,9 +470,9 @@ What programs use regex?
 </ul>
 </div>
 </div>
-<div id="outline-container-org85f3fd3" class="outline-4">
-<h4 id="org85f3fd3">Robustness</h4>
-<div class="outline-text-4" id="text-org85f3fd3">
+<div id="outline-container-org50af7f5" class="outline-4">
+<h4 id="org50af7f5">Robustness</h4>
+<div class="outline-text-4" id="text-org50af7f5">
 <ul class="org-ul">
 <li>invest time in learning regexs</li>
 <li>use EREs wherever possible</li>
@@ -480,9 +481,9 @@ What programs use regex?
 </div>
 </div>
 </div>
-<div id="outline-container-org09854f0" class="outline-3">
-<h3 id="org09854f0">Basic regex components</h3>
-<div class="outline-text-3" id="text-org09854f0">
+<div id="outline-container-org0845b90" class="outline-3">
+<h3 id="org0845b90">Basic regex components</h3>
+<div class="outline-text-3" id="text-org0845b90">
 <p>
 Same as BREs:
 </p>
@@ -498,9 +499,9 @@ Same as BREs:
 </ul>
 </div>
 </div>
-<div id="outline-container-org3814b03" class="outline-3">
-<h3 id="org3814b03">Aditional repetition operators</h3>
-<div class="outline-text-3" id="text-org3814b03">
+<div id="outline-container-orgb598a15" class="outline-3">
+<h3 id="orgb598a15">Aditional repetition operators</h3>
+<div class="outline-text-3" id="text-orgb598a15">
 <ul class="org-ul">
 <li><code>re?</code> matches zero or one of <code>re</code> - "optional"</li>
 <li><code>re+</code> matches one or more of <code>re</code> - "at least one of"</li>
@@ -530,9 +531,9 @@ abbbc
 </pre>
 </div>
 </div>
-<div id="outline-container-org13f140c" class="outline-3">
-<h3 id="org13f140c">Grouping with parenthesis</h3>
-<div class="outline-text-3" id="text-org13f140c">
+<div id="outline-container-orgf9dd492" class="outline-3">
+<h3 id="orgf9dd492">Grouping with parenthesis</h3>
+<div class="outline-text-3" id="text-orgf9dd492">
 <p>
 Parentheses group smaller REs into larger ones.
 </p>
@@ -558,9 +559,9 @@ Parentheses group smaller REs into larger ones.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf1b4bd1" class="outline-3">
-<h3 id="orgf1b4bd1">Alternation</h3>
-<div class="outline-text-3" id="text-orgf1b4bd1">
+<div id="outline-container-orgf769bfb" class="outline-3">
+<h3 id="orgf769bfb">Alternation</h3>
+<div class="outline-text-3" id="text-orgf769bfb">
 <p>
 Separate alternatives with <code>|</code>
 </p>
@@ -604,9 +605,9 @@ hello
 </pre>
 </div>
 </div>
-<div id="outline-container-org6ff2199" class="outline-3">
-<h3 id="org6ff2199">ERE operator precedence</h3>
-<div class="outline-text-3" id="text-org6ff2199">
+<div id="outline-container-org9c33068" class="outline-3">
+<h3 id="org9c33068">ERE operator precedence</h3>
+<div class="outline-text-3" id="text-org9c33068">
 <ol class="org-ol">
 <li>bracket symbols: <code>[:class:]</code>, <code>[=c=]</code>, <code>[.cs.]</code></li>
 <li><code>\metacharacter</code></li>
@@ -619,9 +620,9 @@ hello
 </ol>
 </div>
 </div>
-<div id="outline-container-orgb93f74b" class="outline-3">
-<h3 id="orgb93f74b">Robustness</h3>
-<div class="outline-text-3" id="text-orgb93f74b">
+<div id="outline-container-orgdbc5b1a" class="outline-3">
+<h3 id="orgdbc5b1a">Robustness</h3>
+<div class="outline-text-3" id="text-orgdbc5b1a">
 <ul class="org-ul">
 <li>always quote your REs
 <ul class="org-ul">
@@ -634,9 +635,9 @@ hello
 </ul>
 </div>
 </div>
-<div id="outline-container-org392f897" class="outline-3">
-<h3 id="org392f897">Using plain grep</h3>
-<div class="outline-text-3" id="text-org392f897">
+<div id="outline-container-org9f1d7aa" class="outline-3">
+<h3 id="org9f1d7aa">Using plain grep</h3>
+<div class="outline-text-3" id="text-org9f1d7aa">
 <p>
 Without the <code>-E</code>
 </p>
@@ -660,6 +661,8 @@ hi
 </div>
 
 <div class="footer">
+<button class="scroll-to-top" onclick="scrollToTop()">^ home</button>
+
 <nav class="breadcrumbs footer">
 <a href="/index.html">index</a> <span class="separator">/</span> <span>.</span>
 </nav>

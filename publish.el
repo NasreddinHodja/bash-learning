@@ -17,6 +17,7 @@
 
 (require 'ansi-color)
 
+
 (defun nas/org-ansi-colorize-blocks (beg end)
   "Apply ANSI colors to source block results in region."
   (save-excursion
@@ -140,7 +141,8 @@
       (buffer-string))))
 
 (defun nas/footer-filter (string backend info)
-  "Append a footer div with breadcrumbs and nav buttons at the end of the HTML output."
+  "Append a footer div with scroll-to-top button, breadcrumbs, and nav buttons
+at the end of the HTML output."
   (when (eq backend 'html)
     (let* ((input-file (plist-get info :input-file))
            (breadcrumbs (nas/extract-keyword-from-file input-file "breadcrumbs"))
@@ -155,7 +157,7 @@
             (goto-char (point-max))
             (search-backward "</body>" nil t)
 
-            ;; build footer contents
+            ;; build inner components
             (let* ((crumbs-html
                     (when breadcrumbs
                       (nas/generate-breadcrumb-html
@@ -165,20 +167,24 @@
                     (nas/generate-nav-buttons-html
                      (delq nil (list back-button next-button)))))
 
-              ;; insert combined footer
+              ;; insert footer
               (insert
                "\n<div class=\"footer\">\n"
+               ;; scroll to top button
+               "<button class=\"scroll-to-top\" onclick=\"scrollToTop()\">^ home</button>\n\n"
+
+               ;; breadcrumbs (with footer class)
                (when crumbs-html
                  (replace-regexp-in-string
                   "class=\"breadcrumbs\""
                   "class=\"breadcrumbs footer\""
                   crumbs-html))
+
                "\n"
                nav-buttons-html
                "\n</div>\n"))
 
             (buffer-string))
-
         string))))
 
 ;; add filters
@@ -187,6 +193,19 @@
 (add-to-list 'org-export-filter-final-output-functions 'nas/nav-buttons-filter)
 (add-to-list 'org-export-filter-final-output-functions 'nas/footer-filter)
 
+;; scripts
+(defun nas/scripts-to-html-extra (scripts)
+  "Given a list of script filenames, return a string of <script> tags
+to be used in org-html-head-extra."
+  (mapconcat
+   (lambda (file)
+     (format "<script src=\"/static/%s\"></script>" file))
+   scripts
+   "\n"))
+
+(setq nas/html-scripts
+      (nas/scripts-to-html-extra '("toc-toggle.js"
+                                   "scroll-to-top.js")))
 
 ;; set default header arguments for all source blocks
 (setq org-babel-default-header-args
@@ -199,8 +218,9 @@
         (:tangle . "no")))
 
 ;; define publish project
+;;
 (setq org-publish-project-alist
-      '(("content"
+      `(("content"
          :base-directory "./notes"
          :publishing-directory "./public"
          :recursive t
@@ -210,7 +230,7 @@
          :with-toc t
          :section-numbers nil
          :time-stamp-file nil
-         :html-head-extra "<script src=\"/static/toc-toggle.js\"></script>")
+         :html-head-extra  ,nas/html-scripts)
         ("static"
          :base-directory "./static"
          :base-extension "css\\|js\\|png\\|jpg\\|gif\\|svg"
