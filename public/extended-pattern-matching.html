@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Extended Pattern Matching</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/static/style.css" >
+<script src="/static/toc-toggle.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Extended Pattern Matching</h1>
+<nav class="breadcrumbs">
+<a href="/index.html">index</a> <span class="separator">/</span> <span>.</span>
+</nav>
+<div class="nav-buttons">
+<a href="/tilde-wildcards-and-hidden-files.html" class="nav-button"><< Tilde, Wildcards and Hidden Files</a>
+<a href="/cut-and-join.html" class="nav-button">>> Cut and Join</a>
+</div>
+<div id="table-of-contents" role="doc-toc">
+<div class="toc-header" onclick="toggleToc()">
+<h2>Table of Contents</h2>
+<div class="toggle-icon">+</div>
+</div>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org6c0f896">Intro</a></li>
+<li><a href="#org90458ad">Extended notations</a></li>
+<li><a href="#org0aeca71">Use cases</a></li>
+<li><a href="#org2d19dfd">Robustness</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6c0f896" class="outline-2">
+<h2 id="org6c0f896">Intro</h2>
+<div class="outline-text-2" id="text-org6c0f896">
+<ul class="org-ul">
+<li>must be enabled in bash: <code>shopt -s extglob</code></li>
+<li>not part of POSIX</li>
+<li>power similar to that of EREs</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org90458ad" class="outline-2">
+<h2 id="org90458ad">Extended notations</h2>
+<div class="outline-text-2" id="text-org90458ad">
+<ul class="org-ul">
+<li><code>*(exp)</code>
+<ul class="org-ul">
+<li>0+ of <i>exp</i></li>
+<li>equivalent to ERE <code>(exp*)</code></li>
+</ul></li>
+<li><code>+(exp)</code>
+<ul class="org-ul">
+<li>1+ of <i>exp</i></li>
+<li>equivalent to ERE <code>(exp+)</code></li>
+</ul></li>
+<li><code>?(exp)</code>
+<ul class="org-ul">
+<li>0|1 of <i>exp</i></li>
+<li>equivalent to ERE <code>(exp?)</code></li>
+</ul></li>
+<li><code>@(exp1|exp2|...)</code>
+<ul class="org-ul">
+<li>alternation (one of)</li>
+<li>equivalent to ERE <code>exp1|exp2|...</code></li>
+</ul></li>
+<li><code>!(exp1)</code>
+<ul class="org-ul">
+<li>complement of <i>exp</i></li>
+<li>no equivalent</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0aeca71" class="outline-2">
+<h2 id="org0aeca71">Use cases</h2>
+<div class="outline-text-2" id="text-org0aeca71">
+<ul class="org-ul">
+<li>more powerful filename matching</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash">shopt -s extglob
+ls @(<span style="font-weight: bold;">in</span>*|*ss*)
+</pre>
+</div>
+
+<pre class="example">
+index.org
+index.org~
+intro.org
+regular-expressions.org
+simple-text-processing.org
+</pre>
+
+
+<ul class="org-ul">
+<li>patterns within <code>case</code> statements</li>
+<li>pattern matching with extended test command (<code>[[ ... ]]</code>)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2d19dfd" class="outline-2">
+<h2 id="org2d19dfd">Robustness</h2>
+<div class="outline-text-2" id="text-org2d19dfd">
+<ul class="org-ul">
+<li>enable portably (because it's not POSIX)</li>
+<li>use patterns where it makes sense and EREs when it makes sense</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="footer">
+<nav class="breadcrumbs footer">
+<a href="/index.html">index</a> <span class="separator">/</span> <span>.</span>
+</nav>
+<div class="nav-buttons">
+<a href="/tilde-wildcards-and-hidden-files.html" class="nav-button"><< Tilde, Wildcards and Hidden Files</a>
+<a href="/cut-and-join.html" class="nav-button">>> Cut and Join</a>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+#+title: Cut and Join
+#+index: 12
+#+breadcrumbs: index:/index.html
+#+back: << Extended Pattern Matching:/extended-pattern-matching.html
+#+next: >> Extended Pattern Matching:/extended-pattern-matching.html
+#+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
+
+* Choosing fields with =cut=
++ use =cut= to "cut out" fields from data files
++ default is field based (with =TAB= field separator), with =-f=
+  - use =-d <char>= to change the delimiter char
++ or, choose fields based on char ranges with =-c=
++ or, choose fields based on byte ranges with =-b=

@@ -108,6 +108,15 @@
 + [[./tilde-wildcards-and-hidden-files.org::*Wildcarding][10.2 Wildcarding]]
 + [[./tilde-wildcards-and-hidden-files.org::*Hidden files][10.3 Hidden files]]
 
+** [[./extended-pattern-matching.org][11.0 Extended Pattern Matching]]
++ [[./extended-pattern-matching.org::*Intro][11.1 Intro]]
++ [[./extended-pattern-matching.org::*Extended notations][11.2 Extended notations]]
++ [[./extended-pattern-matching.org::*Use cases][11.3 Use cases]]
++ [[./extended-pattern-matching.org::*Robustness][11.4 Robustness]]
+
+** [[./cut-and-join.org][12.0 Cut and Join]]
++ [[./cut-and-join.org::*Choosing fields with =cut=][12.1 Choosing fields with =cut=]]
+
 ** [[./shell-expansions.org][100.0 Shell Expansions]]
 + [[./shell-expansions.org::*Default values][100.1 Default values]]
 + [[./shell-expansions.org::*Required parameters with error][100.2 Required parameters with error]]

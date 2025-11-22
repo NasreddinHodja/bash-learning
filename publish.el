@@ -57,8 +57,8 @@
                      (if (= (length parts) 2)
                          ;; format: "text:url"
                          (format "<a href=\"%s\">%s</a>"
-                                (string-trim (cadr parts))
-                                (string-trim (car parts)))
+                                 (string-trim (cadr parts))
+                                 (string-trim (car parts)))
                        ;; format: "text" (no link)
                        (format "<span>%s</span>" (string-trim crumb)))))
                  crumbs-list)))
@@ -74,8 +74,8 @@
                      (if (= (length parts) 2)
                          ;; format: "text:url"
                          (format "<a href=\"%s\" class=\"nav-button\">%s</a>"
-                                (string-trim (cadr parts))
-                                (string-trim (car parts)))
+                                 (string-trim (cadr parts))
+                                 (string-trim (car parts)))
                        ;; format: "text" (no link)
                        (format "<span class=\"nav-button disabled\">%s</span>" (string-trim button)))))
                  nav-buttons-list)))
@@ -124,7 +124,7 @@
             (let* ((crumbs-list (split-string breadcrumbs " > "))
                    (breadcrumb-html (nas/generate-breadcrumb-html (append crumbs-list '(".")))))
               (insert "\n" breadcrumb-html)
-          (buffer-string))))))))
+              (buffer-string))))))))
 
 ;; filter for replacing toc
 (defun my-collapsible-toc-filter (string backend _info)
@@ -139,10 +139,54 @@
         (replace-match "<div id=\"table-of-contents\" role=\"doc-toc\">\n<div class=\"toc-header\" onclick=\"toggleToc()\">\n<h2>\\1</h2>\n<div class=\"toggle-icon\">+</div>\n</div>"))
       (buffer-string))))
 
+(defun nas/footer-filter (string backend info)
+  "Append a footer div with breadcrumbs and nav buttons at the end of the HTML output."
+  (when (eq backend 'html)
+    (let* ((input-file (plist-get info :input-file))
+           (breadcrumbs (nas/extract-keyword-from-file input-file "breadcrumbs"))
+           (back-button (nas/extract-keyword-from-file input-file "back"))
+           (next-button (nas/extract-keyword-from-file input-file "next")))
+
+      (if (or breadcrumbs back-button next-button)
+          (with-temp-buffer
+            (insert string)
+
+            ;; move to before </body>
+            (goto-char (point-max))
+            (search-backward "</body>" nil t)
+
+            ;; build footer contents
+            (let* ((crumbs-html
+                    (when breadcrumbs
+                      (nas/generate-breadcrumb-html
+                       (append (split-string breadcrumbs " > ") '(".")))))
+
+                   (nav-buttons-html
+                    (nas/generate-nav-buttons-html
+                     (delq nil (list back-button next-button)))))
+
+              ;; insert combined footer
+              (insert
+               "\n<div class=\"footer\">\n"
+               (when crumbs-html
+                 (replace-regexp-in-string
+                  "class=\"breadcrumbs\""
+                  "class=\"breadcrumbs footer\""
+                  crumbs-html))
+               "\n"
+               nav-buttons-html
+               "\n</div>\n"))
+
+            (buffer-string))
+
+        string))))
+
 ;; add filters
 (add-to-list 'org-export-filter-final-output-functions 'my-collapsible-toc-filter)
 (add-to-list 'org-export-filter-final-output-functions 'nas/breadcrumbs-filter)
 (add-to-list 'org-export-filter-final-output-functions 'nas/nav-buttons-filter)
+(add-to-list 'org-export-filter-final-output-functions 'nas/footer-filter)
+
 
 ;; set default header arguments for all source blocks
 (setq org-babel-default-header-args

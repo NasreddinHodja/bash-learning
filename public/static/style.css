@@ -93,6 +93,10 @@ body > footer {
   border-top: var(--border-width) solid var(--border);
 }
 
+.footer {
+  margin-top: 4rem;
+}
+
 /* collapsible TOC */
 #table-of-contents {
   border: 1px solid #ddd;

@@ -1,0 +1,51 @@
+#+title: Extended Pattern Matching
+#+index: 11
+#+breadcrumbs: index:/index.html
+#+back: << Tilde, Wildcards and Hidden Files:/tilde-wildcards-and-hidden-files.html
+#+next: >> Cut and Join:/cut-and-join.html
+#+source: https://youtu.be/fAgz66M4aNc?si=ybChoNNggXGZmo8U
+
+* Intro
++ must be enabled in bash: =shopt -s extglob=
++ not part of POSIX
++ power similar to that of EREs
+
+* Extended notations
+
++ =*(exp)=
+  - 0+ of /exp/
+  - equivalent to ERE =(exp*)=
++ =+(exp)=
+  - 1+ of /exp/
+  - equivalent to ERE =(exp+)=
++ =?(exp)=
+  - 0|1 of /exp/
+  - equivalent to ERE =(exp?)=
++ =@(exp1|exp2|...)=
+  - alternation (one of)
+  - equivalent to ERE =exp1|exp2|...=
++ =!(exp1)=
+  - complement of /exp/
+  - no equivalent
+
+* Use cases
++ more powerful filename matching
+
+#+begin_src bash :results output verbatim
+shopt -s extglob
+ls @(in*|*ss*)
+#+end_src
+
+#+RESULTS:
+: index.org
+: index.org~
+: intro.org
+: regular-expressions.org
+: simple-text-processing.org
+
++ patterns within =case= statements
++ pattern matching with extended test command (=[[ ... ]]=)
+
+* Robustness
++ enable portably (because it's not POSIX)
++ use patterns where it makes sense and EREs when it makes sense
