@@ -1,62 +1,12 @@
 #+title: Bash Learning Notes
 
-* Overview
-These are my personal notes while learning Bash, structured to eventually become a comprehensive tutorial website. The notes are written in Org-mode format.
+Personal notes while learning Bash. Published as a static website using [[https://github.com/NasreddinHodja/knorgpub][knorgpub]].
 
-* Project Structure
-#+begin_example
-bash-learning/
-├── notes/
-│   ├── index.org          # index file with TOC
-│   ├── [notesection].org  # note file concerning a specific topic
-│   └── ...                # additional topic files
-├── static/
-│   └── style.css          # CSS styles for HTML output
-│   └── [notesection]/     # images for notes/[notesection].org files
-│   └── ...                # additional images dir for each topic file
-├── public/                # generated HTML files (build output)
-├── build-toc.el           # elisp script to generate index file with TOC
-├── publish.el             # org-publish configuration & HTML generation
-├── build.sh               # build script wrapper
-└── watch.sh               # development server with live reload
-#+end_example
+* Writing notes
 
-* Content
-Each topic is contained in its own =.org= file within the =notes/= directory.
+Add =.org= files to =content/=. Each file needs a title and an index number for TOC ordering:
 
 #+begin_src org
-,#+title: Topic Title
-,#+index: 1
-,* Main Heading
-,** Subheading
-,*** ...
-#+end_src
-
-+ =#+index:= determines the order in the [[* Table of Contents Generation][table of contents]].
-
-* Table of Contents Generation
-=build-toc.el= automatically generates a hierarchical table of contents in =notes/index.org= by:
-1. Scanning all =.org= files in the =notes/= directory
-2. Extracting titles, index numbers, and heading structures
-3. Creating a numbered, hierarchical TOC with proper Org-mode links
-4. Updating the "Table of Contents" section in =index.org=
-
-* Publishing
-** HTML Generation
-=publish.el= script uses Org's built-in publishing system to generate a static website:
-+ Converts all =.org= files in =notes/= to HTML in =public/=
-+ Includes custom CSS styling and collapsible TOC functionality
-+ Automatically cleans up orphaned HTML files (when source =.org= files are deleted)
-+ Copies static assets (CSS, images) from =static/= to =public/static/=
-
-** Build
-#+begin_src bash
-./build.sh    # runs all the publishing scripts
-#+end_src
-
-The build script runs =publish.el= through Emacs in batch mode for automated publishing.
-
-** Dev Workflow
-#+begin_src bash
-./watch.sh    # starts dev server with browser-sync
+#+title: Topic Title
+#+index: 1
 #+end_src
