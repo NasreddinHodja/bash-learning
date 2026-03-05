@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Redirection and Special Files</title>
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="/static/style.css" >
+<link rel="stylesheet" href="/static/style.css">
+<link rel="icon" href="/static/favicon.ico">
 <script src="/static/toc-toggle.js"></script>
 <script src="/static/scroll-to-top.js"></script>
 </head>
@@ -26,22 +27,22 @@
 </div>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1b4b174">File redirection</a></li>
-<li><a href="#orgc2056fe">Pipelines</a></li>
-<li><a href="#orgad6ee33">Redirecting <code>stderr</code> vs <code>stdout</code></a></li>
-<li><a href="#org0b92415">Here documents</a></li>
-<li><a href="#orgac216e6">Special files</a>
+<li><a href="#orgd267784">File redirection</a></li>
+<li><a href="#orgcd149e8">Pipelines</a></li>
+<li><a href="#orgc586f6b">Redirecting <code>stderr</code> vs <code>stdout</code></a></li>
+<li><a href="#orgf241ca6">Here documents</a></li>
+<li><a href="#org1017691">Special files</a>
 <ul>
-<li><a href="#org15697c0"><code>/dev/null</code></a></li>
-<li><a href="#org722b510"><code>/dev/tty</code></a></li>
+<li><a href="#org1cf1f90"><code>/dev/null</code></a></li>
+<li><a href="#org72812fb"><code>/dev/tty</code></a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org1b4b174" class="outline-2">
-<h2 id="org1b4b174">File redirection</h2>
-<div class="outline-text-2" id="text-org1b4b174">
+<div id="outline-container-orgd267784" class="outline-2">
+<h2 id="orgd267784">File redirection</h2>
+<div class="outline-text-2" id="text-orgd267784">
 <ul class="org-ul">
 <li><code>&lt;</code> redirects stdin</li>
 <li><code>&gt;</code> redirects stdout</li>
@@ -99,9 +100,9 @@ another line
 </pre>
 </div>
 </div>
-<div id="outline-container-orgc2056fe" class="outline-2">
-<h2 id="orgc2056fe">Pipelines</h2>
-<div class="outline-text-2" id="text-orgc2056fe">
+<div id="outline-container-orgcd149e8" class="outline-2">
+<h2 id="orgcd149e8">Pipelines</h2>
+<div class="outline-text-2" id="text-orgcd149e8">
 <p>
 They hook 2 files together.
 </p>
@@ -116,7 +117,7 @@ They hook 2 files together.
 </pre>
 </div>
 
-<pre class="example" id="org2cab766">
+<pre class="example" id="orgd51cead">
 arguments.org
 index.org
 index.org~
@@ -151,9 +152,9 @@ arguments.org
 </ul>
 </div>
 </div>
-<div id="outline-container-orgad6ee33" class="outline-2">
-<h2 id="orgad6ee33">Redirecting <code>stderr</code> vs <code>stdout</code></h2>
-<div class="outline-text-2" id="text-orgad6ee33">
+<div id="outline-container-orgc586f6b" class="outline-2">
+<h2 id="orgc586f6b">Redirecting <code>stderr</code> vs <code>stdout</code></h2>
+<div class="outline-text-2" id="text-orgc586f6b">
 <ul class="org-ul">
 <li>We can redirect <code>stderr</code> to other files with <code>2&gt;</code>:</li>
 </ul>
@@ -215,9 +216,9 @@ We should:
 </ul>
 </div>
 </div>
-<div id="outline-container-org0b92415" class="outline-2">
-<h2 id="org0b92415">Here documents</h2>
-<div class="outline-text-2" id="text-org0b92415">
+<div id="outline-container-orgf241ca6" class="outline-2">
+<h2 id="orgf241ca6">Here documents</h2>
+<div class="outline-text-2" id="text-orgf241ca6">
 <p>
 <code>&lt;&lt;</code> is called a "here document".
 </p>
@@ -275,7 +276,7 @@ EOF</span>
 </pre>
 </div>
 
-<pre class="example" id="org15139f8">
+<pre class="example" id="orgffca033">
 This is a here document
 	This line has a tab at the start
 		This line has two tabs
@@ -290,13 +291,13 @@ No leading content, just a tab (stripped)
 </pre>
 </div>
 </div>
-<div id="outline-container-orgac216e6" class="outline-2">
-<h2 id="orgac216e6">Special files</h2>
-<div class="outline-text-2" id="text-orgac216e6">
+<div id="outline-container-org1017691" class="outline-2">
+<h2 id="org1017691">Special files</h2>
+<div class="outline-text-2" id="text-org1017691">
 </div>
-<div id="outline-container-org15697c0" class="outline-3">
-<h3 id="org15697c0"><code>/dev/null</code></h3>
-<div class="outline-text-3" id="text-org15697c0">
+<div id="outline-container-org1cf1f90" class="outline-3">
+<h3 id="org1cf1f90"><code>/dev/null</code></h3>
+<div class="outline-text-3" id="text-org1cf1f90">
 <p>
 The <b>bit bucket</b>. Output to <code>/dev/null</code> is thrown away!
 </p>
@@ -306,9 +307,9 @@ Useful in cases where we dont care about the output but want exit status or othe
 </p>
 </div>
 </div>
-<div id="outline-container-org722b510" class="outline-3">
-<h3 id="org722b510"><code>/dev/tty</code></h3>
-<div class="outline-text-3" id="text-org722b510">
+<div id="outline-container-org72812fb" class="outline-3">
+<h3 id="org72812fb"><code>/dev/tty</code></h3>
+<div class="outline-text-3" id="text-org72812fb">
 <p>
 This is our terminal! ("tty" stands for "teletype")
 </p>
@@ -354,7 +355,7 @@ Important if we wish to communicate with the user. <code>stdout</code>, <code>st
 </pre>
 </div>
 
-<pre class="example" id="org46e8988">
+<pre class="example" id="org2bc1fbb">
 Enter new password:
 Enter again:
 Passwords match

@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Shell Expansions</title>
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="/static/style.css" >
+<link rel="stylesheet" href="/static/style.css">
+<link rel="icon" href="/static/favicon.ico">
 <script src="/static/toc-toggle.js"></script>
 <script src="/static/scroll-to-top.js"></script>
 </head>
@@ -22,33 +23,33 @@
 </div>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9b4c9e8">Default values</a></li>
-<li><a href="#orga62cfb0">Required parameters with error</a></li>
-<li><a href="#org825255d">String manipulation</a></li>
+<li><a href="#org1a4044e">Default values</a></li>
+<li><a href="#org123c56f">Required parameters with error</a></li>
+<li><a href="#org3c9dd87">String manipulation</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org9b4c9e8" class="outline-2">
-<h2 id="org9b4c9e8">Default values</h2>
-<div class="outline-text-2" id="text-org9b4c9e8">
+<div id="outline-container-org1a4044e" class="outline-2">
+<h2 id="org1a4044e">Default values</h2>
+<div class="outline-text-2" id="text-org1a4044e">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">DIR</span>=<span style="font-style: italic;">"${DIR:-/default/path}"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orga62cfb0" class="outline-2">
-<h2 id="orga62cfb0">Required parameters with error</h2>
-<div class="outline-text-2" id="text-orga62cfb0">
+<div id="outline-container-org123c56f" class="outline-2">
+<h2 id="org123c56f">Required parameters with error</h2>
+<div class="outline-text-2" id="text-org123c56f">
 <div class="org-src-container">
 <pre class="src src-bash">: <span style="font-style: italic;">"${REQUIRED_VAR:?Error: REQUIRED_VAR must be set}"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org825255d" class="outline-2">
-<h2 id="org825255d">String manipulation</h2>
-<div class="outline-text-2" id="text-org825255d">
+<div id="outline-container-org3c9dd87" class="outline-2">
+<h2 id="org3c9dd87">String manipulation</h2>
+<div class="outline-text-2" id="text-org3c9dd87">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">filename</span>=<span style="font-style: italic;">"/path/to/file.txt"</span>
 <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"${filename##*/}"</span>

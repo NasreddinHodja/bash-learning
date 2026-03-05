@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Intro</title>
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="/static/style.css" >
+<link rel="stylesheet" href="/static/style.css">
+<link rel="icon" href="/static/favicon.ico">
 <script src="/static/toc-toggle.js"></script>
 <script src="/static/scroll-to-top.js"></script>
 </head>
@@ -25,41 +26,41 @@
 </div>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd652982">History</a></li>
-<li><a href="#org08d349c">Software tools principles</a>
+<li><a href="#orgb7e93ca">History</a></li>
+<li><a href="#org3d590f3">Software tools principles</a>
 <ul>
-<li><a href="#orgdf2a9e4">Do one thing well</a></li>
-<li><a href="#org0bb591e">Process lines of text, not binary</a></li>
-<li><a href="#orgdb58d06">Use Regular Expressions</a></li>
-<li><a href="#org1dfc690">Default to std in/out</a></li>
-<li><a href="#org1828f4e">Don't be chatty</a></li>
-<li><a href="#org2984a13">Use the input format for output</a></li>
-<li><a href="#orga9532c7">Let someone else do the hard part</a></li>
-<li><a href="#org40bb153">Detour to write specilized tools</a></li>
+<li><a href="#org6d6b9b9">Do one thing well</a></li>
+<li><a href="#orge05a950">Process lines of text, not binary</a></li>
+<li><a href="#orgb44372f">Use Regular Expressions</a></li>
+<li><a href="#org1153eeb">Default to std in/out</a></li>
+<li><a href="#org2ceac09">Don't be chatty</a></li>
+<li><a href="#org10a3625">Use the input format for output</a></li>
+<li><a href="#orgbda5b7f">Let someone else do the hard part</a></li>
+<li><a href="#org854d6a1">Detour to write specilized tools</a></li>
 </ul>
 </li>
-<li><a href="#orgfb389f1">Self contained scripts</a>
+<li><a href="#orge512900">Self contained scripts</a>
 <ul>
-<li><a href="#orgbf86be6">Creating a script</a>
+<li><a href="#org8c7fa28">Creating a script</a>
 <ul>
-<li><a href="#org7036e38">understand tools you can use</a></li>
-<li><a href="#orgb29156e">write it</a></li>
-<li><a href="#orgb3aeb86">make it executable</a></li>
-<li><a href="#orge2ed50e">run!</a></li>
-<li><a href="#org45551d7">Lets change our script</a></li>
+<li><a href="#org0c69a79">understand tools you can use</a></li>
+<li><a href="#org59c0c54">write it</a></li>
+<li><a href="#org844ad1e">make it executable</a></li>
+<li><a href="#orgfbf3b91">run!</a></li>
+<li><a href="#org5b3c9f6">Lets change our script</a></li>
 </ul>
 </li>
-<li><a href="#org01f6b24">How simple script works</a></li>
-<li><a href="#orgc8df803">Interpreter in a script</a></li>
-<li><a href="#org6ca576c"><code>man</code> and <code>help</code></a></li>
+<li><a href="#org3969b62">How simple script works</a></li>
+<li><a href="#org77f2423">Interpreter in a script</a></li>
+<li><a href="#org447a0b5"><code>man</code> and <code>help</code></a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd652982" class="outline-2">
-<h2 id="orgd652982">History</h2>
-<div class="outline-text-2" id="text-orgd652982">
+<div id="outline-container-orgb7e93ca" class="outline-2">
+<h2 id="orgb7e93ca">History</h2>
+<div class="outline-text-2" id="text-orgb7e93ca">
 <ul class="org-ul">
 <li>shell scripting was deved in the context of UNIX from Bell Labs</li>
 <li>research-oriented, no pressure to ship product</li>
@@ -97,9 +98,9 @@ Small history:
 </ul>
 </div>
 </div>
-<div id="outline-container-org08d349c" class="outline-2">
-<h2 id="org08d349c">Software tools principles</h2>
-<div class="outline-text-2" id="text-org08d349c">
+<div id="outline-container-org3d590f3" class="outline-2">
+<h2 id="org3d590f3">Software tools principles</h2>
+<div class="outline-text-2" id="text-org3d590f3">
 <ul class="org-ul">
 <li>programs should be specialized tools
 <ul class="org-ul">
@@ -109,9 +110,9 @@ Small history:
 <li>popularized in the Kerninghan &amp; Plauger books</li>
 </ul>
 </div>
-<div id="outline-container-orgdf2a9e4" class="outline-3">
-<h3 id="orgdf2a9e4">Do one thing well</h3>
-<div class="outline-text-3" id="text-orgdf2a9e4">
+<div id="outline-container-org6d6b9b9" class="outline-3">
+<h3 id="org6d6b9b9">Do one thing well</h3>
+<div class="outline-text-3" id="text-org6d6b9b9">
 <p>
 Programs are easier to:
 </p>
@@ -131,9 +132,9 @@ Examples:
 </ul>
 </div>
 </div>
-<div id="outline-container-org0bb591e" class="outline-3">
-<h3 id="org0bb591e">Process lines of text, not binary</h3>
-<div class="outline-text-3" id="text-org0bb591e">
+<div id="outline-container-orge05a950" class="outline-3">
+<h3 id="orge05a950">Process lines of text, not binary</h3>
+<div class="outline-text-3" id="text-orge05a950">
 <ul class="org-ul">
 <li>easy to process with existing and new tools</li>
 <li>can be edited with any text editor</li>
@@ -153,9 +154,9 @@ nasreddin
 </pre>
 </div>
 </div>
-<div id="outline-container-orgdb58d06" class="outline-3">
-<h3 id="orgdb58d06">Use Regular Expressions</h3>
-<div class="outline-text-3" id="text-orgdb58d06">
+<div id="outline-container-orgb44372f" class="outline-3">
+<h3 id="orgb44372f">Use Regular Expressions</h3>
+<div class="outline-text-3" id="text-orgb44372f">
 <p>
 Provide powerful text matching and substitution
 </p>
@@ -186,9 +187,9 @@ nasreddin
 </p>
 </div>
 </div>
-<div id="outline-container-org1dfc690" class="outline-3">
-<h3 id="org1dfc690">Default to std in/out</h3>
-<div class="outline-text-3" id="text-org1dfc690">
+<div id="outline-container-org1153eeb" class="outline-3">
+<h3 id="org1153eeb">Default to std in/out</h3>
+<div class="outline-text-3" id="text-org1153eeb">
 <p>
 When no files are named on the command line, use std in and out
 </p>
@@ -204,18 +205,18 @@ Such programs are called "<b>filters</b>" (by analogy to water pipelines)
 </p>
 </div>
 </div>
-<div id="outline-container-org1828f4e" class="outline-3">
-<h3 id="org1828f4e">Don't be chatty</h3>
-<div class="outline-text-3" id="text-org1828f4e">
+<div id="outline-container-org2ceac09" class="outline-3">
+<h3 id="org2ceac09">Don't be chatty</h3>
+<div class="outline-text-3" id="text-org2ceac09">
 <ul class="org-ul">
 <li>status messages mixed with output can only confuse downstream programs</li>
 <li>you asked for it, you got it (no "are you sure?")</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org2984a13" class="outline-3">
-<h3 id="org2984a13">Use the input format for output</h3>
-<div class="outline-text-3" id="text-org2984a13">
+<div id="outline-container-org10a3625" class="outline-3">
+<h3 id="org10a3625">Use the input format for output</h3>
+<div class="outline-text-3" id="text-org10a3625">
 <p>
 If your text is structured, after processing, write the same format for output as you read for input.
 (this is something of a later principle adopted by the community)
@@ -234,9 +235,9 @@ Example: The Portable Network Graphics (PNG) suite:
 </div>
 </div>
 </div>
-<div id="outline-container-orga9532c7" class="outline-3">
-<h3 id="orga9532c7">Let someone else do the hard part</h3>
-<div class="outline-text-3" id="text-orga9532c7">
+<div id="outline-container-orgbda5b7f" class="outline-3">
+<h3 id="orgbda5b7f">Let someone else do the hard part</h3>
+<div class="outline-text-3" id="text-orgbda5b7f">
 <ul class="org-ul">
 <li>use existing tools to select data (<code>grep</code>, <code>awk</code>, &#x2026;)</li>
 <li>sort it, if that makes sense</li>
@@ -244,9 +245,9 @@ Example: The Portable Network Graphics (PNG) suite:
 </ul>
 </div>
 </div>
-<div id="outline-container-org40bb153" class="outline-3">
-<h3 id="org40bb153">Detour to write specilized tools</h3>
-<div class="outline-text-3" id="text-org40bb153">
+<div id="outline-container-org854d6a1" class="outline-3">
+<h3 id="org854d6a1">Detour to write specilized tools</h3>
+<div class="outline-text-3" id="text-org854d6a1">
 <ul class="org-ul">
 <li>sometimes, there is no existing too, so write it!</li>
 <li>but, stop and think:
@@ -260,20 +261,20 @@ Example: The Portable Network Graphics (PNG) suite:
 </div>
 </div>
 </div>
-<div id="outline-container-orgfb389f1" class="outline-2">
-<h2 id="orgfb389f1">Self contained scripts</h2>
-<div class="outline-text-2" id="text-orgfb389f1">
+<div id="outline-container-orge512900" class="outline-2">
+<h2 id="orge512900">Self contained scripts</h2>
+<div class="outline-text-2" id="text-orge512900">
 </div>
-<div id="outline-container-orgbf86be6" class="outline-3">
-<h3 id="orgbf86be6">Creating a script</h3>
-<div class="outline-text-3" id="text-orgbf86be6">
+<div id="outline-container-org8c7fa28" class="outline-3">
+<h3 id="org8c7fa28">Creating a script</h3>
+<div class="outline-text-3" id="text-org8c7fa28">
 <p>
 Lets say we want to count the number of login sessions on our computer&#x2026; (here there's just me)
 </p>
 </div>
-<div id="outline-container-org7036e38" class="outline-4">
-<h4 id="org7036e38">understand tools you can use</h4>
-<div class="outline-text-4" id="text-org7036e38">
+<div id="outline-container-org0c69a79" class="outline-4">
+<h4 id="org0c69a79">understand tools you can use</h4>
+<div class="outline-text-4" id="text-org0c69a79">
 <ul class="org-ul">
 <li><code>who</code> allows us to see who is logged in:</li>
 </ul>
@@ -302,9 +303,9 @@ nasreddin pts/1        2025-08-18 18:34 (tmux(1307).%0)
 </pre>
 </div>
 </div>
-<div id="outline-container-orgb29156e" class="outline-4">
-<h4 id="orgb29156e">write it</h4>
-<div class="outline-text-4" id="text-orgb29156e">
+<div id="outline-container-org59c0c54" class="outline-4">
+<h4 id="org59c0c54">write it</h4>
+<div class="outline-text-4" id="text-org59c0c54">
 <p>
 Use a text editor and save it to a file.
 </p>
@@ -331,18 +332,18 @@ Lets save that to a file:
 </div>
 </div>
 </div>
-<div id="outline-container-orgb3aeb86" class="outline-4">
-<h4 id="orgb3aeb86">make it executable</h4>
-<div class="outline-text-4" id="text-orgb3aeb86">
+<div id="outline-container-org844ad1e" class="outline-4">
+<h4 id="org844ad1e">make it executable</h4>
+<div class="outline-text-4" id="text-org844ad1e">
 <div class="org-src-container">
 <pre class="src src-bash">chmod +x ./scripts/nusers
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orge2ed50e" class="outline-4">
-<h4 id="orge2ed50e">run!</h4>
-<div class="outline-text-4" id="text-orge2ed50e">
+<div id="outline-container-orgfbf3b91" class="outline-4">
+<h4 id="orgfbf3b91">run!</h4>
+<div class="outline-text-4" id="text-orgfbf3b91">
 <div class="org-src-container">
 <pre class="src src-bash">./scripts/nusers
 </pre>
@@ -353,9 +354,9 @@ Lets save that to a file:
 </pre>
 </div>
 </div>
-<div id="outline-container-org45551d7" class="outline-4">
-<h4 id="org45551d7">Lets change our script</h4>
-<div class="outline-text-4" id="text-org45551d7">
+<div id="outline-container-org5b3c9f6" class="outline-4">
+<h4 id="org5b3c9f6">Lets change our script</h4>
+<div class="outline-text-4" id="text-org5b3c9f6">
 <p>
 We can enhance it by printing <b>unique</b> logged in users
 </p>
@@ -380,11 +381,11 @@ Now we see that there is only me logged in
 </div>
 </div>
 </div>
-<div id="outline-container-org01f6b24" class="outline-3">
-<h3 id="org01f6b24">How simple script works</h3>
-<div class="outline-text-3" id="text-org01f6b24">
+<div id="outline-container-org3969b62" class="outline-3">
+<h3 id="org3969b62">How simple script works</h3>
+<div class="outline-text-3" id="text-org3969b62">
 
-<div id="orgdc55cb4" class="figure">
+<div id="org8ddc6c9" class="figure">
 <p><img src="../static/intro/script_execution_diagram.png" alt="script_execution_diagram.png">
 </p>
 </div>
@@ -397,9 +398,9 @@ Now we see that there is only me logged in
 </ol>
 </div>
 </div>
-<div id="outline-container-orgc8df803" class="outline-3">
-<h3 id="orgc8df803">Interpreter in a script</h3>
-<div class="outline-text-3" id="text-orgc8df803">
+<div id="outline-container-org77f2423" class="outline-3">
+<h3 id="org77f2423">Interpreter in a script</h3>
+<div class="outline-text-3" id="text-org77f2423">
 <p>
 Shell scripts can be as simple text files containing shell scripts.
 </p>
@@ -417,9 +418,9 @@ But <b>this only works if the script is in the same language as your interactive
 </ul>
 </div>
 </div>
-<div id="outline-container-org6ca576c" class="outline-3">
-<h3 id="org6ca576c"><code>man</code> and <code>help</code></h3>
-<div class="outline-text-3" id="text-org6ca576c">
+<div id="outline-container-org447a0b5" class="outline-3">
+<h3 id="org447a0b5"><code>man</code> and <code>help</code></h3>
+<div class="outline-text-3" id="text-org447a0b5">
 <p>
 These are our friends in learning shell scripting.
 </p>

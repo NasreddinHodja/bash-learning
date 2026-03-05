@@ -5,227 +5,228 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Bash Notes</title>
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="/static/style.css" >
+<link rel="stylesheet" href="/static/style.css">
+<link rel="icon" href="/static/favicon.ico">
 <script src="/static/toc-toggle.js"></script>
 <script src="/static/scroll-to-top.js"></script>
 </head>
 <body>
 <div id="content" class="content">
 <h1 class="title">Bash Notes</h1>
-<div id="outline-container-orgb1dcf0a" class="outline-2">
-<h2 id="orgb1dcf0a">Table of Contents</h2>
-<div class="outline-text-2" id="text-orgb1dcf0a">
+<div id="outline-container-org907b1fe" class="outline-2">
+<h2 id="org907b1fe">Table of Contents</h2>
+<div class="outline-text-2" id="text-org907b1fe">
 </div>
-<div id="outline-container-org747db06" class="outline-3">
-<h3 id="org747db06"><a href="./intro.html">1.0 Intro</a></h3>
-<div class="outline-text-3" id="text-org747db06">
+<div id="outline-container-org22ef9a5" class="outline-3">
+<h3 id="org22ef9a5"><a href="./intro.html">1.0 Intro</a></h3>
+<div class="outline-text-3" id="text-org22ef9a5">
 <ul class="org-ul">
-<li><a href="./intro.html#orgd652982">1.1 History</a></li>
-<li><a href="./intro.html#org08d349c">1.2 Software tools principles</a>
+<li><a href="./intro.html#orgb7e93ca">1.1 History</a></li>
+<li><a href="./intro.html#org3d590f3">1.2 Software tools principles</a>
 <ul class="org-ul">
-<li><a href="./intro.html#orgdf2a9e4">1.3 Do one thing well</a></li>
-<li><a href="./intro.html#org0bb591e">1.4 Process lines of text, not binary</a></li>
-<li><a href="./intro.html#orgdb58d06">1.5 Use Regular Expressions</a></li>
-<li><a href="./intro.html#org1dfc690">1.6 Default to std in/out</a></li>
-<li><a href="./intro.html#org1828f4e">1.7 Don't be chatty</a></li>
-<li><a href="./intro.html#org2984a13">1.8 Use the input format for output</a></li>
-<li><a href="./intro.html#orga9532c7">1.9 Let someone else do the hard part</a></li>
-<li><a href="./intro.html#org40bb153">1.10 Detour to write specilized tools</a></li>
+<li><a href="./intro.html#org6d6b9b9">1.3 Do one thing well</a></li>
+<li><a href="./intro.html#orge05a950">1.4 Process lines of text, not binary</a></li>
+<li><a href="./intro.html#orgb44372f">1.5 Use Regular Expressions</a></li>
+<li><a href="./intro.html#org1153eeb">1.6 Default to std in/out</a></li>
+<li><a href="./intro.html#org2ceac09">1.7 Don't be chatty</a></li>
+<li><a href="./intro.html#org10a3625">1.8 Use the input format for output</a></li>
+<li><a href="./intro.html#orgbda5b7f">1.9 Let someone else do the hard part</a></li>
+<li><a href="./intro.html#org854d6a1">1.10 Detour to write specilized tools</a></li>
 </ul></li>
-<li><a href="./intro.html#orgfb389f1">1.11 Self contained scripts</a>
+<li><a href="./intro.html#orge512900">1.11 Self contained scripts</a>
 <ul class="org-ul">
-<li><a href="./intro.html#orgbf86be6">1.12 Creating a script</a>
+<li><a href="./intro.html#org8c7fa28">1.12 Creating a script</a>
 <ul class="org-ul">
-<li><a href="./intro.html#org7036e38">1.13 understand tools you can use</a></li>
-<li><a href="./intro.html#orgb29156e">1.14 write it</a></li>
-<li><a href="./intro.html#orgb3aeb86">1.15 make it executable</a></li>
-<li><a href="./intro.html#orge2ed50e">1.16 run!</a></li>
-<li><a href="./intro.html#org45551d7">1.17 Lets change our script</a></li>
+<li><a href="./intro.html#org0c69a79">1.13 understand tools you can use</a></li>
+<li><a href="./intro.html#org59c0c54">1.14 write it</a></li>
+<li><a href="./intro.html#org844ad1e">1.15 make it executable</a></li>
+<li><a href="./intro.html#orgfbf3b91">1.16 run!</a></li>
+<li><a href="./intro.html#org5b3c9f6">1.17 Lets change our script</a></li>
 </ul></li>
-<li><a href="./intro.html#org01f6b24">1.18 How simple script works</a></li>
-<li><a href="./intro.html#orgc8df803">1.19 Interpreter in a script</a></li>
-<li><a href="./intro.html#org6ca576c">1.20 <code>man</code> and <code>help</code></a></li>
-</ul></li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org4bb932f" class="outline-3">
-<h3 id="org4bb932f"><a href="./variables-and-simple-output.html">2.0 Variables and Simple Output</a></h3>
-<div class="outline-text-3" id="text-org4bb932f">
-<ul class="org-ul">
-<li><a href="./variables-and-simple-output.html#org1ce208a">2.1 Variables</a>
-<ul class="org-ul">
-<li><a href="./variables-and-simple-output.html#org2eb5cdc">2.2 Quoting issues</a></li>
-</ul></li>
-<li><a href="./variables-and-simple-output.html#org33ae9b6">2.3 Output</a>
-<ul class="org-ul">
-<li><a href="./variables-and-simple-output.html#org2bbad09">2.4 <code>echo</code></a></li>
-<li><a href="./variables-and-simple-output.html#org51b44c7">2.5 <code>printf</code></a></li>
+<li><a href="./intro.html#org3969b62">1.18 How simple script works</a></li>
+<li><a href="./intro.html#org77f2423">1.19 Interpreter in a script</a></li>
+<li><a href="./intro.html#org447a0b5">1.20 <code>man</code> and <code>help</code></a></li>
 </ul></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org3b9e0c1" class="outline-3">
-<h3 id="org3b9e0c1"><a href="./arguments.html">3.0 Script Arguments</a></h3>
-<div class="outline-text-3" id="text-org3b9e0c1">
+<div id="outline-container-orga08b90c" class="outline-3">
+<h3 id="orga08b90c"><a href="./variables-and-simple-output.html">2.0 Variables and Simple Output</a></h3>
+<div class="outline-text-3" id="text-orga08b90c">
 <ul class="org-ul">
-<li><a href="./arguments.html#org40dea2f">3.1 Getting arguments</a></li>
-<li><a href="./arguments.html#orgdc30e40">3.2 Processing arguments</a></li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orgbc572d6" class="outline-3">
-<h3 id="orgbc572d6"><a href="./quoting-and-execution-tracing.html">4.0 Quoting and Execution Tracting</a></h3>
-<div class="outline-text-3" id="text-orgbc572d6">
+<li><a href="./variables-and-simple-output.html#org921539e">2.1 Variables</a>
 <ul class="org-ul">
-<li><a href="./quoting-and-execution-tracing.html#org6eecc5b">4.1 Backslash escaping</a></li>
-<li><a href="./quoting-and-execution-tracing.html#org79d2c36">4.2 Single quotes</a></li>
-<li><a href="./quoting-and-execution-tracing.html#orgf33db85">4.3 Double quotes</a></li>
-<li><a href="./quoting-and-execution-tracing.html#org54c1ecb">4.4 Execution tracing</a>
+<li><a href="./variables-and-simple-output.html#orgfcc4bae">2.2 Quoting issues</a></li>
+</ul></li>
+<li><a href="./variables-and-simple-output.html#orgcd4c789">2.3 Output</a>
 <ul class="org-ul">
-<li><a href="./quoting-and-execution-tracing.html#org5a487b3">4.5 Demo 1 - sh</a></li>
-<li><a href="./quoting-and-execution-tracing.html#org61fc9b4">4.6 Demo 2 - bash</a></li>
+<li><a href="./variables-and-simple-output.html#org46f4796">2.4 <code>echo</code></a></li>
+<li><a href="./variables-and-simple-output.html#org60eefd0">2.5 <code>printf</code></a></li>
 </ul></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org4840d65" class="outline-3">
-<h3 id="org4840d65"><a href="./redirection-and-special-files.html">5.0 Redirection and Special Files</a></h3>
-<div class="outline-text-3" id="text-org4840d65">
+<div id="outline-container-org5ba2595" class="outline-3">
+<h3 id="org5ba2595"><a href="./arguments.html">3.0 Script Arguments</a></h3>
+<div class="outline-text-3" id="text-org5ba2595">
 <ul class="org-ul">
-<li><a href="./redirection-and-special-files.html#org1b4b174">5.1 File redirection</a></li>
-<li><a href="./redirection-and-special-files.html#orgc2056fe">5.2 Pipelines</a></li>
-<li><a href="./redirection-and-special-files.html#orgad6ee33">5.3 Redirecting <code>stderr</code> vs <code>stdout</code></a></li>
-<li><a href="./redirection-and-special-files.html#org0b92415">5.4 Here documents</a></li>
-<li><a href="./redirection-and-special-files.html#orgac216e6">5.5 Special files</a>
+<li><a href="./arguments.html#orga7376e4">3.1 Getting arguments</a></li>
+<li><a href="./arguments.html#orgdd9f04c">3.2 Processing arguments</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org324cc17" class="outline-3">
+<h3 id="org324cc17"><a href="./quoting-and-execution-tracing.html">4.0 Quoting and Execution Tracting</a></h3>
+<div class="outline-text-3" id="text-org324cc17">
 <ul class="org-ul">
-<li><a href="./redirection-and-special-files.html#org15697c0">5.6 <code>/dev/null</code></a></li>
-<li><a href="./redirection-and-special-files.html#org722b510">5.7 <code>/dev/tty</code></a></li>
+<li><a href="./quoting-and-execution-tracing.html#orgccd2bb4">4.1 Backslash escaping</a></li>
+<li><a href="./quoting-and-execution-tracing.html#org695689b">4.2 Single quotes</a></li>
+<li><a href="./quoting-and-execution-tracing.html#orge6e548c">4.3 Double quotes</a></li>
+<li><a href="./quoting-and-execution-tracing.html#org86a88cb">4.4 Execution tracing</a>
+<ul class="org-ul">
+<li><a href="./quoting-and-execution-tracing.html#orgb253590">4.5 Demo 1 - sh</a></li>
+<li><a href="./quoting-and-execution-tracing.html#org1c66be0">4.6 Demo 2 - bash</a></li>
 </ul></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgea1bb78" class="outline-3">
-<h3 id="orgea1bb78"><a href="./command-types.html">6.0 Command Types; Command and Directory Searching</a></h3>
-<div class="outline-text-3" id="text-orgea1bb78">
+<div id="outline-container-org1fb1d25" class="outline-3">
+<h3 id="org1fb1d25"><a href="./redirection-and-special-files.html">5.0 Redirection and Special Files</a></h3>
+<div class="outline-text-3" id="text-org1fb1d25">
 <ul class="org-ul">
-<li><a href="./command-types.html#org862a2d4">6.1 Types of commands</a></li>
-<li><a href="./command-types.html#org3feeba9">6.2 <code>PATH</code></a></li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org4b87057" class="outline-3">
-<h3 id="org4b87057"><a href="./simple-text-processing.html">7.0 Simple Text Processing</a></h3>
-<div class="outline-text-3" id="text-org4b87057">
+<li><a href="./redirection-and-special-files.html#orgd267784">5.1 File redirection</a></li>
+<li><a href="./redirection-and-special-files.html#orgcd149e8">5.2 Pipelines</a></li>
+<li><a href="./redirection-and-special-files.html#orgc586f6b">5.3 Redirecting <code>stderr</code> vs <code>stdout</code></a></li>
+<li><a href="./redirection-and-special-files.html#orgf241ca6">5.4 Here documents</a></li>
+<li><a href="./redirection-and-special-files.html#org1017691">5.5 Special files</a>
 <ul class="org-ul">
-<li><a href="./simple-text-processing.html#org40124de">7.1 Counting lines, words, chars</a></li>
-<li><a href="./simple-text-processing.html#orgff4c011">7.2 Transforming text</a></li>
-<li><a href="./simple-text-processing.html#org75d316d">7.3 Converting tabs vs spaces</a></li>
-<li><a href="./simple-text-processing.html#orgbf13d11">7.4 First or last few lines</a></li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org2e1466b" class="outline-3">
-<h3 id="org2e1466b"><a href="./regular-expressions.html">8.0 Regular Expressions</a></h3>
-<div class="outline-text-3" id="text-org2e1466b">
-<ul class="org-ul">
-<li><a href="./regular-expressions.html#org39d9d4e">8.1 BREs</a>
-<ul class="org-ul">
-<li><a href="./regular-expressions.html#org7331e3d">8.2 Regular expression concepts</a>
-<ul class="org-ul">
-<li><a href="./regular-expressions.html#org3a5732f">8.3 <code>grep</code> options</a></li>
-<li><a href="./regular-expressions.html#orgdbc5b1a">8.4 Robustness</a></li>
-</ul></li>
-<li><a href="./regular-expressions.html#org0845b90">8.5 Basic regex components</a>
-<ul class="org-ul">
-<li><a href="./regular-expressions.html#org6152618">8.6 single char expressions</a></li>
-<li><a href="./regular-expressions.html#org9103f1c">8.7 bracket expressions</a></li>
-<li><a href="./regular-expressions.html#org56bfd87">8.8 repetition - zero or more</a></li>
-<li><a href="./regular-expressions.html#org22391bd">8.9 repetition - interval expressions</a></li>
-<li><a href="./regular-expressions.html#orge033e84">8.10 achoring maches</a></li>
-<li><a href="./regular-expressions.html#org502d597">8.11 parenthasized subexpressions</a></li>
-<li><a href="./regular-expressions.html#orgc0eb059">8.12 operator precedence</a></li>
-<li><a href="./regular-expressions.html#orgbcd5c3d">8.13 longest, leftmost match</a></li>
-</ul></li>
-</ul></li>
-<li><a href="./regular-expressions.html#org7044054">8.14 EREs</a>
-<ul class="org-ul">
-<li><a href="./regular-expressions.html#org7331e3d">8.15 Regular expression concepts</a>
-<ul class="org-ul">
-<li><a href="./regular-expressions.html#org3a5732f">8.16 <code>grep</code> options</a></li>
-<li><a href="./regular-expressions.html#orgdbc5b1a">8.17 Robustness</a></li>
-</ul></li>
-<li><a href="./regular-expressions.html#org0845b90">8.18 Basic regex components</a></li>
-<li><a href="./regular-expressions.html#orgb598a15">8.19 Aditional repetition operators</a></li>
-<li><a href="./regular-expressions.html#orgf9dd492">8.20 Grouping with parenthesis</a></li>
-<li><a href="./regular-expressions.html#orgf769bfb">8.21 Alternation</a></li>
-<li><a href="./regular-expressions.html#org9c33068">8.22 ERE operator precedence</a></li>
-<li><a href="./regular-expressions.html#orgdbc5b1a">8.23 Robustness</a></li>
-<li><a href="./regular-expressions.html#org9f1d7aa">8.24 Using plain grep</a></li>
+<li><a href="./redirection-and-special-files.html#org1cf1f90">5.6 <code>/dev/null</code></a></li>
+<li><a href="./redirection-and-special-files.html#org72812fb">5.7 <code>/dev/tty</code></a></li>
 </ul></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org4279f0c" class="outline-3">
-<h3 id="org4279f0c"><a href="./sed.html">9.0 sed</a></h3>
-<div class="outline-text-3" id="text-org4279f0c">
+<div id="outline-container-org12c25ed" class="outline-3">
+<h3 id="org12c25ed"><a href="./command-types.html">6.0 Command Types; Command and Directory Searching</a></h3>
+<div class="outline-text-3" id="text-org12c25ed">
 <ul class="org-ul">
-<li><a href="./sed.html#org943a14a">9.1 Intro</a></li>
-<li><a href="./sed.html#orgf0bf443">9.2 Input flow</a></li>
-<li><a href="./sed.html#org8cb5ae7">9.3 Options</a></li>
-<li><a href="./sed.html#orgf5e5729">9.4 Command structure</a></li>
-<li><a href="./sed.html#org590a30f">9.5 Substitute command</a>
+<li><a href="./command-types.html#org7b9063d">6.1 Types of commands</a></li>
+<li><a href="./command-types.html#orge716c32">6.2 <code>PATH</code></a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org145fc96" class="outline-3">
+<h3 id="org145fc96"><a href="./simple-text-processing.html">7.0 Simple Text Processing</a></h3>
+<div class="outline-text-3" id="text-org145fc96">
 <ul class="org-ul">
-<li><a href="./sed.html#org726c272">9.6 Replacement</a></li>
-<li><a href="./sed.html#orgc1daf69">9.7 Flags</a></li>
-<li><a href="./sed.html#orgce65b5a">9.8 Robustness</a></li>
+<li><a href="./simple-text-processing.html#orgf283fa7">7.1 Counting lines, words, chars</a></li>
+<li><a href="./simple-text-processing.html#org6a3040c">7.2 Transforming text</a></li>
+<li><a href="./simple-text-processing.html#org6c56358">7.3 Converting tabs vs spaces</a></li>
+<li><a href="./simple-text-processing.html#org71c63f2">7.4 First or last few lines</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgfcab67b" class="outline-3">
+<h3 id="orgfcab67b"><a href="./regular-expressions.html">8.0 Regular Expressions</a></h3>
+<div class="outline-text-3" id="text-orgfcab67b">
+<ul class="org-ul">
+<li><a href="./regular-expressions.html#org924a093">8.1 BREs</a>
+<ul class="org-ul">
+<li><a href="./regular-expressions.html#org70f6048">8.2 Regular expression concepts</a>
+<ul class="org-ul">
+<li><a href="./regular-expressions.html#org3a3b100">8.3 <code>grep</code> options</a></li>
+<li><a href="./regular-expressions.html#org0b447fa">8.4 Robustness</a></li>
 </ul></li>
-<li><a href="./sed.html#org210caaa">9.9 Examples</a>
+<li><a href="./regular-expressions.html#org3c93ffc">8.5 Basic regex components</a>
 <ul class="org-ul">
-<li><a href="./sed.html#orgb69255c">9.10 Matching and removing</a></li>
-<li><a href="./sed.html#orgda350eb">9.11 Printing</a></li>
-<li><a href="./sed.html#org4f021cc">9.12 Quit command</a></li>
-<li><a href="./sed.html#orgbd233bb">9.13 Generate commands</a></li>
+<li><a href="./regular-expressions.html#org56f1e85">8.6 single char expressions</a></li>
+<li><a href="./regular-expressions.html#orgc05dfb2">8.7 bracket expressions</a></li>
+<li><a href="./regular-expressions.html#orgc8ef7b7">8.8 repetition - zero or more</a></li>
+<li><a href="./regular-expressions.html#orgdeffc8a">8.9 repetition - interval expressions</a></li>
+<li><a href="./regular-expressions.html#orga856bc5">8.10 achoring maches</a></li>
+<li><a href="./regular-expressions.html#orgd2af28c">8.11 parenthasized subexpressions</a></li>
+<li><a href="./regular-expressions.html#orgbfd0e08">8.12 operator precedence</a></li>
+<li><a href="./regular-expressions.html#org97c7c47">8.13 longest, leftmost match</a></li>
+</ul></li>
+</ul></li>
+<li><a href="./regular-expressions.html#org37ebee7">8.14 EREs</a>
+<ul class="org-ul">
+<li><a href="./regular-expressions.html#org70f6048">8.15 Regular expression concepts</a>
+<ul class="org-ul">
+<li><a href="./regular-expressions.html#org3a3b100">8.16 <code>grep</code> options</a></li>
+<li><a href="./regular-expressions.html#org0b447fa">8.17 Robustness</a></li>
+</ul></li>
+<li><a href="./regular-expressions.html#org3c93ffc">8.18 Basic regex components</a></li>
+<li><a href="./regular-expressions.html#orgc69896b">8.19 Aditional repetition operators</a></li>
+<li><a href="./regular-expressions.html#org2a1b0db">8.20 Grouping with parenthesis</a></li>
+<li><a href="./regular-expressions.html#org4b28cbe">8.21 Alternation</a></li>
+<li><a href="./regular-expressions.html#org2fc82c2">8.22 ERE operator precedence</a></li>
+<li><a href="./regular-expressions.html#org0b447fa">8.23 Robustness</a></li>
+<li><a href="./regular-expressions.html#org52fdb48">8.24 Using plain grep</a></li>
 </ul></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org5d3631e" class="outline-3">
-<h3 id="org5d3631e"><a href="./tilde-wildcards-and-hidden-files.html">10.0 Tilde, Wildcards and Hidden Files</a></h3>
-<div class="outline-text-3" id="text-org5d3631e">
+<div id="outline-container-org84b91cf" class="outline-3">
+<h3 id="org84b91cf"><a href="./sed.html">9.0 sed</a></h3>
+<div class="outline-text-3" id="text-org84b91cf">
 <ul class="org-ul">
-<li><a href="./tilde-wildcards-and-hidden-files.html#orgb7dfcd4">10.1 Tilde expansion</a></li>
-<li><a href="./tilde-wildcards-and-hidden-files.html#org3d5b39c">10.2 Wildcarding</a></li>
-<li><a href="./tilde-wildcards-and-hidden-files.html#org33f73cd">10.3 Hidden files</a></li>
+<li><a href="./sed.html#org6859983">9.1 Intro</a></li>
+<li><a href="./sed.html#org5fc9ce1">9.2 Input flow</a></li>
+<li><a href="./sed.html#org4eb20b7">9.3 Options</a></li>
+<li><a href="./sed.html#org04f8769">9.4 Command structure</a></li>
+<li><a href="./sed.html#org15b497d">9.5 Substitute command</a>
+<ul class="org-ul">
+<li><a href="./sed.html#orgb72489d">9.6 Replacement</a></li>
+<li><a href="./sed.html#org287c1c7">9.7 Flags</a></li>
+<li><a href="./sed.html#orgb09cfcf">9.8 Robustness</a></li>
+</ul></li>
+<li><a href="./sed.html#org1e14bd3">9.9 Examples</a>
+<ul class="org-ul">
+<li><a href="./sed.html#orgc2b3d40">9.10 Matching and removing</a></li>
+<li><a href="./sed.html#org1ad2178">9.11 Printing</a></li>
+<li><a href="./sed.html#org71f90d2">9.12 Quit command</a></li>
+<li><a href="./sed.html#org95a170b">9.13 Generate commands</a></li>
+</ul></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org639a5fb" class="outline-3">
-<h3 id="org639a5fb"><a href="./extended-pattern-matching.html">11.0 Extended Pattern Matching</a></h3>
-<div class="outline-text-3" id="text-org639a5fb">
+<div id="outline-container-org1fec2c5" class="outline-3">
+<h3 id="org1fec2c5"><a href="./tilde-wildcards-and-hidden-files.html">10.0 Tilde, Wildcards and Hidden Files</a></h3>
+<div class="outline-text-3" id="text-org1fec2c5">
 <ul class="org-ul">
-<li><a href="./extended-pattern-matching.html#org9be4016">11.1 Intro</a></li>
-<li><a href="./extended-pattern-matching.html#orgf5b394a">11.2 Extended notations</a></li>
-<li><a href="./extended-pattern-matching.html#org265b4ea">11.3 Use cases</a></li>
-<li><a href="./extended-pattern-matching.html#orgc0e6c21">11.4 Robustness</a></li>
+<li><a href="./tilde-wildcards-and-hidden-files.html#org10b65d8">10.1 Tilde expansion</a></li>
+<li><a href="./tilde-wildcards-and-hidden-files.html#org629bf20">10.2 Wildcarding</a></li>
+<li><a href="./tilde-wildcards-and-hidden-files.html#orgcae650c">10.3 Hidden files</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf749da9" class="outline-3">
-<h3 id="orgf749da9"><a href="./cut-and-join.html">12.0 Cut and Join</a></h3>
-<div class="outline-text-3" id="text-orgf749da9">
+<div id="outline-container-orgcb276bf" class="outline-3">
+<h3 id="orgcb276bf"><a href="./extended-pattern-matching.html">11.0 Extended Pattern Matching</a></h3>
+<div class="outline-text-3" id="text-orgcb276bf">
 <ul class="org-ul">
-<li><a href="./cut-and-join.html#org428991a">12.1 Choosing fields with <code>cut</code></a></li>
+<li><a href="./extended-pattern-matching.html#org0e52dc7">11.1 Intro</a></li>
+<li><a href="./extended-pattern-matching.html#org32de0c4">11.2 Extended notations</a></li>
+<li><a href="./extended-pattern-matching.html#org10faaac">11.3 Use cases</a></li>
+<li><a href="./extended-pattern-matching.html#org6f96053">11.4 Robustness</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org833a700" class="outline-3">
-<h3 id="org833a700"><a href="./shell-expansions.html">100.0 Shell Expansions</a></h3>
-<div class="outline-text-3" id="text-org833a700">
+<div id="outline-container-org75667de" class="outline-3">
+<h3 id="org75667de"><a href="./cut-and-join.html">12.0 Cut and Join</a></h3>
+<div class="outline-text-3" id="text-org75667de">
 <ul class="org-ul">
-<li><a href="./shell-expansions.html#org9b4c9e8">100.1 Default values</a></li>
-<li><a href="./shell-expansions.html#orga62cfb0">100.2 Required parameters with error</a></li>
-<li><a href="./shell-expansions.html#org825255d">100.3 String manipulation</a></li>
+<li><a href="./cut-and-join.html#orgdbc63e7">12.1 Choosing fields with <code>cut</code></a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org63b6824" class="outline-3">
+<h3 id="org63b6824"><a href="./shell-expansions.html">100.0 Shell Expansions</a></h3>
+<div class="outline-text-3" id="text-org63b6824">
+<ul class="org-ul">
+<li><a href="./shell-expansions.html#org1a4044e">100.1 Default values</a></li>
+<li><a href="./shell-expansions.html#org123c56f">100.2 Required parameters with error</a></li>
+<li><a href="./shell-expansions.html#org3c9dd87">100.3 String manipulation</a></li>
 </ul>
 </div>
 </div>
